@@ -9,3 +9,4 @@
 </head>
 <body>
 	<h1>Achados e Perdidos RJ</h1>
+	<h2><?php echo $titulo ?></h2>

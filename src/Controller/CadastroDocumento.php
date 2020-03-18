@@ -7,6 +7,7 @@ class CadastroDocumento implements InterfaceControladoraRequisicao
 {
 	public function processaRequisicao(): void
 	{
+		$titulo = "Cadastro Documento";
 		require __DIR__ . '/../../view/documento/cadastro-documento.php';
 	}
 }
