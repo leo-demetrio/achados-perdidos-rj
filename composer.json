@@ -1,0 +1,17 @@
+{
+    "name": "leo-demetrio/achados-perdidos-rj",
+    "description": "Facilitador de devolu\u0000\u0000o de documentos entre outros",
+    "type": "project",
+    "authors": [
+        {
+            "name": "leo-demetrio",
+            "email": "leocdemetrio@gmail.com"
+        }
+    ],
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "Projeto\\APRJ\\": "src/"
+        }
+    }
+}
