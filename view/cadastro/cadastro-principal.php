@@ -2,7 +2,7 @@
 	
 
 
-<form id="form" action="/rescue-pricipal" method="post">
+<form id="form" action="/salvar-pricipal" method="post">
 	<fieldset>
 		<legend>Cadastro principal</legend>
 		<p>
@@ -11,13 +11,18 @@
 		</p>
 
 		<p>
-			<label for="email">Email:</label><br>
-			<input type="email" name="pEmail" id="email">
+			<label for="telefone">Telefone:</label><br>
+			<input type="tel" name="telefone" id="telefone">
+		</p>
+		<p>
+			<label for="telefone-recado">Telefone recado:</label><br>
+			<input type="telefone-recado" name="telefone-recado" id="telefone-recado">
 		</p>
 
 		<p>
 			<input type="submit" value="Submit">
 		</p>
+
 	</fieldset>
 </form>
 
