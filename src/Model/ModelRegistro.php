@@ -16,4 +16,13 @@ class ModelRegistro
 		$stmt->bindValue(':data', $data);
 		$stmt->execute();
 	}
+	public function buscaIdPorEmail($email)
+	{
+		$query = "SELECT id_registro FROM registro WHERE email = :email";
+		$conexao = ModelConexao::conect();
+		$stmt = $conexao->prepare($query);
+		$stmt->bindValue(':email', $email);
+		$stmt->execute();
+		return $stmt->fetch();
+	}
 }

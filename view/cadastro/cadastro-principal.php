@@ -4,7 +4,7 @@
 
 <form id="form" action="/salvar-pricipal" method="post">
 	<fieldset>
-		<legend>Cadastro principal</legend>
+		<legend>Cadastro principal</legend><?php echo $id = $_GET['id']; ?>
 		<p>
 			<label for="name">Nome:</label><br>
 			<input type="text" name="pName" id="name"/>

@@ -9,7 +9,7 @@ session_start();
 $_SESSION['ip'] = $_SERVER['REMOTE_ADDR'];
 $_SESSION['data'] = date('d/m/y');
 
-
+//print_r($_SERVER);exit;
 $caminho = $_SERVER['PATH_INFO'];
 $rotas = require __DIR__ . '/../config/routes.php';
 

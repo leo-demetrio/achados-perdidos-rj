@@ -13,6 +13,7 @@ use Projeto\APRJ\Controller\PersisteRegistro;
 
 
 return  [
+	//'/' =>
 	'/login' => CadastroLogin::class,
 	'/salvar-login' => PersisteLogin::class,
 	'/cadastro-principal' => CadastroPrincipal::class,
