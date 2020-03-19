@@ -9,7 +9,9 @@ use Projeto\APRJ\Controller\CadastroRegistro;
 use Projeto\APRJ\Controller\PersisteLogin;
 use Projeto\APRJ\Controller\PersistePrincipal;
 use Projeto\APRJ\Controller\PersisteRegistro;
+use Projeto\APRJ\Controller\PersisteVeiculo;
 use Projeto\APRJ\Controller\HomeLogado;
+use Projeto\APRJ\Controller\Relatorio;
 
 
 
@@ -23,6 +25,8 @@ return  [
 	'/salvar-principal' => PersistePrincipal::class,
 	'/home-logado' => HomeLogado::class,
 	'/cadastro-veiculo' => CadastroVeiculo::class,
-	'/cadastro-documento' => CadastroDocumento::class
+	'/salvar-veiculo' => PersisteVeiculo::class,
+	'/cadastro-documento' => CadastroDocumento::class,
+	'/relatorio' => Relatorio::class
 
 ];
