@@ -2,12 +2,12 @@
 	
 
 
-<form id="form" action="/salvar-pricipal" method="post">
+<form id="form" action="/salvar-principal" method="post">
 	<fieldset>
-		<legend>Cadastro principal</legend><?php echo $id = $_GET['id']; ?>
+		<legend>Cadastro principal</legend>
 		<p>
-			<label for="name">Nome:</label><br>
-			<input type="text" name="pName" id="name"/>
+			<label for="nome">Nome:</label><br>
+			<input type="text" name="nome" id="nome"/>
 		</p>
 
 		<p>

@@ -7,7 +7,7 @@ class ModelPrincipal
 {
 	public function inserir($id, $nome, $telefone, $telefoneRecado, $email)
 	{
-		$query = "INSERT INTO :id, :nome, :telefone, :telefoneRecado, :email FROM  registro_completo";
+		$query = "INSERT INTO registro_completo (id_reg, nome, telefone, telefone_recado, email) VALUES (:id, :nome, :telefone, :telefoneRecado, :email)";
 		$conexao = ModelConexao::conect();
 		$stmt = $conexao->prepare($query);
 		$stmt->bindValue(':id', $id);
