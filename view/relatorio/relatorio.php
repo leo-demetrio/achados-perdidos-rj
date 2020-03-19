@@ -1,19 +1,21 @@
  <?php require __DIR__ . '/../header.php' ?>
- 
-	<?php echo $registros[0]['nome']; ?>
-  <?php foreach($registros as $registro): ?>
+ 	
+ 	
 
-  	<ul>
-  		<li><?php echo $registro['nome'] ?></li>
-  		<li><?php echo $registro['placa'] ?></li>
-  		<li><?php echo $registro['modelo'] ?></li>
-  		<li><?php echo $registro['cor'] ?></li>
-  		<li><?php echo $registro['data_registro'] ?></li>
-  		<li><?php echo $registro['nome_propritario'] ?></li>
-  		<li><?php echo $registro['situacao'] ?></li>
-  	</ul>
+<pre>
+<?php echo count($registros);print_r($registros);exit; ?>
+ </pre>
+  		<div class="relatorio">
 
-  <?php endforeach ?>
+  		<?php echo $registros['nome'] ?><br>
+  		<?php echo  $registros['placa'] ?><br>
+  		<?php echo $registros['modelo'] ?><br>
+  		<?php echo $registros['cor'] ?><br>
+  		<?php echo $registros['data_registro'] ?><br>
+  		<?php echo $registros['nome_proprietario'] ?><br>
+  		<?php echo $registros['situacao'] ?><br>
+  		<div>
+
 
 
 

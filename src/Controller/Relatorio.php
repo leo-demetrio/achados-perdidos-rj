@@ -12,11 +12,11 @@ class Relatorio implements InterfaceControladoraRequisicao
 		$relatorio = new ModelRelatorio();
 		//$registros = $relatorio->buscaRegistros($_SESSION['id']);
 		$registros = $relatorio->buscaRegistros("32");
-		// echo $registros['nome'];exit;
+		 //echo $registros['placa'];exit;
 		// echo "<pre>";
-		// print_r($registros);exit;
+		 //print_r($registros);exit;
 		// foreach ($registros as $key => $value) {
-		// 	echo $key." ".$value;
+		// 	echo " ".$value;
 		// }exit;
 
 		$titulo = "Relatorio";
