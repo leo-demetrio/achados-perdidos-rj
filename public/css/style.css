@@ -1,5 +1,6 @@
-/*@import url('https://fonts.googleapis.com/css?family=Roboto|Roboto+Condensed&display=swap');
-*/body {
+@import url('https://fonts.googleapis.com/css?family=Roboto|Roboto+Condensed&display=swap');
+body {
+	font-family: 'Roboto', sans-serif;
 }
 
 fieldset {
@@ -7,3 +8,24 @@ fieldset {
 	margin: 0 auto;
 	margin-top: 2em;
 }
+.relatorio {
+	width: 80%;
+	margin: 2em auto;
+	font-size: 1.5em;
+}
+.relatorio-table {
+	margin: 2em auto;
+}
+tr {
+	padding: 10px;
+}
+/*
+
+SE EU NÃO PEGAR O NOME TALVEZ NÃO REPLIQUE VÁRIAS VEZES
+
+
+SELECT  distinct(placa), nome, modelo,cor, data_registro,nome_proprietario,situacao, d.data_perda, d.data_registro, d.nome_documento, d.numero_documento, d.situacao, d.tipo_documento FROM registro_completo as rc INNER JOIN veiculos as v Inner JOin documentos as d ON rc.id_reg = '32' and d.id_reg = "32"*/
+
+/*SELECT distinct(placa), nome, modelo,cor, v.data_registro,nome_proprietario,v.situacao, d.data_perda, d.data_registro, d.nome_documento, d.numero_documento, d.tipo_documento FROM registro_completo as rc INNER JOIN veiculos as v Inner JOin documentos as d ON rc.id_reg = '32' and d.id_reg = "32"
+
+SELECT distinct(placa), nome, modelo,cor, v.data_registro,nome_proprietario,v.situacao, d.data_perda, d.data_registro, d.nome_documento, d.numero_documento, d.tipo_documento, d.situacao as situacao_documento FROM registro_completo as rc INNER JOIN veiculos as v Inner JOin documentos as d ON rc.id_reg = '32' and d.id_reg = "32"*/

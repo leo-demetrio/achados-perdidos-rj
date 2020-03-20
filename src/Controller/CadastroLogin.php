@@ -2,11 +2,19 @@
 namespace Projeto\APRJ\Controller;
 
 use Projeto\APRJ\Controller\InterfaceControladoraRequisicao;
-class CadastroLogin implements InterfaceControladoraRequisicao
+use Projeto\APRJ\Controller\ControllerComHtml;
+
+
+
+class CadastroLogin extends ControllerComHtml implements InterfaceControladoraRequisicao
 {
 	public function processaRequisicao(): void
 	{
-		$titulo = "Login";
-		require __DIR__ . '/../../view/cadastro/cadastro-login.php';
+
+		echo $this->renderizahtml('cadastro/cadastro-login.php', [
+			
+			'titulo' => 'Login'
+
+		]);
 	}
 }
