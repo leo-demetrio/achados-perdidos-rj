@@ -18,8 +18,11 @@ class PersisteRegistro implements InterfaceControladoraRequisicao
 		    $senha = ServiceFilter::filtraString($_POST['senha']);
 		    $ip = $_SESSION['ip'];
 		    $data = $_SESSION['data'];
+
+		    $senhaEncriptada = password_hash($senha, PASSWORD_ARGON2I);
+	
 			$registro = new ModelRegistro();
-			$registro->inserir($email, $senha, $ip, $data);
+			$registro->inserir($email, $senhaEncriptada, $ip, $data);
 			$id = $registro->buscaIdPorEmail($email);
 			$_SESSION['id'] = $id['id_registro'];
 			$_SESSION['email'] = $email;

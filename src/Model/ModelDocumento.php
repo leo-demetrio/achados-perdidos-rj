@@ -6,7 +6,7 @@ class ModelDocumento
 {
 	public function inserir($id_reg, $numero_documento, $tipo_documento, $data_perda,$data_registro, $nome_documento, $situacao)
 	{
-		try{
+		
 		$query = "INSERT INTO documentos (id_reg,numero_documento, tipo_documento,data_perda,data_registro,nome_documento,situacao) VALUES (:id_reg,:numero_documento,:tipo_documento,:data_perda,:data_registro,:nome_documento,:situacao)";
 		//echo $id;echo$numero;exit;
 		$conexao = ModelConexao::conect();
@@ -21,8 +21,6 @@ class ModelDocumento
 		$stmt->execute();
 
 		//var_dump($stmt);exit;
-		}catch(Exception $e){
-			echo $e->getMessage();
-		}
+			
 	}
 }

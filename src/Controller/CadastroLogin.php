@@ -17,6 +17,7 @@ class CadastroLogin extends ControllerComHtml implements InterfaceControladoraRe
 				'titulo' => 'Login'
 
 			]);
+			
 		}catch(\Exception $e){
 			ServiceErro::trataErro($e);
 		}	
