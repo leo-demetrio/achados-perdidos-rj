@@ -4,31 +4,38 @@ namespace Projeto\APRJ\Controller;
 use Projeto\APRJ\Controller\InterfaceControladoraRequisicao;
 use Projeto\APRJ\Model\ModelRegistro;
 use Projeto\APRJ\Services\ServiceFilter;
+use Projeto\APRJ\Services\ServiceErro;
 
 class PersisteRegistro implements InterfaceControladoraRequisicao
 {
 	public function processaRequisicao(): void
 	{
-		//Inserção tabela Registro
-		$email = ServiceFilter::filtraEmail($_POST['email']);
-	    $senha = ServiceFilter::filtraString($_POST['senha']);
-	    $ip = $_SESSION['ip'];
-	    $data = $_SESSION['data'];
-		$registro = new ModelRegistro();
-		$registro->inserir($email, $senha, $ip, $data);
-		$id = $registro->buscaIdPorEmail($email);
-		$_SESSION['id'] = $id['id_registro'];
-		$_SESSION['email'] = $email;
+		
+		try{
+			//Inserção tabela Registro
 
-		//$_SESSION['id'] = ServiceFilter::filtraInt($id['id_registro']);
-		// if(is_null($_SESSION['id']) || $_SESSION['id'] === false)
-		// {
-		// 	header('location: /cadastro-registro');
-		// 	return;
-		// }
+			$email = ServiceFilter::filtraEmail($_POST['email']);
+		    $senha = ServiceFilter::filtraString($_POST['senha']);
+		    $ip = $_SESSION['ip'];
+		    $data = $_SESSION['data'];
+			$registro = new ModelRegistro();
+			$registro->inserir($email, $senha, $ip, $data);
+			$id = $registro->buscaIdPorEmail($email);
+			$_SESSION['id'] = $id['id_registro'];
+			$_SESSION['email'] = $email;
 
-		header("Location: /cadastro-principal");
-		die();
+			//$_SESSION['id'] = ServiceFilter::filtraInt($id['id_registro']);
+			// if(is_null($_SESSION['id']) || $_SESSION['id'] === false)
+			// {
+			// 	header('location: /cadastro-registro');
+			// 	return;
+			// }
+
+			header("Location: /cadastro-principal");
+			die();
+		}catch(\Exception $e){
+			ServiceErro::trataErro($e);
+		}
 
 	}
 }

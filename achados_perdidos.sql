@@ -27,6 +27,7 @@ SET time_zone = "+00:00";
 --
 -- Estrutura da tabela `documentos`
 --
+CREATE DATABASE achados_perdidos;
 
 CREATE TABLE `documentos` (
   `id_reg` int(11) NOT NULL,

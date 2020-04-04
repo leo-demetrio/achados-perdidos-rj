@@ -7,6 +7,7 @@ class ModelPrincipal
 {
 	public function inserir($id, $nome, $telefone, $telefoneRecado, $email)
 	{
+		// throw new \Exception('Erro php');
 		$query = "INSERT INTO registro_completo (id_reg, nome, telefone, telefone_recado, email) VALUES (:id, :nome, :telefone, :telefoneRecado, :email)";
 		$conexao = ModelConexao::conect();
 		$stmt = $conexao->prepare($query);
