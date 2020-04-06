@@ -4,6 +4,7 @@ namespace Projeto\APRJ\Model;
 
 class ModelLogin
 {
+	private $id_registro;
 	private $email;
 	private $senha;
 
@@ -18,7 +19,7 @@ class ModelLogin
 	}
 	public function buscaPeloEmail($email)
 	{
-		$query = "SELECT email, senha FROM registro WHERE email = :email";
+		$query = "SELECT email, senha, id_registro FROM registro WHERE email = :email";
 		$conexao = ModelConexao::conect();
 		$stmt = $conexao->prepare($query);
 		$stmt->bindValue(':email', $email);
@@ -27,6 +28,8 @@ class ModelLogin
 		//var_dump($email);exit;
 		$this->email = $email['email'];
 		$this->senha = $email['senha'];
+		$this->id_registro = $email['id_registro'];
+		 //echo $this->id_registro;exit;
 		//var_dump($this->email);exit;
 		return $this->email;
 
@@ -39,5 +42,9 @@ class ModelLogin
 	public function getSenha(){
 
 		return $this->senha;
+	}
+	public function getId_registro(){
+
+		return $this->id_registro;
 	}
 }

@@ -20,22 +20,30 @@ class PersisteDocumento implements InterfaceControladoraRequisicao
 			$tipo = ServiceFilter::filtraString($_POST['tipo-documento']);
 			$situacao = ServiceFilter::filtraString($_POST['situacao']);
 
-			//$dataPerda = ServiceFilter::filtraString($_POST['data']);
-			$dataPerda = date('d/m/y');
+			//$dataPerda = ServiceFilter::filtraString($_POST['data'])
 			$id = ServiceFilter::filtraInt($_SESSION['id']);
 			$dataRegistro= $_SESSION['data'];
 			//echo $dataRegistro;exit;
 			//var_dump($_POST);exit;
 
 			$documento = new ModelDocumento();
-			$documento->inserir($id, $numero, $tipo, $dataPerda,$dataRegistro, $nome, $situacao);
+			$documento->setNomeDocumento($nome);
+			$documento->setNumeroDocumento($numero);
+			$documento->setTipoDocumento($tipo);
+			$documento->setDataPerda = date('d/m/y');
+			$documento->setIdREg($id);
+			$documento->setDataRegistro($dataRegistro);
+			$documento->setSituacao($situacao);
+			$documento->inserir();
 
-		
-			$dataPerda = ServiceFilter::filtraString($_POST['data']);
-			$id = $_SESSION['id'];
-			$dataRegistro= $_SESSION['data'];
+			header('Location: /relatorio');
+			// $dataPerda = ServiceFilter::filtraString($_POST['data']);
+			// $id = $_SESSION['id'];
+			// $dataRegistro= $_SESSION['data'];
 
-			var_dump($_POST);exit;
+			// var_dump($_POST);exit;
+
+			
 
 		}catch(\Exception $e){
 			ServiceErro::trataErro($e);

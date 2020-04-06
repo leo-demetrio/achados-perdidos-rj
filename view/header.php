@@ -18,7 +18,7 @@
 				<li><a href="/cadastro-documento">Documento</a></li>
 				<li><a href="/cadastro-veiculo">Veiculos</a></li>
 				<li><a href="/">Quem somos</a></li>
-				<li><a href="/"></a><?php// $_SESSION['email'] ?></li>
+				<li><a href="/relatorio">Relatorio</a><?php// $_SESSION['email'] ?></li>
 			</ul>
 		</nav>
 	</header>

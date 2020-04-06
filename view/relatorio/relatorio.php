@@ -5,13 +5,15 @@
  	<table class="relatorio-table">
  		<thead class="relatorio-thead">
  			<tr class="tr">Veículos</tr>
+
+      <?php if(count($registros) > 0): ?>
  			<tr>
  				<!-- <th>Nome Denunciante</th> -->
  				<th>Placa</th>
  				<th>Modelo</th>
  				<th>Cor</th>
  				<th>Data registro</th>
- 				<th>Nome proçprietário</th>
+ 				<th>Nome proprietário</th>
  				<th>Situação</th>
  				<th>Editar</th>
  				<th>Excluir</th>
@@ -20,9 +22,10 @@
   
  		<tbody>
 
- 	<?php foreach ($registros as $registro){ ?> 	
+ 	<?php foreach ($registros as $registro): ?> 	
   		
  		<tr>
+      <?php echo $registro['nome_documento']?>
   		<!-- <td><?php// echo $registro['nome'] ?></td> -->
   		<td><?php echo  $registro['placa'] ?></td>
   		<td><?php echo $registro['modelo'] ?></td>
@@ -30,11 +33,13 @@
   		<td><?php echo $registro['data_registro'] ?></td>
   		<td><?php echo $registro['nome_proprietario'] ?></td>
   		<td><?php echo $registro['situacao'] ?></td>
-  		</tr>
-  		
-  		
+  		</tr>  		
 
-  	<?php } ?>
+  	<?php endforeach ?>
+
+    <?php else: ?>
+      <p>Nenhum cadastro em nosso banco</p>
+    <?php endif ?>
 
   		</tbody>
   	</table>

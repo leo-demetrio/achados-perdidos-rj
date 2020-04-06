@@ -14,7 +14,7 @@ class Relatorio extends ControllerComHtml implements InterfaceControladoraRequis
 		try{
 			$relatorio = new ModelRelatorio();
 			//$registros = $relatorio->buscaRegistros($_SESSION['id']);
-			$registros = $relatorio->buscaRegistros("32");
+			$registros = $relatorio->buscaRegistros($_SESSION['id']);
 			 //echo $registros['placa'];exit;
 			// echo "<pre>";
 			 //print_r($registros);exit;
