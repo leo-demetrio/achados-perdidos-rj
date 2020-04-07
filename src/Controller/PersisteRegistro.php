@@ -5,6 +5,7 @@ use Projeto\APRJ\Controller\InterfaceControladoraRequisicao;
 use Projeto\APRJ\Model\ModelRegistro;
 use Projeto\APRJ\Services\ServiceFilter;
 use Projeto\APRJ\Services\ServiceErro;
+use Projeto\APRJ\Services\ServiceEncripta;
 
 class PersisteRegistro implements InterfaceControladoraRequisicao
 {
@@ -19,7 +20,8 @@ class PersisteRegistro implements InterfaceControladoraRequisicao
 		    $ip = $_SESSION['ip'];
 		    $data = $_SESSION['data'];
 
-		    $senhaEncriptada = password_hash($senha, PASSWORD_ARGON2I);
+		    $senhaEncriptada = ServiceEncripta::encriptaSenha($senha);
+		    echo $senhaEncriptada;exit;
 	
 			$registro = new ModelRegistro();
 			$registro->inserir($email, $senhaEncriptada, $ip, $data);

@@ -11,6 +11,7 @@ class CadastroPrincipal extends ControllerComHtml implements InterfaceControlado
 	public function processaRequisicao(): void
 	{
 		try{
+			
 			echo $this->renderizaHtml('cadastro/cadastro-principal.php', [
 
 				'titulo' => 'Cadastro Principal'
