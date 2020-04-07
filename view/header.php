@@ -10,6 +10,8 @@
 	<meta name="viewport" content="width=device-width,initial-sacle=1">
 </head>
 <body>
+
+	<?php if(isset($_SESSION['id'])): ?>
 	<header>
 		<a href="/home-logado"><h1 class="logo">Achados e perdidos RJ</h1></a>
 		<nav>
@@ -18,9 +20,11 @@
 				<li><a href="/cadastro-documento">Documento</a></li>
 				<li><a href="/cadastro-veiculo">Veiculos</a></li>
 				<li><a href="/">Quem somos</a></li>
-				<li><a href="/relatorio">Relatorio</a><?php// $_SESSION['email'] ?></li>
+				<li><a href="/relatorio">Relatorio</a></li>
+				<li><a href="/sair">Sair</a></li>
 			</ul>
 		</nav>
 	</header>
+	<?php endif ?>
 	
 	<h2 class="titulo-pagina"><?php echo $titulo ?></h2>

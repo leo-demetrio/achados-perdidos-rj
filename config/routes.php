@@ -13,6 +13,7 @@ use Projeto\APRJ\Controller\PersisteVeiculo;
 use Projeto\APRJ\Controller\PersisteDocumento;
 use Projeto\APRJ\Controller\HomeLogado;
 use Projeto\APRJ\Controller\Relatorio;
+use Projeto\APRJ\Controller\Sair;
 
 
 
@@ -29,6 +30,7 @@ return  [
 	'/salvar-veiculo' => PersisteVeiculo::class,
 	'/cadastro-documento' => CadastroDocumento::class,
 	'/salvar-documento' => PersisteDocumento::class,
-	'/relatorio' => Relatorio::class
+	'/relatorio' => Relatorio::class,
+	'/sair' => Sair::class
 
 ];
