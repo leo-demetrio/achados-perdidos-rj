@@ -27,9 +27,19 @@ class ModelVeiculo
 		$stmt->bindValue(':situacao', $this->situacao);
 		$stmt->execute();
 	}
+
+	public function buscaPeloId(){
+		$query = 'SELECT id_reg, placa, modelo, cor, data_registro, nome_proprietario, situacao FROM veiculos WHERE id_reg = :id';
+		$conexao = ModelConexao::conect();
+		$stmt = $conexao->prepare($query);
+		$stmt->bindValue(':id', $this->id_reg);
+		$stmt->execute();
+		$veiculos = $stmt->fetchAll();
+		return $veiculos;
+	}
 	//fazer métodos set e get
 
-	public function setId($valor){
+	public function setIdReg($valor){
 		 $this->id_reg = $valor;
 	}
 	public function setPlaca($valor){

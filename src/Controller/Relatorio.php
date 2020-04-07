@@ -2,7 +2,8 @@
 namespace Projeto\APRJ\Controller;
 
 use Projeto\APRJ\Controller\InterfaceControladoraRequisicao;
-use Projeto\APRJ\Model\ModelRelatorio;
+use Projeto\APRJ\Model\ModelVeiculo;
+use Projeto\APRJ\Model\ModelDocumento;
 use Projeto\APRJ\Controller\ControllerComHtml;
 use Projeto\APRJ\Services\ServiceErro;
 
@@ -12,20 +13,21 @@ class Relatorio extends ControllerComHtml implements InterfaceControladoraRequis
 	public function processaRequisicao(): void
 	{
 		try{
-			$relatorio = new ModelRelatorio();
-			//$registros = $relatorio->buscaRegistros($_SESSION['id']);
-			$registros = $relatorio->buscaRegistros($_SESSION['id']);
-			 //echo $registros['placa'];exit;
-			// echo "<pre>";
-			 //print_r($registros);exit;
-			// foreach ($registros as $key => $value) {
-			// 	echo " ".$value;
-			// }exit;
+			$relatorioVeiculos = new ModelVeiculo();
+			$relatorioVeiculos->setIdReg($_SESSION['id']);
+			$veiculos = $relatorioVeiculos->buscaPeloId();
 
+			$relatorioDocumetos = new ModelDocumento();
+			$relatorioDocumetos->setIdReg($_SESSION['id']);
+			$documentos = $relatorioDocumetos->buscaPeloId();
+
+
+			
 			echo $this->renderizaHtml('relatorio/relatorio.php', [
 
 				'titulo' => 'Relatório',
-				'registros' => $registros
+				'veiculos' => $veiculos,
+				'documentos' => $documentos
 
 			]);
 		}catch(\Exception $e){

@@ -31,6 +31,16 @@ class ModelDocumento
 		//var_dump($stmt);exit;
 			
 	}
+
+	public function buscaPeloId(){
+		$query = 'SELECT numero_documento, tipo_documento, data_perda, data_registro, nome_documento, situacao FROM documentos WHERE id_reg = :id';
+		$conexao = ModelConexao::conect();
+		$stmt = $conexao->prepare($query);
+		$stmt->bindValue(':id', $this->id_reg);
+		$stmt->execute();
+		$documentos = $stmt->fetchAll();
+		return $documentos;
+	}
 	public function setIdReg($valor){
 		$this->id_reg = $valor;
 	}
