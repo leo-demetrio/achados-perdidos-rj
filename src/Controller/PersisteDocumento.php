@@ -19,12 +19,9 @@ class PersisteDocumento implements InterfaceControladoraRequisicao
 			$numero = ServiceFilter::filtraString($_POST['numero']);
 			$tipo = ServiceFilter::filtraString($_POST['tipo-documento']);
 			$situacao = ServiceFilter::filtraString($_POST['situacao']);
-
-			//$dataPerda = ServiceFilter::filtraString($_POST['data'])
 			$id = ServiceFilter::filtraInt($_SESSION['id']);
 			$dataRegistro= $_SESSION['data'];
-			//echo $dataRegistro;exit;
-			//var_dump($_POST);exit;
+
 
 			$documento = new ModelDocumento();
 			$documento->setNomeDocumento($nome);
@@ -37,11 +34,7 @@ class PersisteDocumento implements InterfaceControladoraRequisicao
 			$documento->inserir();
 
 			header('Location: /relatorio');
-			// $dataPerda = ServiceFilter::filtraString($_POST['data']);
-			// $id = $_SESSION['id'];
-			// $dataRegistro= $_SESSION['data'];
-
-			// var_dump($_POST);exit;
+			die();
 
 			
 

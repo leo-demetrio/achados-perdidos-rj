@@ -4,6 +4,7 @@ namespace Projeto\APRJ\Controller;
 use Projeto\APRJ\Controller\InterfaceControladoraRequisicao;
 use Projeto\APRJ\Model\ModelVeiculo;
 use Projeto\APRJ\Services\ServiceErro;
+use Projeto\APRJ\Services\ServiceFilter;
 
 class PersisteVeiculo implements InterfaceControladoraRequisicao
 {
@@ -11,14 +12,22 @@ class PersisteVeiculo implements InterfaceControladoraRequisicao
 	{
 		try{
 
+			$placa = ServiceFilter::filtraString($_POST['placa']);
+			$modelo = ServiceFilter::filtraString($_POST['modelo']);
+			$cor = ServiceFilter::filtraString($_POST['cor']);
+			$nomeProprietario = ServiceFilter::filtraString($_POST['nome-proprietario']);
+			$situacao = ServiceFilter::filtraString($_POST['situacao']);
+			$data = $_SESSION['data'];
+			$id = $_SESSION['id'];
+
 			$veiculo = new ModelVeiculo();
-			$veiculo->setId($_SESSION['id']);
-			$veiculo->setPlaca($_POST['placa']);
-			$veiculo->setModelo($_POST['modelo']);
-			$veiculo->setCor($_POST['cor']);
-			$veiculo->setDataRegistro($_SESSION['data']);
-			$veiculo->setNomeProprietario ($_POST['nome-proprietario']);
-			$veiculo->setSituacao($_POST['situacao']);
+			$veiculo->setIdReg($id);
+			$veiculo->setPlaca($placa);
+			$veiculo->setModelo($modelo);
+			$veiculo->setCor($cor);
+			$veiculo->setDataRegistro($data);
+			$veiculo->setNomeProprietario ($nomeProprietario);
+			$veiculo->setSituacao($situacao);
 			$veiculo->inserir();
 
 			header('Location: /relatorio');

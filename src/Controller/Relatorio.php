@@ -13,6 +13,7 @@ class Relatorio extends ControllerComHtml implements InterfaceControladoraRequis
 	public function processaRequisicao(): void
 	{
 		try{
+
 			$relatorioVeiculos = new ModelVeiculo();
 			$relatorioVeiculos->setIdReg($_SESSION['id']);
 			$veiculos = $relatorioVeiculos->buscaPeloId();
@@ -30,6 +31,7 @@ class Relatorio extends ControllerComHtml implements InterfaceControladoraRequis
 				'documentos' => $documentos
 
 			]);
+			
 		}catch(\Exception $e){
 			ServiceErro::trataErro($e);
 		}
