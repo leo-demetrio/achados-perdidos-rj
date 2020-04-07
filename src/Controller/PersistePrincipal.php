@@ -13,16 +13,18 @@ class PersistePrincipal
 	{
 		try{
 			
-			// $nome = ServiceFilter::filtraString($_POST['nome']);
-			// $telefone = ServiceFilter::filtraString($_POST['telefone']);
-			// $telefoneRecado = ServiceFilter::filtraString($_POST['telefone-recado']);
-
-			$telefone = '(21) 98696-5590';
+			$nome = ServiceFilter::filtraString($_POST['nome']);
+			$telefone = ServiceFilter::filtraString($_POST['telefone']);
+			$telefoneRecado = ServiceFilter::filtraString($_POST['telefone-recado']);
+			// echo $telefone;exit;
 			$resultado = ServiceValidaInput::validaInputTelefone($telefone);
 			if(!$resultado){
-				throw new \Exception("Telefone errado");
+				throw new \Exception("Telefone celular errado");
 			}
-			var_dump($resultado);exit;
+			$resultado = ServiceValidaInput::validaInputTelefone($telefoneRecado);
+			if(!$resultado){
+				throw new \Exception("Telefone recado errado");
+			}
 
 			$id = $_SESSION['id'];
 			$email = $_SESSION['email'];

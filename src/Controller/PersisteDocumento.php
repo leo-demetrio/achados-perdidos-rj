@@ -20,14 +20,14 @@ class PersisteDocumento implements InterfaceControladoraRequisicao
 			$tipo = ServiceFilter::filtraString($_POST['tipo-documento']);
 			$situacao = ServiceFilter::filtraString($_POST['situacao']);
 			$id = ServiceFilter::filtraInt($_SESSION['id']);
+			$data_perda = $_POST['data_perda'];
 			$dataRegistro= $_SESSION['data'];
-
 
 			$documento = new ModelDocumento();
 			$documento->setNomeDocumento($nome);
 			$documento->setNumeroDocumento($numero);
 			$documento->setTipoDocumento($tipo);
-			$documento->setDataPerda = date('d/m/y');
+			$documento->setDataPerda($data_perda);
 			$documento->setIdREg($id);
 			$documento->setDataRegistro($dataRegistro);
 			$documento->setSituacao($situacao);

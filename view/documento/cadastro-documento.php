@@ -26,8 +26,8 @@
 		</p>
 		<br>
 		<p>
-			<label for="data">Data:</label><br>
-			<input type="date" name="data" id="data">
+			<label for="data">Data da perda:</label><br>
+			<input type="date" name="data_perda" id="data">
 		</p>
 		<br>
 		<p>

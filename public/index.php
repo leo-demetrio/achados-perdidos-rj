@@ -10,7 +10,13 @@ $_SESSION['ip'] = $_SERVER['REMOTE_ADDR'];
 $_SESSION['data'] = date('d/m/y');
 
 //print_r($_SERVER['PATH_INFO']);exit;
-$caminho = $_SERVER['PATH_INFO'];
+
+if(!isset($_SERVER['PATH_INFO'])){
+	$caminho = $_SERVER['REQUEST_URI'];	
+}else{
+	$caminho = $_SERVER['PATH_INFO'];
+}
+
 $rotas = require __DIR__ . '/../config/routes.php';
 
 if(!array_key_exists($caminho, $rotas))
@@ -20,13 +26,13 @@ if(!array_key_exists($caminho, $rotas))
 }
 
 
-$rotaLogin = stripos($caminho, 'login');
-if(!isset($_SESSION['id']) && $rotaLogin === false){
+// $rotaLogin = stripos($caminho, 'login');
+// if(!isset($_SESSION['id']) && $rotaLogin === false){
 
-	header('Location: /login');
-	die();
+// 	header('Location: /login');
+// 	die();
 
-}
+// }
 $classeControladora = $rotas[$caminho];
 $controlador = new $classeControladora();
 $controlador->processaRequisicao();

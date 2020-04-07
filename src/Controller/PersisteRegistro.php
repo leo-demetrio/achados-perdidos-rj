@@ -21,7 +21,6 @@ class PersisteRegistro implements InterfaceControladoraRequisicao
 		    $data = $_SESSION['data'];
 
 		    $senhaEncriptada = ServiceEncripta::encriptaSenha($senha);
-		    echo $senhaEncriptada;exit;
 	
 			$registro = new ModelRegistro();
 			$registro->inserir($email, $senhaEncriptada, $ip, $data);
