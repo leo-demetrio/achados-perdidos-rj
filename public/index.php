@@ -19,6 +19,14 @@ if(!array_key_exists($caminho, $rotas))
 	return;
 }
 
+
+$rotaLogin = stripos($caminho, 'login');
+if(!isset($_SESSION['id']) && $rotaLogin === false){
+
+	header('Location: /login');
+	die();
+
+}
 $classeControladora = $rotas[$caminho];
 $controlador = new $classeControladora();
 $controlador->processaRequisicao();
