@@ -19,6 +19,7 @@ use Projeto\APRJ\Controller\Sair;
 
 return  [
 	'/' => HomeLogado::class,
+	'/home' => HomeLogado::class,
 	'/login' => CadastroLogin::class,
 	'/salvar-login' => PersisteLogin::class,
 	'/cadastro-registro' => CadastroRegistro::class,

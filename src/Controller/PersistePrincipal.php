@@ -12,7 +12,9 @@ class PersistePrincipal
 	public function processaRequisicao(): void
 	{
 		try{
-			
+			// $cpf = ServiceValidaInput::validaInputCpf('08860751730');
+			// echo $cpf;exit;
+		
 			$nome = ServiceFilter::filtraString($_POST['nome']);
 			$telefone = ServiceFilter::filtraString($_POST['telefone']);
 			$telefoneRecado = ServiceFilter::filtraString($_POST['telefone-recado']);
@@ -33,7 +35,7 @@ class PersistePrincipal
 			$cadastroPrincipal->inserir($id, $nome, $telefone, $telefoneRecado, $email);
 
 		}catch(\Exception $e){
-			
+
 			ServiceErro::trataErro($e);
 
 		}

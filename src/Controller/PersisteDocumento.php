@@ -4,6 +4,7 @@ namespace Projeto\APRJ\Controller;
 use Projeto\APRJ\Controller\InterfaceControladoraRequisicao;
 use Projeto\APRJ\Services\ServiceFilter;
 use Projeto\APRJ\Services\ServiceErro;
+use Projeto\APRJ\Services\ServiceValidaData;
 use Projeto\APRJ\Model\ModelDocumento;
 
 
@@ -22,6 +23,12 @@ class PersisteDocumento implements InterfaceControladoraRequisicao
 			$id = ServiceFilter::filtraInt($_SESSION['id']);
 			$data_perda = $_POST['data_perda'];
 			$dataRegistro= $_SESSION['data'];
+
+			// $data_perda = ServiceValidaData::validaData($data_perda);
+			// var_dump($data_perda);exit;
+			//FALTA VALIDAR DATA
+			//$date = preg_replace("([^0-9/])", "", $data_perda);
+			//echo $date;exit;
 
 			$documento = new ModelDocumento();
 			$documento->setNomeDocumento($nome);

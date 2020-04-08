@@ -24,19 +24,14 @@ class PersisteRegistro implements InterfaceControladoraRequisicao
 	
 			$registro = new ModelRegistro();
 			$registro->inserir($email, $senhaEncriptada, $ip, $data);
+			
 			$id = $registro->buscaIdPorEmail($email);
 			$_SESSION['id'] = $id['id_registro'];
 			$_SESSION['email'] = $email;
 
-			//$_SESSION['id'] = ServiceFilter::filtraInt($id['id_registro']);
-			// if(is_null($_SESSION['id']) || $_SESSION['id'] === false)
-			// {
-			// 	header('location: /cadastro-registro');
-			// 	return;
-			// }
-
 			header("Location: /cadastro-principal");
 			die();
+
 		}catch(\Exception $e){
 			ServiceErro::trataErro($e);
 		}

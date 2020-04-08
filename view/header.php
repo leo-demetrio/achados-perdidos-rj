@@ -11,6 +11,7 @@
 </head>
 <body>
 
+		
 	<?php if(isset($_SESSION['id'])): ?>
 	<header>
 		<a href="/home-logado"><h1 class="logo">Achados e perdidos RJ</h1></a>
