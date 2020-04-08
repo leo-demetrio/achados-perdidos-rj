@@ -2,48 +2,25 @@
 
 namespace Projeto\APRJ\Services;
 
+use Projeto\APRJ\Services\ServiceRetiraFormatacao;
+
 
 class ServiceValidaInput
 {
- 	public static function validaInputTelefone($telefone)
- 	{
- 		if(strlen($telefone) == 15){
-
- 			$regex_telefone = "/^\([0-9]{2}\)[0-9]{5}\-[0-9]{4}$/";
- 			$validado = preg_match($regex_telefone, str_replace(" ","",$telefone));
- 			return $validado;
-
- 		}elseif (strlen($telefone) == 14){
-	
-			$regex_telefone = "/^\([0-9]{2}\)[0-9]{4}\-[0-9]{4}$/";
-			$validado  = preg_match($regex_telefone, $telefone);
-			return $validado; 	
-
- 		}elseif (strlen($telefone) == 11) {
- 			
- 			$regex_telefone = "/^[0-9]{2}[0-9]{5}[0-9]{4}$/";
- 			$validado = preg_match($regex_telefone, $telefone);
- 			return $validado;
-
- 		}else {
-
- 			return false;
-
- 		}
- 	}
+ 	
  	public static function validaInputCpf($cpf){
 
  		//$cpf_regex = $this->regexCpf($cpf_formatado);
- 		$cpf_formatado = $this->removeFormatacao($cpf);
+ 		$cpf_formatado = ServiceRetiraFormatacoa::retiraFormatacao($cpf);
  		if(!$this->verificaIguais($cpf_formatado)) return false;
  		if(!$this->validarDigitosCpf($cpf)) return false;
  		return $cpf_formatado;
 
  	}
- 	private function removeFormatacao($variavel){
- 		$somente_numeros = str_replace([" ", "-", ".", "(", ")"], "", $variavel);
- 		return $somente_numeros;
- 	}
+ 	// private function removeFormatacao($variavel){
+ 	// 	$somente_numeros = str_replace([" ", "-", ".", "(", ")"], "", $variavel);
+ 	// 	return $somente_numeros;
+ 	// }
  	private function verificaIguais($variavel){
 
  		for($i = 0; $i<= 11; $i++){
