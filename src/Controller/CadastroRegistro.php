@@ -1,13 +1,16 @@
 <?php
 namespace Projeto\APRJ\Controller;
 
-use Projeto\APRJ\Services;
+use Projeto\APRJ\Controller\InterfaceControladoraRequisicao;
+use Projeto\APRJ\Services\ServiceTraitErro;
 
 
 use Projeto\APRJ\Controller\InterfaceControladoraRequisicao;
 
 class CadastroRegistro implements InterfaceControladoraRequisicao
 {
+	use ServiceTraitErro;
+	
 	public function processaRequisicao(): void
 	{	
 
@@ -17,7 +20,7 @@ class CadastroRegistro implements InterfaceControladoraRequisicao
 			require __DIR__ . '/../../view/cadastro/cadastro-registro.php';
 
 		}catch(\Exception $e){
-			ServiceErro::trataErro($e);
+			$this->trataErro($e);
 		}
 	}
 }

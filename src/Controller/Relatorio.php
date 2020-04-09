@@ -5,11 +5,13 @@ use Projeto\APRJ\Controller\InterfaceControladoraRequisicao;
 use Projeto\APRJ\Model\ModelVeiculo;
 use Projeto\APRJ\Model\ModelDocumento;
 use Projeto\APRJ\Controller\ControllerComHtml;
-use Projeto\APRJ\Services\ServiceErro;
+use Projeto\APRJ\Services\ServiceTraitErro;
 
 
 class Relatorio extends ControllerComHtml implements InterfaceControladoraRequisicao
 {
+	use ServiceTraitErro;
+	
 	public function processaRequisicao(): void
 	{
 		try{
@@ -33,7 +35,7 @@ class Relatorio extends ControllerComHtml implements InterfaceControladoraRequis
 			]);
 			
 		}catch(\Exception $e){
-			ServiceErro::trataErro($e);
+			$this->trataErro($e);
 		}
 
 

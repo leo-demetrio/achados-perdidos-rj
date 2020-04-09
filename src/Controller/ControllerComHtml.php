@@ -1,11 +1,13 @@
 <?php
 namespace Projeto\APRJ\Controller;
 
-use Projeto\APRJ\Services\ServiceErro;
+use Projeto\APRJ\Services\ServiceTraitErro;
 
 
 abstract class ControllerComHtml
 {
+	use ServiceTraitErro;
+	
 	public function renderizaHtml(String $caminhoTamplate, array $dados): String
 	{
 		try{
@@ -14,7 +16,7 @@ abstract class ControllerComHtml
 			require __DIR__ . '/../../view/' . $caminhoTamplate;
 			$html = ob_get_clean();//pega tudo e limpa o buffer não esquecer de dar um echo
 		}catch(\Exception $e){
-			ServiceErro::trataErro($e);
+			$this->trataErro($e);
 		}
 
 		return $html;

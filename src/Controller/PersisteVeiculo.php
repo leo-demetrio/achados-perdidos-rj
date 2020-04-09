@@ -3,20 +3,24 @@ namespace Projeto\APRJ\Controller;
 
 use Projeto\APRJ\Controller\InterfaceControladoraRequisicao;
 use Projeto\APRJ\Model\ModelVeiculo;
-use Projeto\APRJ\Services\ServiceErro;
-use Projeto\APRJ\Services\ServiceFilter;
+use Projeto\APRJ\Services\ServiceTraitErro;
+use Projeto\APRJ\Services\ServiceTraitFilter;
 
 class PersisteVeiculo implements InterfaceControladoraRequisicao
 {
+	use ServiceTraitErro;
+	use ServiceTraitFilter;
+	
 	public function processaRequisicao(): void
 	{
+
 		try{
 
-			$placa = ServiceFilter::filtraString($_POST['placa']);
-			$modelo = ServiceFilter::filtraString($_POST['modelo']);
-			$cor = ServiceFilter::filtraString($_POST['cor']);
-			$nomeProprietario = ServiceFilter::filtraString($_POST['nome-proprietario']);
-			$situacao = ServiceFilter::filtraString($_POST['situacao']);
+			$placa = $this->filtraString($_POST['placa']);
+			$modelo = $this->filtraString($_POST['modelo']);
+			$cor = $this->filtraString($_POST['cor']);
+			$nomeProprietario = $this->filtraString($_POST['nome-proprietario']);
+			$situacao = $this->filtraString($_POST['situacao']);
 			$data = $_SESSION['data'];
 			$id = $_SESSION['id'];
 
@@ -33,7 +37,7 @@ class PersisteVeiculo implements InterfaceControladoraRequisicao
 			header('Location: /relatorio');
 			die();
 		}catch(\Exception $e){
-			ServiceErro::trataErro($e);
+			$this->trataErro($e);
 		}
 
 

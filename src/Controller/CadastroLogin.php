@@ -3,15 +3,18 @@ namespace Projeto\APRJ\Controller;
 
 use Projeto\APRJ\Controller\InterfaceControladoraRequisicao;
 use Projeto\APRJ\Controller\ControllerComHtml;
-use Projeto\APRJ\Services\ServiceErro;
+use Projeto\APRJ\Services\ServiceTraitErro;
 
 
 
 class CadastroLogin extends ControllerComHtml implements InterfaceControladoraRequisicao
 {
+	use ServiceTraitErro;
+	
 	public function processaRequisicao(): void
 	{
 		try{
+	
 			echo $this->renderizahtml('cadastro/cadastro-login.php', [
 				
 				'titulo' => 'Login'
@@ -19,7 +22,7 @@ class CadastroLogin extends ControllerComHtml implements InterfaceControladoraRe
 			]);
 			
 		}catch(\Exception $e){
-			ServiceErro::trataErro($e);
+			$this->trataErro($e);
 		}	
 	}
 }

@@ -2,28 +2,32 @@
 namespace Projeto\APRJ\Controller;
 
 use Projeto\APRJ\Controller\InterfaceControladoraRequisicao;
-use Projeto\APRJ\Services\ServiceFilter;
+use Projeto\APRJ\Services\ServiceTraitFilter;
 use Projeto\APRJ\Model\ModelPrincipal;
-use Projeto\APRJ\Services\ServiceErro;
-use Projeto\APRJ\Services\ServiceValidaInput;
+use Projeto\APRJ\Services\ServiceTraitErro;
+use Projeto\APRJ\Services\ServiceTraitValidaInput;
 
 class PersistePrincipal
 {
+	use ServiceTraitErro;
+	use ServiceTraitValidaInput;
+	use ServiceTraitFilter;
+	
 	public function processaRequisicao(): void
 	{
 		try{
 			// $cpf = ServiceValidaInput::validaInputCpf('08860751730');
 			// echo $cpf;exit;
 		
-			$nome = ServiceFilter::filtraString($_POST['nome']);
-			$telefone = ServiceFilter::filtraString($_POST['telefone']);
-			$telefoneRecado = ServiceFilter::filtraString($_POST['telefone-recado']);
+			$nome = $this->filtraString($_POST['nome']);
+			$telefone = $this->filtraString($_POST['telefone']);
+			$telefoneRecado = $this->filtraString($_POST['telefone-recado']);
 			// echo $telefone;exit;
-			$resultado = ServiceValidaInput::validaInputTelefone($telefone);
+			$resultado = $this->validaInputTelefone($telefone);
 			if(!$resultado){
 				throw new \Exception("Telefone celular errado");
 			}
-			$resultado = ServiceValidaInput::validaInputTelefone($telefoneRecado);
+			$resultado = $this->validaInputTelefone($telefoneRecado);
 			if(!$resultado){
 				throw new \Exception("Telefone recado errado");
 			}
@@ -36,7 +40,7 @@ class PersistePrincipal
 
 		}catch(\Exception $e){
 
-			ServiceErro::trataErro($e);
+			$this->trataErro($e);
 
 		}
 		header('Location: /home-logado');

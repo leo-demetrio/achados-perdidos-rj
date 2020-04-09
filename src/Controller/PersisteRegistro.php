@@ -1,26 +1,30 @@
-<?php 
+$this-><?php 
 namespace Projeto\APRJ\Controller;
 
 use Projeto\APRJ\Controller\InterfaceControladoraRequisicao;
 use Projeto\APRJ\Model\ModelRegistro;
-use Projeto\APRJ\Services\ServiceFilter;
-use Projeto\APRJ\Services\ServiceErro;
-use Projeto\APRJ\Services\ServiceEncripta;
+use Projeto\APRJ\Services\ServiceTraitFilter;
+use Projeto\APRJ\Services\ServiceTraitErro;
+use Projeto\APRJ\Services\ServiceTraitEncripta;
 
 class PersisteRegistro implements InterfaceControladoraRequisicao
 {
+	use ServiceTraitErro;
+	use ServiceTraitFilter;
+	use ServiceTraitEncripta;
+
 	public function processaRequisicao(): void
 	{
 		
 		try{
 			//Inserção tabela Registro
 
-			$email = ServiceFilter::filtraEmail($_POST['email']);
-		    $senha = ServiceFilter::filtraString($_POST['senha']);
+			$email = $this->filtraEmail($_POST['email']);
+		    $senha = $this->filtraString($_POST['senha']);
 		    $ip = $_SESSION['ip'];
 		    $data = $_SESSION['data'];
 
-		    $senhaEncriptada = ServiceEncripta::encriptaSenha($senha);
+		    $senhaEncriptada = $this->encriptaSenha($senha);
 	
 			$registro = new ModelRegistro();
 			$registro->inserir($email, $senhaEncriptada, $ip, $data);
@@ -33,7 +37,7 @@ class PersisteRegistro implements InterfaceControladoraRequisicao
 			die();
 
 		}catch(\Exception $e){
-			ServiceErro::trataErro($e);
+			$this->trataErro($e);
 		}
 
 	}

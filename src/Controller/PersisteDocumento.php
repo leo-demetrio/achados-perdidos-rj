@@ -2,25 +2,30 @@
 namespace Projeto\APRJ\Controller;
 
 use Projeto\APRJ\Controller\InterfaceControladoraRequisicao;
-use Projeto\APRJ\Services\ServiceFilter;
-use Projeto\APRJ\Services\ServiceErro;
-use Projeto\APRJ\Services\ServiceValidaData;
+use Projeto\APRJ\Services\ServiceTraitFilter;
+use Projeto\APRJ\Services\ServiceTraitErro;
+use Projeto\APRJ\Services\ServiceTraitValidaData;
 use Projeto\APRJ\Model\ModelDocumento;
 
 
 
 class PersisteDocumento implements InterfaceControladoraRequisicao
 {
+	use ServiceTraitErro;
+	use ServiceTraitFilter;
+	use ServiceTraitValidaData;
+
 	public function processaRequisicao(): void
 	{
+		use ServiceTraitFilter;
 
 		try{
 
-			$nome = ServiceFilter::filtraString($_POST['nome']);
-			$numero = ServiceFilter::filtraString($_POST['numero']);
-			$tipo = ServiceFilter::filtraString($_POST['tipo-documento']);
-			$situacao = ServiceFilter::filtraString($_POST['situacao']);
-			$id = ServiceFilter::filtraInt($_SESSION['id']);
+			$nome = $this->filtraString($_POST['nome']);
+			$numero = $this->filtraString($_POST['numero']);
+			$tipo = $this->filtraString($_POST['tipo-documento']);
+			$situacao = $this->filtraString($_POST['situacao']);
+			$id = $this->filtraInt($_SESSION['id']);
 			$data_perda = $_POST['data_perda'];
 			$dataRegistro= $_SESSION['data'];
 
@@ -46,7 +51,7 @@ class PersisteDocumento implements InterfaceControladoraRequisicao
 			
 
 		}catch(\Exception $e){
-			ServiceErro::trataErro($e);
+			$this->trataErro($e);
 		}
 
 	}

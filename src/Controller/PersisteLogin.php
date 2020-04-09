@@ -5,11 +5,14 @@ namespace Projeto\APRJ\Controller;
 
 use Projeto\APRJ\Controller\InterfaceControladoraRequisicao;
 use Projeto\APRJ\Model\ModelLogin;
-use Projeto\APRJ\Services\ServiceFilter;
-use Projeto\APRJ\Services\ServiceErro;
+use Projeto\APRJ\Services\ServiceTraitFilter;
+use Projeto\APRJ\Services\ServiceTraitErro;
 
 class PersisteLogin implements InterfaceControladoraRequisicao
 {
+	use ServiceTraitErro;
+	use ServiceTraitFilter;
+
 	public function processaRequisicao(): void
 	{
 		try{
@@ -17,8 +20,8 @@ class PersisteLogin implements InterfaceControladoraRequisicao
 			$email = $_POST['email'];
 			$senha = $_POST['senha'];
 
-			$emailFiltrado = ServiceFilter::filtraEmail($email);
-			$senhaFiltrada = ServiceFilter::filtraString($senha);
+			$emailFiltrado = $this->filtraEmail($email);
+			$senhaFiltrada = $this->filtraString($senha);
 
 			if(is_null($emailFiltrado) || $emailFiltrado === false){
 				// echo $emailFiltrado.'leo';
@@ -64,7 +67,7 @@ class PersisteLogin implements InterfaceControladoraRequisicao
 
 		}catch(\Exception $e){
 
-			ServiceErro::trataErro($e);
+			$this->trataErro($e);
 
 		}
 

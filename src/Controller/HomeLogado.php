@@ -3,10 +3,12 @@ namespace Projeto\APRJ\Controller;
 
 use Projeto\APRJ\Controller\InterfaceControladoraRequisicao;
 use Projeto\APRJ\Controller\ControllerComHtml;
-use Projeto\APRJ\Services\ServiceErro;
+use Projeto\APRJ\Services\ServiceTraitErro;
 
 class HomeLogado extends ControllerComHtml implements InterfaceControladoraRequisicao
 {
+	use ServiceTraitErro;
+	
 	public function processaRequisicao(): void
 	{
 		try{
@@ -16,7 +18,7 @@ class HomeLogado extends ControllerComHtml implements InterfaceControladoraRequi
 
 			]);
 		}catch(\Exception $e){
-			ServiceErro::trataErro($e);
+			$this->trataErro($e);
 		}
 
 		// $titulo = "Home Logado";
