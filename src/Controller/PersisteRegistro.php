@@ -1,4 +1,4 @@
-$this-><?php 
+<?php 
 namespace Projeto\APRJ\Controller;
 
 use Projeto\APRJ\Controller\InterfaceControladoraRequisicao;
