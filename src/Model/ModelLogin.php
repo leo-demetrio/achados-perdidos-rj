@@ -26,6 +26,11 @@ class ModelLogin
 		$stmt->execute();
 		$email = $stmt->fetch();
 		//var_dump($email);exit;
+
+		 if(!$email){
+		  throw new \Exception("dados não encontrados no banco");
+		}
+		
 		$this->email = $email['email'];
 		$this->senha = $email['senha'];
 		$this->id_registro = $email['id_registro'];

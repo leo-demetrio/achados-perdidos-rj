@@ -2,7 +2,7 @@
 namespace Projeto\APRJ\Services;
 
 
-class ServiceValidaData
+trait ServiceTraitValidaData
 {
 	public static function validaData($data){
 

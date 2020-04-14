@@ -23,6 +23,8 @@ class ModelRegistro
 		$stmt = $conexao->prepare($query);
 		$stmt->bindValue(':email', $email);
 		$stmt->execute();
-		return $stmt->fetch();
+
+		return  $stmt->fetch();
+
 	}
 }

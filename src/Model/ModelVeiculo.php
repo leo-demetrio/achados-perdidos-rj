@@ -37,6 +37,15 @@ class ModelVeiculo
 		$veiculos = $stmt->fetchAll();
 		return $veiculos;
 	}
+	public function buscaPelaPlaca($placa){
+		$query = "SELECT placa FROM veiculos WHERE placa = :placa";
+		$conexao = ModelConexao::conect();
+		$stmt = $conexao->prepare($query);
+		$stmt->bindValue(':placa', $placa);
+		$stmt->execute();
+		return $stmt->fetch();
+
+	}
 	//fazer métodos set e get
 
 	public function setIdReg($valor){

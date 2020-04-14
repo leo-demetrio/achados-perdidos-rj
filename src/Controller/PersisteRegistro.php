@@ -19,18 +19,26 @@ class PersisteRegistro implements InterfaceControladoraRequisicao
 		try{
 			//Inserção tabela Registro
 
+
 			$email = $this->filtraEmail($_POST['email']);
-		    $senha = $this->filtraString($_POST['senha']);
+			$registro = new ModelRegistro();
+			$registroEmail = $registro->buscaIdPorEmail($email);
+
+			if($registroEmail){ 
+				throw new \Exception("O email já possui cadastro!!");
+				}	
+
+			$senha = $this->filtraString($_POST['senha']);
+		    $senhaEncriptada = $this->encriptaSenha($senha);
+
 		    $ip = $_SESSION['ip'];
 		    $data = $_SESSION['data'];
-
-		    $senhaEncriptada = $this->encriptaSenha($senha);
 	
-			$registro = new ModelRegistro();
+			
 			$registro->inserir($email, $senhaEncriptada, $ip, $data);
 			
-			$id = $registro->buscaIdPorEmail($email);
-			$_SESSION['id'] = $id['id_registro'];
+			$id_registro = $registro->buscaIdPorEmail($email);
+			$_SESSION['id'] = $id_registro['id_registro'];//arraya associativo
 			$_SESSION['email'] = $email;
 
 			header("Location: /cadastro-principal");

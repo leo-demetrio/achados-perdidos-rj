@@ -40,19 +40,9 @@ class PersisteLogin implements InterfaceControladoraRequisicao
 				echo "Email ou senha Inválidos";
 				exit;
 			}
-			//echo $emailBanco.'login';exit;
-			// echo $senhaFiltrada.'parou';
-			// var_dump($senhaFiltrada);exit;
-			// $e = is_null($senhaFiltrada);
-			// var_dump($e);exit;
-
-			//echo "passou";exit;
-
-
 
 			if(is_null($senhaFiltrada) || $senhaFiltrada === false){
-				// echo $emailFiltrado.'leo';
-				// echo 'ok';exit;
+				
 				header('location: /login');
 				exit;
 			}

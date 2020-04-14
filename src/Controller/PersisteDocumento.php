@@ -14,28 +14,29 @@ class PersisteDocumento implements InterfaceControladoraRequisicao
 	use ServiceTraitErro;
 	use ServiceTraitFilter;
 	use ServiceTraitValidaData;
+	use ServiceTraitFilter;
 
 	public function processaRequisicao(): void
 	{
-		use ServiceTraitFilter;
 
 		try{
 
-			$nome = $this->filtraString($_POST['nome']);
+
 			$numero = $this->filtraString($_POST['numero']);
+			$documento = new ModelDocumento();
+			$documnetoBanco = $documento->buscaPeloNumero($numero);
+			
+			if($documnetoBanco){
+				throw new \Exception('Esse documento já existe no banco');
+			}
+
 			$tipo = $this->filtraString($_POST['tipo-documento']);
+			$nome = $this->filtraString($_POST['nome']);
 			$situacao = $this->filtraString($_POST['situacao']);
 			$id = $this->filtraInt($_SESSION['id']);
 			$data_perda = $_POST['data_perda'];
 			$dataRegistro= $_SESSION['data'];
-
-			// $data_perda = ServiceValidaData::validaData($data_perda);
-			// var_dump($data_perda);exit;
-			//FALTA VALIDAR DATA
-			//$date = preg_replace("([^0-9/])", "", $data_perda);
-			//echo $date;exit;
-
-			$documento = new ModelDocumento();
+			
 			$documento->setNomeDocumento($nome);
 			$documento->setNumeroDocumento($numero);
 			$documento->setTipoDocumento($tipo);
@@ -43,6 +44,8 @@ class PersisteDocumento implements InterfaceControladoraRequisicao
 			$documento->setIdREg($id);
 			$documento->setDataRegistro($dataRegistro);
 			$documento->setSituacao($situacao);
+			$documento->inserir();
+
 			$documento->inserir();
 
 			header('Location: /relatorio');

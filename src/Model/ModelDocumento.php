@@ -31,6 +31,14 @@ class ModelDocumento
 		//var_dump($stmt);exit;
 			
 	}
+	public function buscaPeloNumero($numero){
+		$query = 'SELECT numero_documento FROM documentos WHERE numero_documento = :numero';
+		$conexao = ModelConexao::conect();
+		$stmt = $conexao->prepare($query);
+		$stmt->bindValue(':numero', $numero);
+		$stmt->execute();
+		return $stmt->fetch();
+	}
 
 	public function buscaPeloId(){
 		$query = 'SELECT numero_documento, tipo_documento, data_perda, data_registro, nome_documento, situacao FROM documentos WHERE id_reg = :id';
