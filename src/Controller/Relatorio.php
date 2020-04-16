@@ -4,6 +4,7 @@ namespace Projeto\APRJ\Controller;
 use Projeto\APRJ\Controller\InterfaceControladoraRequisicao;
 use Projeto\APRJ\Model\ModelVeiculo;
 use Projeto\APRJ\Model\ModelDocumento;
+use Projeto\APRJ\Model\ModelDocumentoAchado;
 use Projeto\APRJ\Controller\ControllerComHtml;
 use Projeto\APRJ\Services\ServiceTraitErro;
 
@@ -24,13 +25,16 @@ class Relatorio extends ControllerComHtml implements InterfaceControladoraRequis
 			$relatorioDocumetos->setIdReg($_SESSION['id']);
 			$documentos = $relatorioDocumetos->buscaPeloId();
 
-
+			$relatorioDocumetosAchados = new ModelDocumentoAchado();
+			$relatorioDocumetosAchados->setIdReg($_SESSION['id']);
+			$documenetosAchados = $relatorioDocumetosAchados->buscaPeloId();
 			
 			echo $this->renderizaHtml('relatorio/relatorio.php', [
 
 				'titulo' => 'Relatório',
 				'veiculos' => $veiculos,
-				'documentos' => $documentos
+				'documentos' => $documentos,
+				'documentosAchados' => $documenetosAchados
 
 			]);
 			

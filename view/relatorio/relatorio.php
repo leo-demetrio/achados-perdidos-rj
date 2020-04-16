@@ -88,6 +88,18 @@
       </tbody>
     </table>
 
+    <h2>Achados</h2>
+
+    <?php foreach($documentosAchados as $docAchado): ?>
+
+    <p>Você achou  documento número: 
+
+      <?php echo $docAchado['numero_documento'] ?>
+
+    </p>
+
+  <?php endforeach ?>
+
 </div>
 
 
