@@ -55,11 +55,13 @@ class PersisteDocumento implements InterfaceControladoraRequisicao
 				//vai p relatório						
 			}		
 
-			// die('passou');
 			
 			if($situacao === 'achado'){	
 										
+					if(isset($docAchadoBanco)){
+						throw new \Exception('Este documento já possui cadastro como achado no banco')
 
+					}
 					$documentoAchado->setNomeDocumento($nome);
 					$documentoAchado->setNumeroDocumento($numero);
 					$documentoAchado->setTipoDocumento($tipo);
@@ -72,7 +74,7 @@ class PersisteDocumento implements InterfaceControladoraRequisicao
 					//verifica se possui cadastro no banco para devolver
 					if($docBanco){
 
-						throw new \Exception('Este veículo foi encontrado em nosso sistema seu proprietário será notificado');
+						throw new \Exception('Este documento foi encontrado em nosso sistema seu proprietário será notificado');
 
 					}
 

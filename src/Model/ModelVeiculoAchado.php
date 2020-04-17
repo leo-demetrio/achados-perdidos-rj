@@ -1,7 +1,7 @@
 <?php 
 namespace Projeto\APRJ\Model;
 
-class ModelVeiculo
+class ModelVeiculoAchado
 {
 	private $id_reg;
 	private $placa;
@@ -14,7 +14,7 @@ class ModelVeiculo
 	
 	public function inserir()
 	{
-		$query = "INSERT INTO veiculos (id_reg, placa, modelo, cor, data_registro, nome_proprietario, situacao) VALUES (:id_reg, :placa, :modelo, :cor, :data_registro, :nome_proprietario, :situacao)";
+		$query = "INSERT INTO veiculos_achados (id_reg, placa, modelo, cor, data_registro, nome_proprietario, situacao) VALUES (:id_reg, :placa, :modelo, :cor, :data_registro, :nome_proprietario, :situacao)";
 		$conexao = ModelConexao::conect();
 		$stmt = $conexao->prepare($query);
 		// echo $this->placa.'id';exit;
@@ -29,7 +29,7 @@ class ModelVeiculo
 	}
 
 	public function buscaPeloId(){
-		$query = 'SELECT id_reg, placa, modelo, cor, data_registro, nome_proprietario, situacao FROM veiculos WHERE id_reg = :id';
+		$query = 'SELECT id_reg, placa, modelo, cor, data_registro, nome_proprietario, situacao FROM veiculos_achados WHERE id_reg = :id';
 		$conexao = ModelConexao::conect();
 		$stmt = $conexao->prepare($query);
 		$stmt->bindValue(':id', $this->id_reg);
@@ -38,7 +38,7 @@ class ModelVeiculo
 		return $veiculos;
 	}
 	public function buscaPelaPlaca($placa){
-		$query = "SELECT id_reg,placa FROM veiculos WHERE placa = :placa";
+		$query = "SELECT id_reg,placa FROM veiculos_achados WHERE placa = :placa";
 		$conexao = ModelConexao::conect();
 		$stmt = $conexao->prepare($query);
 		$stmt->bindValue(':placa', $placa);
@@ -46,7 +46,7 @@ class ModelVeiculo
 		return $stmt->fetch();
 
 	}
-	//fazer métodos set e get
+	
 
 	public function setIdReg($valor){
 		 $this->id_reg = $valor;
@@ -69,11 +69,7 @@ class ModelVeiculo
 	public function setSituacao($valor){
 		 $this->situacao = $valor;
 	}
-	// public function __set($nome, $valor){
-	// 	 echo $nome.'set';
-	// 	$this->dados[$nome] = $valor;
-	// 	echo $this->id_reg;exit;
-	// }
+	
 
 	public function __get($nome){
 		return $this->dados[$nome];
