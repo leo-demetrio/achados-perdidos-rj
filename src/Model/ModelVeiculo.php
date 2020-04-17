@@ -46,6 +46,14 @@ class ModelVeiculo
 		return $stmt->fetch();
 
 	}
+	public function excluir($placa)
+	{
+		$query = "DELETE FROM veiculos WHERE placa = :placa";
+		$conexao = ModelConexao::conect();
+		$stmt = $conexao->prepare($query);
+		$stmt->bindValue(':placa', $placa);
+		$stmt->execute();
+	}
 	//fazer métodos set e get
 
 	public function setIdReg($valor){

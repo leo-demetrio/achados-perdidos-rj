@@ -49,6 +49,15 @@ class ModelDocumento
 		$documentos = $stmt->fetchAll();
 		return $documentos;
 	}
+	public function excluir(int $numero): void
+	{
+		$query = "DELETE FROM documentos WHERE numero_documento = :numero";
+		$conexao = ModelConexao::conect();
+		$stmt = $conexao->prepare($query);
+		$stmt->bindValue(':numero', $numero);
+		$stmt->execute();
+		// var_dump($stmt);die('excluiu');
+	}
 	public function setIdReg($valor){
 		$this->id_reg = $valor;
 	}

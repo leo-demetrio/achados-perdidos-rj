@@ -46,6 +46,15 @@ class ModelVeiculoAchado
 		return $stmt->fetch();
 
 	}
+	public function excluir(int $numero): void
+	{
+		$query = "DELETE FROM documentos_achados WHERE numero_documento = :numero";
+		$conexao = ModelConexao::conect();
+		$stmt = $conexao->prepare($query);
+		$stmt->bindValue(':numero', $numero);
+		$stmt->execute();
+		// var_dump($stmt);die('excluiu');
+	}
 	
 
 	public function setIdReg($valor){

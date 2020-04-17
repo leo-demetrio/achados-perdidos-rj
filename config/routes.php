@@ -15,6 +15,10 @@ use Projeto\APRJ\Controller\HomeLogado;
 use Projeto\APRJ\Controller\Relatorio;
 use Projeto\APRJ\Controller\RelatorioAchado;
 use Projeto\APRJ\Controller\Sair;
+use Projeto\APRJ\Controller\ExcluirDocumento;
+use Projeto\APRJ\Controller\ExcluirDocumentoAchado;
+use Projeto\APRJ\Controller\ExcluirVeiculo;
+use Projeto\APRJ\Controller\ExcluirVeiculoAchado;
 
 
 
@@ -34,6 +38,10 @@ return  [
 	'/salvar-documento' => PersisteDocumento::class,
 	'/relatorio' => Relatorio::class,
 	'/relatorio-encontrado' => RelatorioAchado::class,
-	'/sair' => Sair::class
+	'/sair' => Sair::class,
+	'/excluir-documento' => ExcluirDocumento::class,
+	'/excluir-documentos-achados' => ExcluirDocumentoAchado::class,
+	'/excluir-veiculo' => ExcluirVeiculo::class,
+	'/excluir-veiculos-achados' => ExcluirVeiculoAchado::class,
 
 ];

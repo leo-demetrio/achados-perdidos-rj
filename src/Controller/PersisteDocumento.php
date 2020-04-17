@@ -58,8 +58,8 @@ class PersisteDocumento implements InterfaceControladoraRequisicao
 			
 			if($situacao === 'achado'){	
 										
-					if(isset($docAchadoBanco)){
-						throw new \Exception('Este documento já possui cadastro como achado no banco')
+					if($docAchadoBanco){
+						throw new \Exception('Este documento já possui cadastro como achado no banco');
 
 					}
 					$documentoAchado->setNomeDocumento($nome);
@@ -69,7 +69,7 @@ class PersisteDocumento implements InterfaceControladoraRequisicao
 					$documentoAchado->setIdREg($id);
 					$documentoAchado->setDataRegistro($dataRegistro);
 					$documentoAchado->setSituacao($situacao);
-					$documentoAchado->inserir();//die("inseriru");
+					$documentoAchado->inserirAchado();//die("inseriru");
 
 					//verifica se possui cadastro no banco para devolver
 					if($docBanco){
@@ -79,6 +79,7 @@ class PersisteDocumento implements InterfaceControladoraRequisicao
 					}
 
 					header('Location: /relatorio');
+					return;
 				}
 					
 
@@ -89,7 +90,7 @@ class PersisteDocumento implements InterfaceControladoraRequisicao
 			}
 
 			
-			
+			// die("veio");
 			$documento->setNomeDocumento($nome);
 			$documento->setNumeroDocumento($numero);
 			$documento->setTipoDocumento($tipo);

@@ -34,7 +34,7 @@
   		<td class="td"><?//php echo $registro['nome_proprietario'] ?></td>
   		<td class="td"><?//php echo $registro['situacao'] ?></td> -->
       <td><a href="/editar" class="green link">editar</a></td>
-      <td><a href="/excluir" class="red link">excluir</a></td>
+      <td><a href="/excluir-veiculo?placa=<?php echo $registro['placa']?>" class="red link">excluir</a></td>
   		</tr>  		
 
   	<?php endforeach ?>
@@ -80,7 +80,7 @@
       <td><?php //echo $registro['nome_documento'] ?></td>
       <td><?php //echo $registro['situacao'] ?></td> -->
       <td class="td"><a href="/editar" class="green link">editar</a></td>
-      <td class="td"><a href="/excluir" class="red link">excluir</a></td>
+      <td class="td"><a href="/excluir-documento?numero_documento=<?php echo $registro['numero_documento']?>" class="red link">excluir</a></td>
       </tr>     
 
     <?php endforeach ?>
@@ -101,7 +101,7 @@
       <?php echo $docAchado['numero_documento'] ?>
       <p class="btn-achados">  
       <td><a href="/editar" class="green link">editar</a></td>
-      <td><a href="/excluir" class="red link">excluir</a></td>
+      <td><a href="/excluir-documentos-achados?numero_documento=<?php echo $docAchado['numero_documento']?>" class="red link">excluir</a></td>
       </p>
 
     </p>

@@ -13,10 +13,10 @@ class ModelDocumentoAchado
 	private $nomeDocumento;
 	private $situacao;
 
-	public function inserir()
+	public function inserirAchado()
 	{
 		
-		$query = "INSERT INTO documentos_achados (id_reg,numero_documento, tipo_documento,data_perda,data_registro,nome_documento,situacao) VALUES (:id_reg,:numero_documento,:tipo_documento,:data_perda,:data_registro,:nome_documento,:situacao)";
+		$query = "INSERT INTO docAchados (id_reg,numero_documento, tipo_documento,data_perda,data_registro,nome_documento,situacao) VALUES (:id_reg,:numero_documento,:tipo_documento,:data_perda,:data_registro,:nome_documento,:situacao)";
 		//echo $id;echo$numero;exit;
 		$conexao = ModelConexao::conect();
 		$stmt = $conexao->prepare($query);
@@ -33,7 +33,7 @@ class ModelDocumentoAchado
 			
 	}
 	public function buscaPeloNumero($numero){
-		$query = 'SELECT id_reg,numero_documento FROM documentos_achados WHERE numero_documento = :numero';
+		$query = 'SELECT id_reg,numero_documento FROM docAchados WHERE numero_documento = :numero';
 		$conexao = ModelConexao::conect();
 		$stmt = $conexao->prepare($query);
 		$stmt->bindValue(':numero', $numero);
@@ -41,13 +41,23 @@ class ModelDocumentoAchado
 		return $stmt->fetch();
 	}
 	public function buscaPeloId(){
-		$query = 'SELECT numero_documento, tipo_documento, data_perda, data_registro, nome_documento, situacao FROM documentos WHERE id_reg = :id';
+		$query = 'SELECT numero_documento, tipo_documento, data_perda, data_registro, nome_documento, situacao FROM docAchados WHERE id_reg = :id';
 		$conexao = ModelConexao::conect();
 		$stmt = $conexao->prepare($query);
 		$stmt->bindValue(':id', $this->id_reg);
 		$stmt->execute();
 		$documentos = $stmt->fetchAll();
 		return $documentos;
+	}
+
+	public function excluir(int $numero): void
+	{
+		$query = "DELETE FROM docAchados WHERE numero_documento = :numero";
+		$conexao = ModelConexao::conect();
+		$stmt = $conexao->prepare($query);
+		$stmt->bindValue(':numero', $numero);
+		$stmt->execute();
+		 // var_dump($stmt);die('excluiu');
 	}
 	public function setIdReg($valor){
 		$this->id_reg = $valor;
