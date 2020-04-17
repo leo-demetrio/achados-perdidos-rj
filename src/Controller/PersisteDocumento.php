@@ -45,6 +45,10 @@ class PersisteDocumento implements InterfaceControladoraRequisicao
 				if(isset($docBanco)){
 
 					$documento = new ModelDocumentoAchado();
+					if(isset($documento)){
+						throw new \Exception("Este documento já possui cadastro, vá para relatório");
+						
+					}
 					$documento->setNomeDocumento($nome);
 					$documento->setNumeroDocumento($numero);
 					$documento->setTipoDocumento($tipo);
