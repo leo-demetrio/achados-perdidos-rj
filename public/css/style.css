@@ -3,22 +3,45 @@ body {
 	font-family: 'Roboto', sans-serif;
 }
 
-fieldset {
-	width: 80%;
-	margin: 0 auto;
-	margin-top: 2em;
-}
+
 .relatorio {
 	width: 80%;
-	margin: 2em auto;
+	margin: 1em 1em;
 	font-size: 1.5em;
-
 }
 .relatorio-table {
-	margin: 2em auto;
+	margin: 2em 1em;
 }
-tr {
-	padding: 10px;
+.tr {
+	margin: 100em;
+}
+/*.th {
+	padding: 0.5em 0.2em;
+	margin: 5em;não está funcionando
+}*/
+
+.td {
+	padding: 0.5em 1em;
+	text-align: left;
+}
+.link {
+	margin: 0.5em;
+	text-align: center;
+	padding: 0.2em 0.5em;
+	/*width: 5em;*/
+	/*font-size: 0.5em;*/
+	font-weight: bold;
+	color: white;
+}
+a.red {
+	background-color: red;
+}
+a.green {
+	background-color: green;
+}
+.btn-achados {
+	text-align: right;
+	vertical-align: center;
 }
 /*
 
@@ -30,7 +53,3 @@ SELECT  distinct(placa), nome, modelo,cor, data_registro,nome_proprietario,situa
 /*SELECT distinct(placa), nome, modelo,cor, v.data_registro,nome_proprietario,v.situacao, d.data_perda, d.data_registro, d.nome_documento, d.numero_documento, d.tipo_documento FROM registro_completo as rc INNER JOIN veiculos as v Inner JOin documentos as d ON rc.id_reg = '32' and d.id_reg = "32"
 
 SELECT distinct(placa), nome, modelo,cor, v.data_registro,nome_proprietario,v.situacao, d.data_perda, d.data_registro, d.nome_documento, d.numero_documento, d.tipo_documento, d.situacao as situacao_documento FROM registro_completo as rc INNER JOIN veiculos as v Inner JOin documentos as d ON rc.id_reg = '32' and d.id_reg = "32"*/
-=======
-
-}
->>>>>>> 313b9b8c4aabf28fd57252c61f83f4f873b9754d

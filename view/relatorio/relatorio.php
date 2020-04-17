@@ -9,14 +9,14 @@
       <?php if(count($veiculos) > 0): ?>
  			<tr>
  				<!-- <th>Nome Denunciante</th> -->
- 				<th>Placa</th>
- 				<th>Modelo</th>
- 				<th>Cor</th>
- 				<th>Data registro</th>
- 				<th>Nome proprietário</th>
- 				<th>Situação</th>
- 				<th>Editar</th>
- 				<th>Excluir</th>
+ 				<th class="th">Placa</th>
+ 				<th class="th">Modelo</th>
+ 			<!-- 	<th>Cor</th>
+ 				<th class="th" class="td">Data registro</th>
+ 				<th class="th" class="td">Nome proprietário</th>
+ 				<th class="th" class="td">Situação</th> -->
+ 				<th class="th">Editar</th>
+ 				<th class="th">Excluir</th>
  			</tr>
  		</thead>
   
@@ -27,12 +27,14 @@
  		<tr>
       <?php //echo $registro['nome_documento']?>
   		<!-- <td><?php// echo $registro['nome'] ?></td> -->
-  		<td><?php echo  $registro['placa'] ?></td>
-  		<td><?php echo $registro['modelo'] ?></td>
-  		<td><?php echo $registro['cor'] ?></td>
-  		<td><?php echo $registro['data_registro'] ?></td>
-  		<td><?php echo $registro['nome_proprietario'] ?></td>
-  		<td><?php echo $registro['situacao'] ?></td>
+  		<td class="td"><?php echo  $registro['placa'] ?></td>
+  		<td class="td"><?php echo $registro['modelo'] ?></td>
+  	<!-- 	<td class="td"><?//php echo $registro['cor'] ?></td>
+  		<td class="td"><?//php echo $registro['data_registro'] ?></td>
+  		<td class="td"><?//php echo $registro['nome_proprietario'] ?></td>
+  		<td class="td"><?//php echo $registro['situacao'] ?></td> -->
+      <td><a href="/editar" class="green link">editar</a></td>
+      <td><a href="/excluir" class="red link">excluir</a></td>
   		</tr>  		
 
   	<?php endforeach ?>
@@ -53,14 +55,14 @@
     <?php if(count($documentos) > 0): ?>
       <tr>
         <!-- <th>Nome Denunciante</th> -->
-        <th>Documento número:</th>
-        <th>Tipo documento</th>
-        <th>Data perda</th>
+        <th class="th">Documento número:</th>
+        <th class="th">Tipo documento</th>
+      <!--   <th>Data perda</th>
         <th>Data registro</th>
         <th>Nome proprietário</th>
-        <th>Situação</th>
-        <th>Editar</th>
-        <th>Excluir</th>
+        <th>Situação</th> -->
+        <th class="th">Editar</th> 
+        <th class="th">Excluir</th>
       </tr>
     </thead>
   
@@ -71,12 +73,14 @@
     <tr>
       <?php //echo $registro['nome_documento']?>
       <!-- <td><?php// echo $registro['nome'] ?></td> -->
-      <td><?php echo  $registro['numero_documento'] ?></td>
-      <td><?php echo $registro['tipo_documento'] ?></td>
-      <td><?php echo $registro['data_perda'] ?></td>
-      <td><?php echo $registro['data_registro'] ?></td>
-      <td><?php echo $registro['nome_documento'] ?></td>
-      <td><?php echo $registro['situacao'] ?></td>
+      <td class="td"><?php echo  $registro['numero_documento'] ?></td>
+      <td class="td"><?php echo $registro['tipo_documento'] ?></td>
+     <!--  <td><?php //echo $registro['data_perda'] ?></td>
+      <td><?php //echo $registro['data_registro'] ?></td>
+      <td><?php //echo $registro['nome_documento'] ?></td>
+      <td><?php //echo $registro['situacao'] ?></td> -->
+      <td class="td"><a href="/editar" class="green link">editar</a></td>
+      <td class="td"><a href="/excluir" class="red link">excluir</a></td>
       </tr>     
 
     <?php endforeach ?>
@@ -88,17 +92,22 @@
       </tbody>
     </table>
 
-    <h2>Documentos Achados</h2>
+    <h2>Documentos Achados
 
     <?php foreach($documentosAchados as $docAchado): ?>
 
     <p>Você achou  documento número: 
 
       <?php echo $docAchado['numero_documento'] ?>
+      <p class="btn-achados">  
+      <td><a href="/editar" class="green link">editar</a></td>
+      <td><a href="/excluir" class="red link">excluir</a></td>
+      </p>
 
     </p>
 
-  <?php endforeach ?>
+
+  <?php endforeach ?> 
 
 </div>
 
@@ -109,33 +118,3 @@
 
 
 
-<!-- <div class="relatorio">
-<pre>
-<?php echo count($registros);print_r($registros);exit; ?>
- </pre>
-<div> -->
- 	
-
-<!-- <pre>
-<?php// echo count($registros);print_r($registros);exit; ?>
- </pre>
-  		<div class="relatorio">
-
-  		<?php //echo $registros['nome'] ?><br>
-  		<?php //echo  $registros['placa'] ?><br>
-  		<?php //echo $registros['modelo'] ?><br>
-  		<?php// echo $registros['cor'] ?><br>
-  		<?php// echo $registros['data_registro'] ?><br>
-  		<?php// echo $registros['nome_proprietario'] ?><br>
-  		<?php //echo $registros['situacao'] ?><br>
-  		<div>
-
-
-
-
-
-
-
-<?php //require __DIR__ . '/../footer.php' ?>
-
- -->
