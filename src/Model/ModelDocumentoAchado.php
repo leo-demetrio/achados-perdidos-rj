@@ -33,7 +33,7 @@ class ModelDocumentoAchado
 			
 	}
 	public function buscaPeloNumero($numero){
-		$query = 'SELECT numero_documento FROM documentos_achados WHERE numero_documento = :numero';
+		$query = 'SELECT id_reg,numero_documento FROM documentos_achados WHERE numero_documento = :numero';
 		$conexao = ModelConexao::conect();
 		$stmt = $conexao->prepare($query);
 		$stmt->bindValue(':numero', $numero);

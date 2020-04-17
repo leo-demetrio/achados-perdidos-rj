@@ -28,49 +28,62 @@ class PersisteDocumento implements InterfaceControladoraRequisicao
 			$id = $this->filtraInt($_SESSION['id']);
 			$data_perda = $_POST['data_perda'];
 			$dataRegistro= $_SESSION['data'];
-
-			$numero = $this->filtraString($_POST['numero']);			
+			$numero = $this->filtraString($_POST['numero']);
 			$situacao = $this->filtraString($_POST['situacao']);
 
-			//verifica e cruza dados de documento encontrado
+
 			$documento = new ModelDocumento();
+			$docBanco = $documento->buscaPeloNumero($numero);
+			if(isset($docBanco['id_reg'])){ 
+				$regBanco = $docBanco['id_reg'];
+			}else{
+				$regBanco = 0;
+			}
 
-			if($situacao === 'achado'){
 
+			$documentoAchado = new ModelDocumentoAchado();
+			$docAchadoBanco = $documentoAchado->buscaPeloNumero($numero);
+			if(isset($docAchadoBanco['id_reg'])){ 
+				$regAchadoBanco = $docAchadoBanco['id_reg'];
+			}else{
+				$regAchadoBanco = 0;
+			}
+
+			//o mesmo não pode perder e achar
+			if($regBanco == $id || $regAchadoBanco == $id){
+				throw new \Exception("Você já cadastrou esse documento");
+				//vai p relatório						
+			}		
+
+			// die('passou');
 			
-				$docBanco = $documento->buscaPeloNumero($numero);
-				// var_dump($docBanco);die();
+			if($situacao === 'achado'){	
+										
 
-				//se tiver registro insere na tabela achados
-				if(isset($docBanco)){
+					$documentoAchado->setNomeDocumento($nome);
+					$documentoAchado->setNumeroDocumento($numero);
+					$documentoAchado->setTipoDocumento($tipo);
+					$documentoAchado->setDataPerda($data_perda);
+					$documentoAchado->setIdREg($id);
+					$documentoAchado->setDataRegistro($dataRegistro);
+					$documentoAchado->setSituacao($situacao);
+					$documentoAchado->inserir();//die("inseriru");
 
-					$documento = new ModelDocumentoAchado();
-					if(isset($documento)){
-						throw new \Exception("Este documento já possui cadastro, vá para relatório");
-						
+					//verifica se possui cadastro no banco para devolver
+					if($docBanco){
+
+						throw new \Exception('Este veículo foi encontrado em nosso sistema seu proprietário será notificado');
+
 					}
-					$documento->setNomeDocumento($nome);
-					$documento->setNumeroDocumento($numero);
-					$documento->setTipoDocumento($tipo);
-					$documento->setDataPerda($data_perda);
-					$documento->setIdREg($id);
-					$documento->setDataRegistro($dataRegistro);
-					$documento->setSituacao($situacao);
-					$documento->inserir();//die("inseriru");
 
 					header('Location: /relatorio');
 				}
-
-				
-				die("persiste");
-
-			}
+					
 
 			
-			$documnetoBanco = $documento->buscaPeloNumero($numero);
-			
-			if($documnetoBanco){
-				throw new \Exception('Esse documento já existe no banco');
+					
+			if($docBanco){
+				throw new \Exception('Esse documento já foi cadastrado no banco');
 			}
 
 			

@@ -17,17 +17,20 @@ class PersisteVeiculo implements InterfaceControladoraRequisicao
 		try{
 
 			$placa = $this->filtraString($_POST['placa']);
-			$veiculo = new ModelVeiculo();
-			$veiculoBanco = $veiculo->buscaPelaPlaca($placa);
-			if($veiculoBanco){
-				throw new \Exception("Veículo já possui cadastro no sistema");				
-			}echo "passou";exit;
 			$modelo = $this->filtraString($_POST['modelo']);
 			$cor = $this->filtraString($_POST['cor']);
 			$nomeProprietario = $this->filtraString($_POST['nome-proprietario']);
 			$situacao = $this->filtraString($_POST['situacao']);
 			$data = $_SESSION['data'];
 			$id = $_SESSION['id'];
+
+			
+			$veiculo = new ModelVeiculo();
+			$veiculoBanco = $veiculo->buscaPelaPlaca($placa);
+			if($veiculoBanco){
+				throw new \Exception("Veículo já possui cadastro no sistema");				
+			}
+			
 
 			
 			$veiculo->setIdReg($id);
