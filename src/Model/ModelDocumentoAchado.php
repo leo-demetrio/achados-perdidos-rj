@@ -56,8 +56,9 @@ class ModelDocumentoAchado
 		$conexao = ModelConexao::conect();
 		$stmt = $conexao->prepare($query);
 		$stmt->bindValue(':numero', $numero);
-		$stmt->execute();
-		 // var_dump($stmt);die('excluiu');
+		$result = $stmt->execute();
+		return $result;
+		// var_dump($result);die('excluiu');
 	}
 	public function setIdReg($valor){
 		$this->id_reg = $valor;
