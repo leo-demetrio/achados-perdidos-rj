@@ -19,11 +19,13 @@ use Projeto\APRJ\Controller\ExcluirDocumento;
 use Projeto\APRJ\Controller\ExcluirDocumentoAchado;
 use Projeto\APRJ\Controller\ExcluirVeiculo;
 use Projeto\APRJ\Controller\ExcluirVeiculoAchado;
+use Projeto\APRJ\Controller\Teste;
 
 
 
 return  [
 	'/' => HomeLogado::class,
+	'/teste' => Teste::class,
 	'/home' => HomeLogado::class,
 	'/login' => CadastroLogin::class,
 	'/salvar-login' => PersisteLogin::class,
