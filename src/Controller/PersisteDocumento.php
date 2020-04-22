@@ -16,7 +16,7 @@ class PersisteDocumento implements InterfaceControladoraRequisicao
 	use ServiceTraitErro;
 	use ServiceTraitFilter;
 	use ServiceTraitValidaData;
-	use ServiceTraitFilter;
+	
 
 	public function processaRequisicao(): void
 	{

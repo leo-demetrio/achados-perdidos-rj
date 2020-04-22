@@ -6,11 +6,13 @@ use Projeto\APRJ\Model\ModelVeiculo;
 use Projeto\APRJ\Model\ModelVeiculoAchado;
 use Projeto\APRJ\Services\ServiceTraitErro;
 use Projeto\APRJ\Services\ServiceTraitFilter;
+use Projeto\APRJ\Services\ServiceTraitValidaData;
 
 class PersisteVeiculo implements InterfaceControladoraRequisicao
 {
 	use ServiceTraitErro;
 	use ServiceTraitFilter;
+	use ServiceTraitValidaData;
 	
 	public function processaRequisicao(): void
 	{
@@ -33,6 +35,9 @@ class PersisteVeiculo implements InterfaceControladoraRequisicao
 			}else{
 				$veicBanco = 0;
 			}
+			if($veicBanco == $id){
+				throw new \Exception("Você já cadastrou no sistema");				
+			}
 
 			$veiculoAchado = new ModelVeiculoAchado();
 			$veiculoAchadoBanco = $veiculoAchado->buscaPelaPlaca($placa);
@@ -44,7 +49,7 @@ class PersisteVeiculo implements InterfaceControladoraRequisicao
 
 
 			//o mesmo não pode perder e achar
-			if($veicBanco == $id || $veicAchadoBanco == $id){
+			if($veicAchadoBanco == $id){
 				throw new \Exception("Você já cadastrou no sistema");				
 			}
 
@@ -68,13 +73,19 @@ class PersisteVeiculo implements InterfaceControladoraRequisicao
 				//verifica se possui cadastro no banco para devolver
 				if($veicBanco){
 
-					throw new \Exception('Este documento foi encontrado em nosso sistema seu proprietário será notificado');
+					throw new \Exception('Este veículo foi encontrado em nosso sistema seu proprietário será notificado');
 
 				}
+				header('Location: /relatorio');
+				die();
 
+			}
+
+			if($veicBanco){
+				throw new \Exception('Este veículo já foi cadastrado no banco');
 			}		
 
-			
+		
 			$veiculo->setIdReg($id);
 			$veiculo->setPlaca($placa);
 			$veiculo->setModelo($modelo);
@@ -83,6 +94,11 @@ class PersisteVeiculo implements InterfaceControladoraRequisicao
 			$veiculo->setNomeProprietario ($nomeProprietario);
 			$veiculo->setSituacao($situacao);
 			$veiculo->inserir();
+
+		
+			if(isset($veiculoAchadoBanco['placa'])){
+				throw new \Exception('O veículo se encontra em nossa base de dados iremos entrar em contato com que está em posse dele');
+			}
 
 			header('Location: /relatorio');
 			die();
