@@ -16,7 +16,7 @@ class ModelDocumentoAchado
 	public function inserirAchado()
 	{
 		
-		$query = "INSERT INTO docAchados (id_reg,numero_documento, tipo_documento,data_perda,data_registro,nome_documento,situacao) VALUES (:id_reg,:numero_documento,:tipo_documento,:data_perda,:data_registro,:nome_documento,:situacao)";
+		$query = "INSERT INTO doc_achado (id_reg,numero_documento, tipo_documento,data_perda,data_registro,nome_documento,situacao) VALUES (:id_reg,:numero_documento,:tipo_documento,:data_perda,:data_registro,:nome_documento,:situacao)";
 		//echo $id;echo$numero;exit;
 		$conexao = ModelConexao::conect();
 		$stmt = $conexao->prepare($query);
@@ -33,7 +33,7 @@ class ModelDocumentoAchado
 			
 	}
 	public function buscaPeloNumero($numero){
-		$query = 'SELECT id_reg,numero_documento FROM docAchados WHERE numero_documento = :numero';
+		$query = 'SELECT id_reg,numero_documento FROM doc_achado WHERE numero_documento = :numero';
 		$conexao = ModelConexao::conect();
 		$stmt = $conexao->prepare($query);
 		$stmt->bindValue(':numero', $numero);
@@ -41,7 +41,7 @@ class ModelDocumentoAchado
 		return $stmt->fetch();
 	}
 	public function buscaPeloId(){
-		$query = 'SELECT numero_documento, tipo_documento, data_perda, data_registro, nome_documento, situacao FROM docAchados WHERE id_reg = :id';
+		$query = 'SELECT numero_documento, tipo_documento, data_perda, data_registro, nome_documento, situacao FROM doc_achado WHERE id_reg = :id';
 		$conexao = ModelConexao::conect();
 		$stmt = $conexao->prepare($query);
 		$stmt->bindValue(':id', $this->id_reg);
@@ -50,9 +50,9 @@ class ModelDocumentoAchado
 		return $documentos;
 	}
 
-	public function excluir(int $numero): void
+	public function excluir(int $numero): bool
 	{
-		$query = "DELETE FROM docAchados WHERE numero_documento = :numero";
+		$query = "DELETE FROM doc_achado WHERE numero_documento = :numero";
 		$conexao = ModelConexao::conect();
 		$stmt = $conexao->prepare($query);
 		$stmt->bindValue(':numero', $numero);

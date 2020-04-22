@@ -1,13 +1,14 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.2
+-- version 4.9.2
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 17-Abr-2020 às 17:34
+-- Tempo de geração: 22-Abr-2020 às 15:25
 -- Versão do servidor: 10.4.11-MariaDB
--- versão do PHP: 7.2.29
+-- versão do PHP: 7.4.1
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -20,17 +21,21 @@ SET time_zone = "+00:00";
 --
 -- Banco de dados: `achados_perdidos`
 --
+-- ********** ALERTA **********
+-- OS BANCOS NÃO PODEM TER CHAVES PRIMARIAS COM VALORES IGUAIS
+-- MESMO EM TABELAS DIVERENTES POSSÍVEL ERRO
+--  SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry '3334' for key 'PRIMARY'
+CREATE DATABASE  `achados_perdidos`;
 
 -- --------------------------------------------------------
-CREATE DATABASE achados_perdidos;
 
 --
 -- Estrutura da tabela `documentos`
 --
 
-
 CREATE TABLE `documentos` (
   `id_reg` int(11) NOT NULL,
+  `id_doc` int(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
   `numero_documento` varchar(50) NOT NULL,
   `tipo_documento` varchar(50) DEFAULT NULL,
   `data_perda` date DEFAULT NULL,
@@ -38,27 +43,14 @@ CREATE TABLE `documentos` (
   `nome_documento` varchar(50) DEFAULT NULL,
   `situacao` varchar(50) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Extraindo dados da tabela `documentos`
---
-
-INSERT INTO `documentos` (`id_reg`, `numero_documento`, `tipo_documento`, `data_perda`, `data_registro`, `nome_documento`, `situacao`) VALUES
-(2, '11111111111', 'cpf', '2020-04-07', '2017-04-20', 'livro de culinaria', 'perdido'),
-(2, '21212112', 'identidade', '0000-00-00', '2017-04-20', 'Batman Arkahan City', 'furtado'),
-(2, '22222222', 'Habilitacao', '2020-04-07', '2011-04-20', 'livro de culinaria', 'roubado'),
-(2, '232433', 'cpf', '0000-00-00', '2011-04-20', 'livro de finanças', 'roubado'),
-(2, '232433888', 'Habilitacao', '0000-00-00', '2017-04-20', 'Batman Arkahan City', 'perdido'),
-(2, '55555555555', 'identidade', '0000-00-00', '2017-04-20', 'Roupas', 'achado'),
-(2, '77777777', 'identidade', '2020-04-08', '2011-04-20', 'Batman Arkahan City', 'furtado');
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `documentos_achados`
+-- Estrutura da tabela `doc_achado`
 --
 
-CREATE TABLE `documentos_achados` (
+CREATE TABLE `doc_achado` (
   `id_reg` int(11) NOT NULL,
   `numero_documento` varchar(50) NOT NULL,
   `tipo_documento` varchar(50) DEFAULT NULL,
@@ -67,19 +59,6 @@ CREATE TABLE `documentos_achados` (
   `nome_documento` varchar(50) DEFAULT NULL,
   `situacao` varchar(50) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Extraindo dados da tabela `documentos_achados`
---
-
-INSERT INTO `documentos_achados` (`id_reg`, `numero_documento`, `tipo_documento`, `data_perda`, `data_registro`, `nome_documento`, `situacao`) VALUES
-(2, '22222222', 'identidade', '0000-00-00', '2016-04-20', '', 'achado'),
-(2, '22222222', 'identidade', '0000-00-00', '2016-04-20', '', 'achado'),
-(2, '232433', 'identidade', '0000-00-00', '2016-04-20', '', 'achado'),
-(2, '232433', 'identidade', '0000-00-00', '2016-04-20', '', 'achado'),
-(2, '77777777', 'identidade', '2020-04-07', '2016-04-20', 'livro de culinaria', 'achado'),
-(2, '77777777', 'identidade', '2020-04-07', '2016-04-20', 'livro de culinaria', 'achado'),
-(2, '77777777', 'identidade', '2020-04-07', '2016-04-20', 'livro de culinaria', 'achado');
 
 -- --------------------------------------------------------
 
@@ -100,7 +79,9 @@ CREATE TABLE `registro` (
 --
 
 INSERT INTO `registro` (`email`, `senha`, `id_registro`, `data_registro`, `ip`) VALUES
-('leocdemetrio@yahoo.com.br', '$argon2i$v=19$m=65536,t=4,p=1$NHl1dnhlQnhGeVEvaVNq', 2, '2011-04-20', '127.0.0.1');
+('leocdemetrio@yahoo.com.br', '$argon2i$v=19$m=65536,t=4,p=1$NHl1dnhlQnhGeVEvaVNq', 2, '2011-04-20', '127.0.0.1'),
+('leotest@gmail.com', '$argon2i$v=19$m=65536,t=4,p=1$cGwwOVYxSElFZ0hFMHJK', 4, '2022-04-20', '127.0.0.1'),
+('maryleo06@hotmail.com', '$argon2i$v=19$m=65536,t=4,p=1$ZU1IaUVnM0VES01GSEtu', 5, '2022-04-20', '127.0.0.1');
 
 -- --------------------------------------------------------
 
@@ -121,7 +102,9 @@ CREATE TABLE `registro_completo` (
 --
 
 INSERT INTO `registro_completo` (`id_reg`, `nome`, `telefone`, `telefone_recado`, `email`) VALUES
-(2, 'Leo', '21986965590', '21986965590', 'leocdemetrio@yahoo.com.br');
+(2, 'Leo', '21986965590', '21986965590', 'leocdemetrio@yahoo.com.br'),
+(4, 'Leotest', '21986965590', '21986965590', 'leotest@gmail.com'),
+(5, 'Maria', '21986965590', '21986965590', 'maryleo06@hotmail.com');
 
 -- --------------------------------------------------------
 
@@ -144,6 +127,7 @@ CREATE TABLE `registro_login` (
 
 CREATE TABLE `veiculos` (
   `id_reg` int(11) NOT NULL,
+  `id_veic` int(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
   `placa` varchar(50) NOT NULL,
   `modelo` varchar(50) DEFAULT NULL,
   `cor` varchar(50) DEFAULT NULL,
@@ -151,13 +135,6 @@ CREATE TABLE `veiculos` (
   `nome_proprietario` varchar(50) DEFAULT NULL,
   `situacao` varchar(50) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Extraindo dados da tabela `veiculos`
---
-
-INSERT INTO `veiculos` (`id_reg`, `placa`, `modelo`, `cor`, `data_registro`, `nome_proprietario`, `situacao`) VALUES
-(2, '22222222', 'fusca', 'dourado', '2014-04-20', 'Leo', 'furtado');
 
 -- --------------------------------------------------------
 
@@ -183,8 +160,9 @@ CREATE TABLE `veiculos_achados` (
 -- Índices para tabela `documentos`
 --
 ALTER TABLE `documentos`
-  ADD PRIMARY KEY (`numero_documento`),
+  -- ADD PRIMARY KEY (`id_doc`),
   ADD KEY `FK_REGISTRO_DOCUMENTOS` (`id_reg`);
+
 
 --
 -- Índices para tabela `registro`
@@ -209,8 +187,9 @@ ALTER TABLE `registro_login`
 -- Índices para tabela `veiculos`
 --
 ALTER TABLE `veiculos`
-  ADD PRIMARY KEY (`placa`),
+  -- ADD PRIMARY KEY (`id_veic`),
   ADD KEY `FK_REGISTRO_VEICULOS` (`id_reg`);
+
 
 --
 -- AUTO_INCREMENT de tabelas despejadas
@@ -220,7 +199,7 @@ ALTER TABLE `veiculos`
 -- AUTO_INCREMENT de tabela `registro`
 --
 ALTER TABLE `registro`
-  MODIFY `id_registro` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_registro` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT de tabela `registro_login`

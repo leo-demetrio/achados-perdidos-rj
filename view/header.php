@@ -23,6 +23,7 @@
 				<li><a href="/">Quem somos</a></li>
 				<li><a href="/relatorio">Relatorio</a></li>
 				<li><a href="/sair">Sair</a></li>
+				<li><?php echo $_SESSION['nome']?></li>
 			</ul>
 		</nav>
 	</header>

@@ -5,6 +5,7 @@ namespace Projeto\APRJ\Controller;
 
 use Projeto\APRJ\Controller\InterfaceControladoraRequisicao;
 use Projeto\APRJ\Model\ModelLogin;
+use Projeto\APRJ\Model\ModelRegistro;
 use Projeto\APRJ\Services\ServiceTraitFilter;
 use Projeto\APRJ\Services\ServiceTraitErro;
 
@@ -51,6 +52,11 @@ class PersisteLogin implements InterfaceControladoraRequisicao
 				echo 'Email ou senha inválidos';
 				exit;
 			}
+			//pegar nome e por no cabeçalho
+			$registroNome = new ModelRegistro();
+			$nome = $registroNome->buscaPeloId($_SESSION['id']);
+			$_SESSION['nome'] = $nome['nome'];
+
 
 			header('Location: /home-logado');
 			exit;

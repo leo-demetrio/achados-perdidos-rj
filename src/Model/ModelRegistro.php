@@ -27,4 +27,14 @@ class ModelRegistro
 		return  $stmt->fetch();
 
 	}
+	public function buscaPeloId(int $id): array
+	{
+		$query = "SELECT nome FROM registro_completo WHERE id_reg = :id";
+		$conexao = ModelConexao::conect();
+		$stmt = $conexao->prepare($query);
+		$stmt->bindValue(':id', $id);
+		$stmt->execute();
+		$result = $stmt->fetch();
+		return $result;
+	}
 }

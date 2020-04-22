@@ -42,15 +42,22 @@ class PersistePrincipal
 			$email = $_SESSION['email'];
 
 			$cadastroPrincipal = new ModelPrincipal();
-			$cadastroPrincipal->inserir($id, $nome, $telefone, $telefoneRecado, $email);
+			$result = $cadastroPrincipal->inserir($id, $nome, $telefone, $telefoneRecado, $email);
+			if(!$result){
+				header('Location: /cadastro-principal');
+				return;
+			}
+			$_SESSION['nome'] = $nome;
+
+			header('Location: /home-logado');
+			return;
 
 		}catch(\Exception $e){
 
 			$this->trataErro($e);
 
 		}
-		header('Location: /home-logado');
-		die();
+		
 
 	}
 

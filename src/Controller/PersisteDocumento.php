@@ -39,6 +39,13 @@ class PersisteDocumento implements InterfaceControladoraRequisicao
 			}else{
 				$regBanco = 0;
 			}
+			//o mesmo não pode perder e achar o mesmo doc
+			if($regBanco == $id){
+				header("Location: /relatorio");
+				die();
+				// throw new \Exception("Você já cadastrou esse documento");
+				//vai p relatório						
+			}		
 
 
 			$documentoAchado = new ModelDocumentoAchado();
@@ -48,16 +55,18 @@ class PersisteDocumento implements InterfaceControladoraRequisicao
 			}else{
 				$regAchadoBanco = 0;
 			}
-
-			//o mesmo não pode perder e achar
-			if($regBanco == $id || $regAchadoBanco == $id){
-				throw new \Exception("Você já cadastrou esse documento");
+			if($regAchadoBanco == $id){
+				header("Location: /relatorio");
+				die();
+				// throw new \Exception("Você já cadastrou esse documento");
 				//vai p relatório						
-			}		
+			}
+
 
 			
 			if($situacao === 'achado'){	
-										
+					//verifica no banco achados
+					//die('achado');				
 					if($docAchadoBanco){
 						throw new \Exception('Este documento já possui cadastro como achado no banco');
 
@@ -71,7 +80,7 @@ class PersisteDocumento implements InterfaceControladoraRequisicao
 					$documentoAchado->setSituacao($situacao);
 					$documentoAchado->inserirAchado();//die("inseriru");
 
-					//verifica se possui cadastro no banco para devolver
+					//verifica se possui cadastro no banco comum para devolver
 					if($docBanco){
 
 						throw new \Exception('Este documento foi encontrado em nosso sistema seu proprietário será notificado');
@@ -79,12 +88,12 @@ class PersisteDocumento implements InterfaceControladoraRequisicao
 					}
 
 					header('Location: /relatorio');
-					return;
+					die();
 				}
 					
 
 			
-					
+			//verifica se o documento está no banco	
 			if($docBanco){
 				throw new \Exception('Esse documento já foi cadastrado no banco');
 			}
@@ -100,7 +109,9 @@ class PersisteDocumento implements InterfaceControladoraRequisicao
 			$documento->setSituacao($situacao);
 			$documento->inserir();
 
-			$documento->inserir();
+			if(isset($docAchadoBanco['numero_documento'])){
+				throw new \Exception("Documento em nossa base de dados, iremos entrar em contato com quem tem a posse do documento");
+			}
 
 			header('Location: /relatorio');
 			die();
