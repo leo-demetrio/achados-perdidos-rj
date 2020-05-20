@@ -7,25 +7,24 @@ use Projeto\APRJ\Model\ModelVeiculoAchado;
 use Projeto\APRJ\Services\ServiceTraitErro;
 use Projeto\APRJ\Services\ServiceTraitFilter;
 use Projeto\APRJ\Services\ServiceTraitValidaData;
+use Projeto\APRJ\Services\ServiceTraitLimpaPost;
 
 class PersisteVeiculo implements InterfaceControladoraRequisicao
 {
 	use ServiceTraitErro;
 	use ServiceTraitFilter;
 	use ServiceTraitValidaData;
+	use ServiceTraitLimpaPost;
 	
 	public function processaRequisicao(): void
 	{
 
 		try{
 
-			$placa = $this->filtraString($_POST['placa']);
-			$modelo = $this->filtraString($_POST['modelo']);
-			$cor = $this->filtraString($_POST['cor']);
-			$nomeProprietario = $this->filtraString($_POST['nome-proprietario']);
-			$situacao = $this->filtraString($_POST['situacao']);
+			$post = $this->limpaPost($_POST);
+			// var_dump($post);exit;
 			$data = $_SESSION['data'];
-			$id = $_SESSION['id'];
+			$id_registro = $_SESSION['id'];
 
 			
 			$veiculo = new ModelVeiculo();
@@ -36,7 +35,10 @@ class PersisteVeiculo implements InterfaceControladoraRequisicao
 				$veicBanco = 0;
 			}
 			if($veicBanco == $id){
-				throw new \Exception("Você já cadastrou no sistema");				
+
+				header('Location: /relatorio');
+				return;
+				// throw new \Exception("Você já cadastrou no sistema");				
 			}
 
 			$veiculoAchado = new ModelVeiculoAchado();
@@ -60,13 +62,13 @@ class PersisteVeiculo implements InterfaceControladoraRequisicao
 
 					}
 
-					$veiculoAchado->setIdReg($id);
-					$veiculoAchado->setPlaca($placa);
-					$veiculoAchado->setModelo($modelo);
-					$veiculoAchado->setCor($cor);
-					$veiculoAchado->setDataRegistro($data);
-					$veiculoAchado->setNomeProprietario ($nomeProprietario);
-					$veiculoAchado->setSituacao($situacao);
+					$veiculoAchado->setIdReg($id_registro);
+					$veiculoAchado->setPlaca($post['placa']);
+					$veiculoAchado->setModelo($post['modelo']);
+					$veiculoAchado->setCor($post['cor']);
+					$veiculoAchado->setDataRegistro($post['data']);
+					$veiculoAchado->setNomeProprietario ($post['nomeProprietario']);
+					$veiculoAchado->setSituacao($post['situacao']);
 					$veiculoAchado->inserir();
 						
 
@@ -86,13 +88,13 @@ class PersisteVeiculo implements InterfaceControladoraRequisicao
 			}		
 
 		
-			$veiculo->setIdReg($id);
-			$veiculo->setPlaca($placa);
-			$veiculo->setModelo($modelo);
-			$veiculo->setCor($cor);
-			$veiculo->setDataRegistro($data);
-			$veiculo->setNomeProprietario ($nomeProprietario);
-			$veiculo->setSituacao($situacao);
+			$veiculo->setIdReg($post['id']);
+			$veiculo->setPlaca($post['placa']);
+			$veiculo->setModelo($post['modelo']);
+			$veiculo->setCor($post['cor']);
+			$veiculo->setDataRegistro($post['data']);
+			$veiculo->setNomeProprietario ($post['nomeProprietario']);
+			$veiculo->setSituacao($post['situacao']);
 			$veiculo->inserir();
 
 		
@@ -109,3 +111,19 @@ class PersisteVeiculo implements InterfaceControladoraRequisicao
 
 	}
 }
+
+
+
+
+
+
+
+
+
+
+			// $placa = $this->filtraString($_POST['placa']);
+			// $modelo = $this->filtraString($_POST['modelo']);
+			// $cor = $this->filtraString($_POST['cor']);
+			// $nomeProprietario = $this->filtraString($_POST['nome-proprietario']);
+			// $situacao = $this->filtraString($_POST['situacao']);
+			

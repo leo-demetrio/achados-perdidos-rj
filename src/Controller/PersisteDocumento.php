@@ -5,6 +5,7 @@ use Projeto\APRJ\Controller\InterfaceControladoraRequisicao;
 use Projeto\APRJ\Services\ServiceTraitFilter;
 use Projeto\APRJ\Services\ServiceTraitErro;
 use Projeto\APRJ\Services\ServiceTraitValidaData;
+use Projeto\APRJ\Services\ServiceTraitLimpaPost;
 use Projeto\APRJ\Model\ModelDocumento;
 use Projeto\APRJ\Model\ModelDocumentoAchado;
 
@@ -16,6 +17,7 @@ class PersisteDocumento implements InterfaceControladoraRequisicao
 	use ServiceTraitErro;
 	use ServiceTraitFilter;
 	use ServiceTraitValidaData;
+	use ServiceTraitLimpaPost;
 	
 
 	public function processaRequisicao(): void
@@ -23,13 +25,10 @@ class PersisteDocumento implements InterfaceControladoraRequisicao
 
 		try{
 
-			$tipo = $this->filtraString($_POST['tipo-documento']);
-			$nome = $this->filtraString($_POST['nome']);
-			$id = $this->filtraInt($_SESSION['id']);
+			$post = $this->limpaPost($_POST);			
 			$data_perda = $_POST['data_perda'];
 			$dataRegistro= $_SESSION['data'];
-			$numero = $this->filtraString($_POST['numero']);
-			$situacao = $this->filtraString($_POST['situacao']);
+			
 
 
 			$documento = new ModelDocumento();
@@ -124,3 +123,11 @@ class PersisteDocumento implements InterfaceControladoraRequisicao
 
 	}
 }
+
+
+
+// $tipo = $this->filtraString($_POST['tipo-documento']);
+// 			$nome = $this->filtraString($_POST['nome']);
+// 			$id = $this->filtraInt($_SESSION['id']);
+// $numero = $this->filtraString($_POST['numero']);
+// 			$situacao = $this->filtraString($_POST['situacao']);
