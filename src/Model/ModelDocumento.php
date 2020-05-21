@@ -35,7 +35,7 @@ class ModelDocumento
 	{
 		
 		$query = "INSERT INTO $tabela (id_reg,numero_documento, tipo_documento,data_perda,data_registro,nome_documento,situacao) VALUES (:id_reg,:numero_documento,:tipo_documento,:data_perda,:data_registro,:nome_documento,:situacao)";
-		// echo $this->numeroDocumento;exit;
+	
 		$conexao = ModelConexao::conect();
 		$stmt = $conexao->prepare($query);
 		$stmt->bindValue(':id_reg', $this->id_reg);

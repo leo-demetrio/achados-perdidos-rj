@@ -7,6 +7,7 @@ use Projeto\APRJ\Model\ModelDocumento;
 use Projeto\APRJ\Model\ModelDocumentoAchado;
 use Projeto\APRJ\Controller\ControllerComHtml;
 use Projeto\APRJ\Services\ServiceTraitErro;
+use Projeto\APRJ\Model\ModelDao;
 
 
 class Relatorio extends ControllerComHtml implements InterfaceControladoraRequisicao
@@ -16,6 +17,9 @@ class Relatorio extends ControllerComHtml implements InterfaceControladoraRequis
 	public function processaRequisicao(): void
 	{
 		try{
+			$dao = new ModelDao();
+			$dao->buscaTodosRegistros($_SESSION['id']);
+
 
 			//fazer um join com todas consultas
 			$veiculos = ModelVeiculo::buscaPeloId($_SESSION['id']);
