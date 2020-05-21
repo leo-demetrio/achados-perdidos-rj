@@ -38,6 +38,7 @@ class ModelVeiculoAchado
 		return $veiculos;
 	}
 	public function buscaPelaPlaca($placa){
+		
 		$query = "SELECT id_reg,placa FROM veiculos_achados WHERE placa = :placa";
 		$conexao = ModelConexao::conect();
 		$stmt = $conexao->prepare($query);

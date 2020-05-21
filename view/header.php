@@ -29,4 +29,20 @@
 	</header>
 	<?php endif ?>
 	
+
+	<div class="container">
+
+	<?php if(isset($_SESSION['mensagem'])): ?>
+
+	<div class="alert alert-<?php $_SESSION['tipo_mensagem']?>">
+		<?php echo $_SESSION['mensagem'] ?>
+	</div>
+
+	<?php 
+	endif;
+	unset($_SESSION['tipo_mensagem']);
+	unset($_SESSION['mensagem'])
+	 ?>
+
+
 	<h2 class="titulo-pagina"><?php echo $titulo ?></h2>

@@ -17,9 +17,8 @@ class Relatorio extends ControllerComHtml implements InterfaceControladoraRequis
 	{
 		try{
 
-			$relatorioVeiculos = new ModelVeiculo();
-			$relatorioVeiculos->setIdReg($_SESSION['id']);
-			$veiculos = $relatorioVeiculos->buscaPeloId();
+			
+			$veiculos = ModelVeiculo::buscaPeloId($_SESSION['id']);
 
 			$relatorioDocumetos = new ModelDocumento();
 			$relatorioDocumetos->setIdReg($_SESSION['id']);

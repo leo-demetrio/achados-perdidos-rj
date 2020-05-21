@@ -22,60 +22,70 @@ class PersisteVeiculo implements InterfaceControladoraRequisicao
 		try{
 
 			$post = $this->limpaPost($_POST);
-			// var_dump($post);exit;
 			$data = $_SESSION['data'];
 			$id_registro = $_SESSION['id'];
 
+			$veiculo = new ModelVeiculo(
+
+			$id_registro,
+			$post['placa'],
+			$post['modelo'],
+			$post['cor'],
+			$post['dataRegistro'],
+			$post['nomeProprietario'],
+			$post['situacao']			
+
+			);
+
+			//fazer um join para unir as duas consultas
+			$tabela = "veiculos";
+			$veiculoBanco = $veiculo->buscaPelaPlaca($tabela);
 			
-			$veiculo = new ModelVeiculo();
-			$veiculoBanco = $veiculo->buscaPelaPlaca($placa);
-			if(isset($veiculoBanco['id_reg'])){
-				$veicBanco = $veiculoBanco['id_reg'];
-			}else{
-				$veicBanco = 0;
-			}
-			if($veicBanco == $id){
-
+			if($veiculoBanco['id_reg'] == $id_registro){
+				//falta mensagem de já tem cadastro
 				header('Location: /relatorio');
-				return;
-				// throw new \Exception("Você já cadastrou no sistema");				
+				return;				
 			}
 
-			$veiculoAchado = new ModelVeiculoAchado();
-			$veiculoAchadoBanco = $veiculoAchado->buscaPelaPlaca($placa);
-			if(isset($veiculoAchadoBanco['id_reg'])){
-				$veicAchadoBanco = $veiculoAchadoBanco['id_reg'];
-			}else{
-				$veicAchadoBanco = 0;
+			
+			$tabela = "veiculos_achados";
+			$veiculoAchadoBanco = $veiculo->buscaPelaPlaca($tabela);
+			
+			
+			if($veiculoAchadoBanco['id_reg'] == $id_registro){
+
+				//falta mensagem de já tem cadastro
+				$_SESSION['tipo_mensagem'] = "danger";
+				$_SESSION['mensagem'] = "Você já cadastrou em nosso banco!";
+				header('Location: /relatorio');
+				return;	
+			
 			}
+			
+			if($post['situacao'] === 'achado'){
 
 
-			//o mesmo não pode perder e achar
-			if($veicAchadoBanco == $id){
-				throw new \Exception("Você já cadastrou no sistema");				
-			}
+				if($veiculoAchadoBanco){
 
-			if($situacao === 'achado'){
-
-				if($veicAchadoBanco){
-						throw new \Exception('Este veículo já possui cadastro como achado no banco');
+					$_SESSION['tipo_mensagem'] = "danger";
+					$_SESSION['mensagem'] = "Este veículo já possui cadastro como achado no banco";
+					header('Location:/relatorio');
+					return;
 
 					}
+					echo "veiculos achado";exit;
+			
 
-					$veiculoAchado->setIdReg($id_registro);
-					$veiculoAchado->setPlaca($post['placa']);
-					$veiculoAchado->setModelo($post['modelo']);
-					$veiculoAchado->setCor($post['cor']);
-					$veiculoAchado->setDataRegistro($post['data']);
-					$veiculoAchado->setNomeProprietario ($post['nomeProprietario']);
-					$veiculoAchado->setSituacao($post['situacao']);
-					$veiculoAchado->inserir();
+
+					$tabela = "veiculos_achado";
+					$veiculoBanco->inserir($tabela);
 						
 
 				//verifica se possui cadastro no banco para devolver
 				if($veicBanco){
-
-					throw new \Exception('Este veículo foi encontrado em nosso sistema seu proprietário será notificado');
+					$_SESSION['tipo_mensagem'] = "danger";
+					$_SESSION['mensagem'] = "Este veículo foi encontrado em nosso sistema seu proprietário será notificado";
+					return;
 
 				}
 				header('Location: /relatorio');
@@ -84,26 +94,27 @@ class PersisteVeiculo implements InterfaceControladoraRequisicao
 			}
 
 			if($veicBanco){
-				throw new \Exception('Este veículo já foi cadastrado no banco');
+
+					$_SESSION['tipo_mensagem'] = "danger";
+					$_SESSION['mensagem'] = "Este veículo já foi cadastrado no banco";
+					return;
 			}		
 
-		
-			$veiculo->setIdReg($post['id']);
-			$veiculo->setPlaca($post['placa']);
-			$veiculo->setModelo($post['modelo']);
-			$veiculo->setCor($post['cor']);
-			$veiculo->setDataRegistro($post['data']);
-			$veiculo->setNomeProprietario ($post['nomeProprietario']);
-			$veiculo->setSituacao($post['situacao']);
-			$veiculo->inserir();
+			
+			$tabela = "veiculos";
+			$veiculo->inserir($tabela);
 
 		
-			if(isset($veiculoAchadoBanco['placa'])){
-				throw new \Exception('O veículo se encontra em nossa base de dados iremos entrar em contato com que está em posse dele');
+			if($veiculoAchadoBanco){
+
+				$_SESSION['tipo_mensagem'] = "danger";
+				$_SESSION['mensagem'] = "O veículo se encontra em nossa base de dados iremos entrar em contato com quem está em posse dele";
+				
 			}
 
 			header('Location: /relatorio');
 			die();
+
 		}catch(\Exception $e){
 			$this->trataErro($e);
 		}
@@ -127,3 +138,39 @@ class PersisteVeiculo implements InterfaceControladoraRequisicao
 			// $nomeProprietario = $this->filtraString($_POST['nome-proprietario']);
 			// $situacao = $this->filtraString($_POST['situacao']);
 			
+
+			// $veiculoAchado->setIdReg($id_registro);
+			// 		$veiculoAchado->setPlaca($post['placa']);
+			// 		$veiculoAchado->setModelo($post['modelo']);
+			// 		$veiculoAchado->setCor($post['cor']);
+			// 		$veiculoAchado->setDataRegistro($post['data']);
+			// 		$veiculoAchado->setNomeProprietario ($post['nomeProprietario']);
+			// 		$veiculoAchado->setSituacao($post['situacao']);
+
+
+// $veiculo->setIdReg($post['id']);
+// 			$veiculo->setPlaca($post['placa']);
+// 			$veiculo->setModelo($post['modelo']);
+// 			$veiculo->setCor($post['cor']);
+// 			$veiculo->setDataRegistro($post['data']);
+// 			$veiculo->setNomeProprietario ($post['nomeProprietario']);
+// 			$veiculo->setSituacao($post['situacao']);
+
+
+// if(isset($veiculoAchadoBanco['id_reg'])){
+			// 	$veicAchadoBanco = $veiculoAchadoBanco['id_reg'];
+			// }else{
+			// 	$veicAchadoBanco = 0;
+			// }
+			// echo $veicAchadoBanco;exit;
+			//o mesmo não pode perder e achar
+
+
+// if(isset($veiculoBanco['id_reg'])){
+// 				$veicBanco = $veiculoBanco['id_reg'];
+// 			}else{
+// // 				$veicBanco = 0;
+// // 			}
+
+
+// throw new \Exception('O veículo se encontra em nossa base de dados iremos entrar em contato com que está em posse dele');

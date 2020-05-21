@@ -11,13 +11,37 @@ class ModelVeiculo
 	private $nomeProprietario;
 	private $situacao;
 	private $dados = array();
+
+	public function __construct(
+		 $id_reg,
+		 $placa,
+		 $modelo,
+		 $cor,
+		 $dataRegistro,
+		 $nomeProprietario,
+		 $situacao
+
+
+	) {
+		
+		$this->id_reg = $id_reg;
+		$this->placa = $placa;
+		$this->modelo = $modelo;
+		$this->cor = $cor;
+		$this->dataRegistro = $dataRegistro;
+		$this->nomeProprietario = $nomeProprietario;
+		$this->situacao = $situacao;
+
+	}
 	
-	public function inserir()
+	public function inserir($tabela)
 	{
-		$query = "INSERT INTO veiculos (id_reg, placa, modelo, cor, data_registro, nome_proprietario, situacao) VALUES (:id_reg, :placa, :modelo, :cor, :data_registro, :nome_proprietario, :situacao)";
+		// echo($this->id_reg);exit;
+		
+		$query = "INSERT INTO $tabela (id_reg, placa, modelo, cor, data_registro, nome_proprietario, situacao) VALUES (:id_reg, :placa, :modelo, :cor, :data_registro, :nome_proprietario, :situacao)";
+
 		$conexao = ModelConexao::conect();
 		$stmt = $conexao->prepare($query);
-		// echo $this->placa.'id';exit;
 		$stmt->bindValue(':id_reg', $this->id_reg);
 		$stmt->bindValue(':placa', $this->placa);
 		$stmt->bindValue(':modelo', $this->modelo);
@@ -28,25 +52,27 @@ class ModelVeiculo
 		$stmt->execute();
 	}
 
-	public function buscaPeloId(){
-		$query = 'SELECT id_reg, placa, modelo, cor, data_registro, nome_proprietario, situacao FROM veiculos WHERE id_reg = :id';
+	public static function buscaPeloId(int $id_reg){
+	
+		$query = 'SELECT id_reg, placa, modelo, cor, data_registro, nome_proprietario, situacao FROM veiculos WHERE id_reg = :id_reg';
 		$conexao = ModelConexao::conect();
 		$stmt = $conexao->prepare($query);
-		$stmt->bindValue(':id', $this->id_reg);
+		$stmt->bindValue(':id_reg', $id_reg);
 		$stmt->execute();
 		$veiculos = $stmt->fetchAll();
 		return $veiculos;
 	}
-	public function buscaPelaPlaca($placa){
-		$query = "SELECT id_reg,placa FROM veiculos WHERE placa = :placa";
+	public function buscaPelaPlaca($tabela){
+		
+		$query = "SELECT id_reg,placa FROM $tabela WHERE placa = :placa";
 		$conexao = ModelConexao::conect();
 		$stmt = $conexao->prepare($query);
-		$stmt->bindValue(':placa', $placa);
+		$stmt->bindValue(':placa', $this->placa);
 		$stmt->execute();
 		return $stmt->fetch();
 
 	}
-	public function excluir($placa)
+	public static function excluir($placa)
 	{
 		$query = "DELETE FROM veiculos WHERE placa = :placa";
 		$conexao = ModelConexao::conect();
