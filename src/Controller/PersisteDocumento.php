@@ -25,61 +25,65 @@ class PersisteDocumento implements InterfaceControladoraRequisicao
 
 		try{
 
-			$post = $this->limpaPost($_POST);			
+			$post = $this->limpaPost($_POST);
 			$data_perda = $_POST['data_perda'];
 			$dataRegistro= $_SESSION['data'];
+			$id_registro = $_SESSION['id'];
+
+		
+			$documento = new ModelDocumento(
+
+				$id_registro,
+				$post['numero'],
+				$post['tipo-documento'],
+				$post['data_perda'],
+				$post['dataRegistro'],
+				$post['nome'],
+				$post['situacao']
+
+			);
+
+			$tabela = "documentos";
+			$docBanco = $documento->buscaPeloNumero($tabela);
 			
 
-
-			$documento = new ModelDocumento();
-			$docBanco = $documento->buscaPeloNumero($numero);
-			if(isset($docBanco['id_reg'])){ 
-				$regBanco = $docBanco['id_reg'];
-			}else{
-				$regBanco = 0;
-			}
 			//o mesmo não pode perder e achar o mesmo doc
-			if($regBanco == $id){
+			if($docBanco['id_reg'] == $id_registro){
+
+				$_SESSION['tipo_mensagem'] = "danger";
+				$_SESSION['tipo_mensagem'] = "você já cadstrou";
 				header("Location: /relatorio");
-				die();
-				// throw new \Exception("Você já cadastrou esse documento");
-				//vai p relatório						
+				die();					
 			}		
 
-
-			$documentoAchado = new ModelDocumentoAchado();
-			$docAchadoBanco = $documentoAchado->buscaPeloNumero($numero);
+			
+			$tabela = "doc_achado";
+			$docAchadoBanco = $documento->buscaPeloNumero($tabela);
 			if(isset($docAchadoBanco['id_reg'])){ 
 				$regAchadoBanco = $docAchadoBanco['id_reg'];
 			}else{
 				$regAchadoBanco = 0;
 			}
-			if($regAchadoBanco == $id){
+
+			
+			if($regAchadoBanco['id_reg'] == $id_registro){
+
+				$_SESSION['tipo_mensagem'] = "danger";
+				$_SESSION['tipo_mensagem'] = "você já cadstrou como achado"; 
 				header("Location: /relatorio");
-				die();
-				// throw new \Exception("Você já cadastrou esse documento");
-				//vai p relatório						
+				die();					
 			}
 
 
 			
 			if($situacao === 'achado'){	
-					//verifica no banco achados
-					//die('achado');				
+								
 					if($docAchadoBanco){
 						throw new \Exception('Este documento já possui cadastro como achado no banco');
 
 					}
-					$documentoAchado->setNomeDocumento($nome);
-					$documentoAchado->setNumeroDocumento($numero);
-					$documentoAchado->setTipoDocumento($tipo);
-					$documentoAchado->setDataPerda($data_perda);
-					$documentoAchado->setIdREg($id);
-					$documentoAchado->setDataRegistro($dataRegistro);
-					$documentoAchado->setSituacao($situacao);
-					$documentoAchado->inserirAchado();//die("inseriru");
-
-					//verifica se possui cadastro no banco comum para devolver
+					
+					$documentoAchado->inserirAchado();
 					if($docBanco){
 
 						throw new \Exception('Este documento foi encontrado em nosso sistema seu proprietário será notificado');
@@ -91,25 +95,23 @@ class PersisteDocumento implements InterfaceControladoraRequisicao
 				}
 					
 
-			
+			//fazer união dessa mensagem acima
 			//verifica se o documento está no banco	
 			if($docBanco){
 				throw new \Exception('Esse documento já foi cadastrado no banco');
 			}
 
-			
-			// die("veio");
-			$documento->setNomeDocumento($nome);
-			$documento->setNumeroDocumento($numero);
-			$documento->setTipoDocumento($tipo);
-			$documento->setDataPerda($data_perda);
-			$documento->setIdREg($id);
-			$documento->setDataRegistro($dataRegistro);
-			$documento->setSituacao($situacao);
-			$documento->inserir();
+			$tabela = "documentos";
+			$documento->inserir($tabela);
 
 			if(isset($docAchadoBanco['numero_documento'])){
-				throw new \Exception("Documento em nossa base de dados, iremos entrar em contato com quem tem a posse do documento");
+
+				//enviar email
+				$_SESSION['tipo_mensagem'] = "danger";
+				$_SESSION['tipo_mensagem'] = "Documento em nossa base de dados, iremos entrar em contato com quem tem a posse do documento"; 
+				header("Location: /relatorio");
+				die();
+				
 			}
 
 			header('Location: /relatorio');
@@ -131,3 +133,37 @@ class PersisteDocumento implements InterfaceControladoraRequisicao
 // 			$id = $this->filtraInt($_SESSION['id']);
 // $numero = $this->filtraString($_POST['numero']);
 // 			$situacao = $this->filtraString($_POST['situacao']);
+
+
+// $documentoAchado->setNomeDocumento($nome);
+// 					$documentoAchado->setNumeroDocumento($numero);
+// 					$documentoAchado->setTipoDocumento($tipo);
+// 					$documentoAchado->setDataPerda($data_perda);
+// 					$documentoAchado->setIdREg($id);
+// 					$documentoAchado->setDataRegistro($dataRegistro);
+// 					$documentoAchado->setSituacao($situacao);
+
+
+
+			// die("veio");
+			// $documento->setNomeDocumento($nome);
+			// $documento->setNumeroDocumento($numero);
+			// $documento->setTipoDocumento($tipo);
+			// $documento->setDataPerda($data_perda);
+			// $documento->setIdREg($id);
+			// $documento->setDataRegistro($dataRegistro);
+			// $documento->setSituacao($situacao);
+
+
+// if(isset($docBanco['id_reg'])){ 
+// 				$regBanco = $docBanco['id_reg'];
+// 			}else{
+// 				$regBanco = 0;
+
+
+
+// 			}
+
+
+
+// throw new \Exception("Documento em nossa base de dados, iremos entrar em contato com quem tem a posse do documento");

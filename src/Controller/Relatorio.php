@@ -17,12 +17,12 @@ class Relatorio extends ControllerComHtml implements InterfaceControladoraRequis
 	{
 		try{
 
-			
+			//fazer um join com todas consultas
 			$veiculos = ModelVeiculo::buscaPeloId($_SESSION['id']);
 
-			$relatorioDocumetos = new ModelDocumento();
-			$relatorioDocumetos->setIdReg($_SESSION['id']);
-			$documentos = $relatorioDocumetos->buscaPeloId();
+			// $relatorioDocumetos = new ModelDocumento();
+			// $relatorioDocumetos->setIdReg($_SESSION['id']);
+			$documentos = ModelDocumento::buscaPeloId($_SESSION['id']);
 
 			$relatorioDocumetosAchados = new ModelDocumentoAchado();
 			$relatorioDocumetosAchados->setIdReg($_SESSION['id']);

@@ -12,11 +12,30 @@ class ModelDocumento
 	private $nomeDocumento;
 	private $situacao;
 
-	public function inserir()
+	public function __construct(
+
+		$id_reg,
+		$numeroDocumento,
+		$tipoDocumento,
+		$dataPerda,
+		$dataRegistro,
+		$nomeDocumento,
+		$situacao
+	){
+		$this->id_reg = $id_reg;
+		$this->numeroDocumento = $numeroDocumento;
+		$this->tipoDocumento = $tipoDocumento;
+		$this->dataPerda = $dataPerda;
+		$this->dataRegistro = $dataRegistro;
+		$this->nomeDocumento = $nomeDocumento;
+		$this->situacao = $situacao;
+	}
+
+	public function inserir($tabela)
 	{
 		
-		$query = "INSERT INTO documentos (id_reg,numero_documento, tipo_documento,data_perda,data_registro,nome_documento,situacao) VALUES (:id_reg,:numero_documento,:tipo_documento,:data_perda,:data_registro,:nome_documento,:situacao)";
-		//echo $id;echo$numero;exit;
+		$query = "INSERT INTO $tabela (id_reg,numero_documento, tipo_documento,data_perda,data_registro,nome_documento,situacao) VALUES (:id_reg,:numero_documento,:tipo_documento,:data_perda,:data_registro,:nome_documento,:situacao)";
+		// echo $this->numeroDocumento;exit;
 		$conexao = ModelConexao::conect();
 		$stmt = $conexao->prepare($query);
 		$stmt->bindValue(':id_reg', $this->id_reg);
@@ -31,20 +50,22 @@ class ModelDocumento
 		//var_dump($stmt);exit;
 			
 	}
-	public function buscaPeloNumero($numero){
-		$query = 'SELECT id_reg,numero_documento FROM documentos WHERE numero_documento = :numero';
+	public function buscaPeloNumero($tabela) {
+
+		$query = "SELECT id_reg,numero_documento FROM $tabela WHERE numero_documento = :numero";
+		// echo $query;exit();
 		$conexao = ModelConexao::conect();
 		$stmt = $conexao->prepare($query);
-		$stmt->bindValue(':numero', $numero);
+		$stmt->bindValue(':numero', $this->numero);
 		$stmt->execute();
 		return $stmt->fetch();
 	}
 
-	public function buscaPeloId(){
-		$query = 'SELECT numero_documento, tipo_documento, data_perda, data_registro, nome_documento, situacao FROM documentos WHERE id_reg = :id';
+	public static function buscaPeloId($id_reg){
+		$query = 'SELECT numero_documento, tipo_documento, data_perda, data_registro, nome_documento, situacao FROM documentos WHERE id_reg = :id_reg';
 		$conexao = ModelConexao::conect();
 		$stmt = $conexao->prepare($query);
-		$stmt->bindValue(':id', $this->id_reg);
+		$stmt->bindValue(':id_reg', $id_reg);
 		$stmt->execute();
 		$documentos = $stmt->fetchAll();
 		return $documentos;
@@ -56,7 +77,7 @@ class ModelDocumento
 		$stmt = $conexao->prepare($query);
 		$stmt->bindValue(':numero', $numero);
 		$stmt->execute();
-		// var_dump($stmt);die('excluiu');
+		
 	}
 	public function setIdReg($valor){
 		$this->id_reg = $valor;
