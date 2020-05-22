@@ -9,14 +9,25 @@ trait ServiceTraitFlashMessage
 	private 
 	$dNeutra = "Não foi possíel cadastrar",
 
+	//mensgens de sucesso veículo
 	$msv1 = "Teste de mensagem danger",
 	$msv2 = "Teste de número",
 
+	//mensgem de danger veículo
 	$mdv1 = "Você já cadastrou em nosso banco!",
 	$mdv2 = "Este veículo já possui cadastro como achado no banco",
 	$mdv3 = "Este veículo foi encontrado em nosso sistema seu proprietário será notificado",
 	$mdv4 = "Este veículo já foi cadastrado no banco",
-	$mdv5 = "O veículo se encontra em nossa base de dados iremos entrar em contato com quem está em posse dele";
+	$mdv5 = "O veículo se encontra em nossa base de dados iremos entrar em contato com quem está em posse dele",
+
+	//mensagem de danger documento
+	$mdd1 = "você já cadstrou",
+	$mdd2 = "você já cadstrou como achado", 
+	$mdd3 = "Este documento já possui cadastro como achado no banco",
+	$mdd4 = "Este documento foi encontrado em nosso sistema seu proprietário será notificado",
+	$mdd5 = "Esse documento já foi cadastrado no banco",
+	$mdd6 = "Documento em nossa base de dados, iremos entrar em contato com quem tem a posse do documento";
+
 
 
 	//****** Implemtar msg de sucesso ou não
@@ -35,7 +46,7 @@ trait ServiceTraitFlashMessage
 
 	public  function messageSuccess($tipo){
 
-		$msg = "ms".$numero;
+		$msg = "m".$tipo;
 		// echo $this->$msg;exit;
 
 		$_SESSION['tipo-mensagem'] = "success";
@@ -52,3 +63,9 @@ trait ServiceTraitFlashMessage
 		
 	}
 }
+
+
+throw new \Exception('');
+
+$_SESSION['tipo_mensagem'] = "danger";
+				$_SESSION['tipo_mensagem']  

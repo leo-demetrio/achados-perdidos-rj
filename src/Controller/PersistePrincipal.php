@@ -7,6 +7,7 @@ use Projeto\APRJ\Model\ModelPrincipal;
 use Projeto\APRJ\Services\ServiceTraitErro;
 use Projeto\APRJ\Services\ServiceTraitValidaInputNome;
 use Projeto\APRJ\Services\ServiceTraitValidaInputTelefone;
+use Projeto\APRJ\Services\ServiceTraitLimpaPost;
 
 class PersistePrincipal
 {
@@ -14,35 +15,19 @@ class PersistePrincipal
 	use ServiceTraitValidaInputNome;
 	use ServiceTraitValidaInputTelefone;
 	use ServiceTraitFilter;
+	use ServiceTraitLimpaPost;
 	
 	public function processaRequisicao(): void
 	{
 		try{
-		
-			$nome = $this->filtraString($_POST['nome_completo']);
-			// $resultado = $this->validaInputNome($nome);
-			// var_dump($resultado);
-			// if(!$resultado) throw new \Exception('Nome incompleto');
-			// echo "passou";
-			// exit;
-
-			$telefone = $this->filtraString($_POST['telefone']);
-			// $resultado = $this->validaInputTelefone($telefone);
-			// if(!$resultado){
-			// 	throw new \Exception("Telefone  errado");
-			// }
-
-			$telefoneRecado = $this->filtraString($_POST['telefone-recado']);
-			// $resultado = $this->validaInputTelefone($telefoneRecado);
-			// if(!$resultado){
-			// 	throw new \Exception("Telefone recado errado");
-			// }
-
+			
+			$post = $this->limpaPost($_POST);
 			$id = $_SESSION['id'];
-			$email = $_SESSION['email'];
+ 			$email = $_SESSION['email'];
+			
 
 			$cadastroPrincipal = new ModelPrincipal();
-			$result = $cadastroPrincipal->inserir($id, $nome, $telefone, $telefoneRecado, $email);
+			$result = $cadastroPrincipal->inserir($id, $post['nome'], $post['telefone'], $post['telefoneRecado'], $email);
 			if(!$result){
 				header('Location: /cadastro-principal');
 				return;
@@ -62,3 +47,14 @@ class PersistePrincipal
 	}
 
 }
+
+
+// $nome = $this->filtraString($_POST['nome_completo']);
+
+// 			$telefone = $this->filtraString($_POST['telefone']);
+			
+
+// 			$telefoneRecado = $this->filtraString($_POST['telefone-recado']);
+
+// 			$id = $_SESSION['id'];
+// 			$email = $_SESSION['email'];

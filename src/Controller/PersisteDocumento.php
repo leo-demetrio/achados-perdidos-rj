@@ -6,6 +6,7 @@ use Projeto\APRJ\Services\ServiceTraitFilter;
 use Projeto\APRJ\Services\ServiceTraitErro;
 use Projeto\APRJ\Services\ServiceTraitValidaData;
 use Projeto\APRJ\Services\ServiceTraitLimpaPost;
+use Projeto\APRJ\Services\ServiceTraitFlashMessage;
 use Projeto\APRJ\Model\ModelDocumento;
 use Projeto\APRJ\Model\ModelDocumentoAchado;
 
@@ -17,6 +18,7 @@ class PersisteDocumento implements InterfaceControladoraRequisicao
 	use ServiceTraitErro;
 	use ServiceTraitFilter;
 	use ServiceTraitValidaData;
+	use ServiceTraitFlashMessage;
 	use ServiceTraitLimpaPost;
 	
 
@@ -50,10 +52,9 @@ class PersisteDocumento implements InterfaceControladoraRequisicao
 			//o mesmo não pode perder e achar o mesmo doc
 			if($docBanco['id_reg'] == $id_registro){
 
-				$_SESSION['tipo_mensagem'] = "danger";
-				$_SESSION['tipo_mensagem'] = "você já cadstrou";
+				$this->messageSuccess("mdd1");				
 				header("Location: /relatorio");
-				die();					
+				return;					
 			}		
 
 			
@@ -68,8 +69,7 @@ class PersisteDocumento implements InterfaceControladoraRequisicao
 			
 			if($regAchadoBanco['id_reg'] == $id_registro){
 
-				$_SESSION['tipo_mensagem'] = "danger";
-				$_SESSION['tipo_mensagem'] = "você já cadstrou como achado"; 
+				$this->messageSuccess("mdd2");
 				header("Location: /relatorio");
 				die();					
 			}
@@ -79,15 +79,18 @@ class PersisteDocumento implements InterfaceControladoraRequisicao
 			if($situacao === 'achado'){	
 								
 					if($docAchadoBanco){
-						throw new \Exception('Este documento já possui cadastro como achado no banco');
 
+						$this->messageSuccess("mdd3");
+						header('Location: /relatorio');
+						return;
 					}
 					
 					$documentoAchado->inserirAchado();
 					if($docBanco){
 
-						throw new \Exception('Este documento foi encontrado em nosso sistema seu proprietário será notificado');
-
+						$this->messageSuccess("mdd4");
+						header('Location: /relatorio');
+						return;
 					}
 
 					header('Location: /relatorio');
@@ -98,7 +101,10 @@ class PersisteDocumento implements InterfaceControladoraRequisicao
 			//fazer união dessa mensagem acima
 			//verifica se o documento está no banco	
 			if($docBanco){
-				throw new \Exception('Esse documento já foi cadastrado no banco');
+
+				$this->messageSuccess("mdd5");
+				header('Location: /relatorio');
+				return;
 			}
 
 			$tabela = "documentos";
@@ -107,10 +113,10 @@ class PersisteDocumento implements InterfaceControladoraRequisicao
 			if(isset($docAchadoBanco['numero_documento'])){
 
 				//enviar email
-				$_SESSION['tipo_mensagem'] = "danger";
-				$_SESSION['tipo_mensagem'] = "Documento em nossa base de dados, iremos entrar em contato com quem tem a posse do documento"; 
-				header("Location: /relatorio");
-				die();
+
+				$this->messageSuccess("mdd6");
+				header('Location: /relatorio');
+				return;
 				
 			}
 
