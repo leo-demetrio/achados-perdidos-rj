@@ -17,20 +17,19 @@ class Relatorio extends ControllerComHtml implements InterfaceControladoraRequis
 	public function processaRequisicao(): void
 	{
 		try{
-			$dao = new ModelDao();
-			$dao->buscaTodosRegistros($_SESSION['id']);
 
+			$id = $_SESSION['id'];
+			
+			$tabela = "veiculos";
+			$veiculos = ModelVeiculo::buscaPeloId($tabela, $id);
 
-			//fazer um join com todas consultas
-			$veiculos = ModelVeiculo::buscaPeloId($_SESSION['id']);
+			
+			$tabela = "documentos";			
+			$documentos = ModelDocumento::buscaPeloId($tabela, $id);
 
-			// $relatorioDocumetos = new ModelDocumento();
-			// $relatorioDocumetos->setIdReg($_SESSION['id']);
-			$documentos = ModelDocumento::buscaPeloId($_SESSION['id']);
+			$tabela = "doc_achado";			
+			$documentos = ModelDocumento::buscaPeloId($tabela, $id);
 
-			$relatorioDocumetosAchados = new ModelDocumentoAchado();
-			$relatorioDocumetosAchados->setIdReg($_SESSION['id']);
-			$documenetosAchados = $relatorioDocumetosAchados->buscaPeloId();
 			
 			echo $this->renderizaHtml('relatorio/relatorio.php', [
 
@@ -45,8 +44,5 @@ class Relatorio extends ControllerComHtml implements InterfaceControladoraRequis
 			$this->trataErro($e);
 		}
 
-
-		// $titulo = "Relatorio";
-		// require __DIR__ . '/../../view/relatorio/relatorio.php';
 	}
 }

@@ -8,6 +8,7 @@ use Projeto\APRJ\Services\ServiceTraitErro;
 use Projeto\APRJ\Services\ServiceTraitFilter;
 use Projeto\APRJ\Services\ServiceTraitValidaData;
 use Projeto\APRJ\Services\ServiceTraitLimpaPost;
+use Projeto\APRJ\Services\ServiceTraitFlashMessage;
 
 class PersisteVeiculo implements InterfaceControladoraRequisicao
 {
@@ -15,12 +16,13 @@ class PersisteVeiculo implements InterfaceControladoraRequisicao
 	use ServiceTraitFilter;
 	use ServiceTraitValidaData;
 	use ServiceTraitLimpaPost;
+	use ServiceTraitFlashMessage;
 	
 	public function processaRequisicao(): void
 	{
 
 		try{
-
+			// $this->messageDanger("dv5");
 			$post = $this->limpaPost($_POST);
 			$data = $_SESSION['data'];
 			$id_registro = $_SESSION['id'];
@@ -54,9 +56,7 @@ class PersisteVeiculo implements InterfaceControladoraRequisicao
 			
 			if($veiculoAchadoBanco['id_reg'] == $id_registro){
 
-				//falta mensagem de já tem cadastro
-				$_SESSION['tipo_mensagem'] = "danger";
-				$_SESSION['mensagem'] = "Você já cadastrou em nosso banco!";
+				$this->messageDanger("dv1");
 				header('Location: /relatorio');
 				return;	
 			
@@ -67,8 +67,7 @@ class PersisteVeiculo implements InterfaceControladoraRequisicao
 
 				if($veiculoAchadoBanco){
 
-					$_SESSION['tipo_mensagem'] = "danger";
-					$_SESSION['mensagem'] = "Este veículo já possui cadastro como achado no banco";
+					$this->messageDanger("dv2");
 					header('Location:/relatorio');
 					return;
 
@@ -83,8 +82,8 @@ class PersisteVeiculo implements InterfaceControladoraRequisicao
 
 				//verifica se possui cadastro no banco para devolver
 				if($veicBanco){
-					$_SESSION['tipo_mensagem'] = "danger";
-					$_SESSION['mensagem'] = "Este veículo foi encontrado em nosso sistema seu proprietário será notificado";
+
+					$this->messageDanger("dv3");
 					return;
 
 				}
@@ -94,22 +93,19 @@ class PersisteVeiculo implements InterfaceControladoraRequisicao
 			}
 
 			if($veicBanco){
-
-					$_SESSION['tipo_mensagem'] = "danger";
-					$_SESSION['mensagem'] = "Este veículo já foi cadastrado no banco";
-					return;
+				$this->messageDanger("dv4");
+				return;
 			}		
 
 			
 			$tabela = "veiculos";
 			$veiculo->inserir($tabela);
+			$this->messageSuccess("v1");
+
 
 		
 			if($veiculoAchadoBanco){
-
-				$_SESSION['tipo_mensagem'] = "danger";
-				$_SESSION['mensagem'] = "O veículo se encontra em nossa base de dados iremos entrar em contato com quem está em posse dele";
-				
+				$this->messageDanger("dv5");		
 			}
 
 			header('Location: /relatorio');

@@ -61,8 +61,11 @@ class ModelDocumento
 		return $stmt->fetch();
 	}
 
-	public static function buscaPeloId($id_reg){
-		$query = 'SELECT numero_documento, tipo_documento, data_perda, data_registro, nome_documento, situacao FROM documentos WHERE id_reg = :id_reg';
+	public static function buscaPeloId($tabela, $id_reg){
+
+		
+		$query = "SELECT numero_documento, tipo_documento, data_perda, data_registro, nome_documento, situacao FROM $tabela WHERE id_reg = :id_reg";
+		// echo $query;exit;
 		$conexao = ModelConexao::conect();
 		$stmt = $conexao->prepare($query);
 		$stmt->bindValue(':id_reg', $id_reg);

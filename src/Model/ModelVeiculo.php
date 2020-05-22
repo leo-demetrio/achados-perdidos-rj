@@ -49,12 +49,14 @@ class ModelVeiculo
 		$stmt->bindValue(':data_registro', $this->dataRegistro);
 		$stmt->bindValue(':nome_proprietario', $this->nomeProprietario);
 		$stmt->bindValue(':situacao', $this->situacao);
-		$stmt->execute();
+		$result = $stmt->execute();
+		// print_r($result);exit;
 	}
 
-	public static function buscaPeloId(int $id_reg){
-	
-		$query = 'SELECT id_reg, placa, modelo, cor, data_registro, nome_proprietario, situacao FROM veiculos WHERE id_reg = :id_reg';
+	public static function buscaPeloId(string $tabela,int $id_reg){
+			// echo $tabela;exit;
+		$query = "SELECT id_reg, placa, modelo, cor, data_registro, nome_proprietario, situacao FROM $tabela WHERE id_reg = :id_reg";
+		// echo $query;exit;
 		$conexao = ModelConexao::conect();
 		$stmt = $conexao->prepare($query);
 		$stmt->bindValue(':id_reg', $id_reg);
