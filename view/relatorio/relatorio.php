@@ -71,14 +71,10 @@
   <?php foreach ($documentos as $registro): ?>  
       
     <tr>
-      <?php //echo $registro['nome_documento']?>
-      <!-- <td><?php// echo $registro['nome'] ?></td> -->
+      
       <td class="td"><?php echo  $registro['numero_documento'] ?></td>
       <td class="td"><?php echo $registro['tipo_documento'] ?></td>
-     <!--  <td><?php //echo $registro['data_perda'] ?></td>
-      <td><?php //echo $registro['data_registro'] ?></td>
-      <td><?php //echo $registro['nome_documento'] ?></td>
-      <td><?php //echo $registro['situacao'] ?></td> -->
+     
       <td class="td"><a href="/editar" class="green link">editar</a></td>
       <td class="td"><a href="/excluir-documento?numero_documento=<?php echo $registro['numero_documento']?>" class="red link">excluir</a></td>
       </tr>     
@@ -96,7 +92,7 @@
 
     <?php foreach($documentosAchados as $docAchado): ?>
 
-    <p>Você achou  documento número: 
+    <p>Número: 
 
       <?php echo $docAchado['numero_documento'] ?>
       <p class="btn-achados">  

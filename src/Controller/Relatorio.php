@@ -36,7 +36,7 @@ class Relatorio extends ControllerComHtml implements InterfaceControladoraRequis
 				'titulo' => 'Relatório',
 				'veiculos' => $veiculos,
 				'documentos' => $documentos,
-				'documentosAchados' => $documenetosAchados
+				'documentosAchados' => $documentosAchados
 
 			]);
 			

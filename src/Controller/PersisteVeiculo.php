@@ -64,7 +64,7 @@ class PersisteVeiculo implements InterfaceControladoraRequisicao
 			
 			if($post['situacao'] === 'achado'){
 
-
+				//se está no banco achado
 				if($veiculoAchadoBanco){
 
 					$this->messageDanger("dv2");
@@ -72,21 +72,23 @@ class PersisteVeiculo implements InterfaceControladoraRequisicao
 					return;
 
 					}
-					echo "veiculos achado";exit;
+					
 			
 
 
-					$tabela = "veiculos_achado";
-					$veiculoBanco->inserir($tabela);
+					$tabela = "veiculos_achados";
+					$veiculo->inserir($tabela);
 						
 
 				//verifica se possui cadastro no banco para devolver
-				if($veicBanco){
+				if($veiculoBanco){
 
 					$this->messageDanger("dv3");
+					header('Location: /relatorio');
 					return;
 
 				}
+				$this->messageSuccess("sv1")
 				header('Location: /relatorio');
 				die();
 
@@ -100,7 +102,7 @@ class PersisteVeiculo implements InterfaceControladoraRequisicao
 			
 			$tabela = "veiculos";
 			$veiculo->inserir($tabela);
-			$this->messageSuccess("v1");
+			$this->messageSuccess("sv1");
 
 
 		

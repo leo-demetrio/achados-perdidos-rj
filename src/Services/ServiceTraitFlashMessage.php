@@ -10,7 +10,7 @@ trait ServiceTraitFlashMessage
 	$dNeutra = "Não foi possíel cadastrar",
 
 	//mensgens de sucesso veículo
-	$msv1 = "Teste de mensagem danger",
+	$msv1 = "Veículo cadastrado com sucesso",
 	$msv2 = "Teste de número",
 
 	//mensgem de danger veículo
