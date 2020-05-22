@@ -20,8 +20,11 @@ trait ServiceTraitFlashMessage
 	$mdv4 = "Este veículo já foi cadastrado no banco",
 	$mdv5 = "O veículo se encontra em nossa base de dados iremos entrar em contato com quem está em posse dele",
 
+	//mensagem sucesso documento
+	$msd1 = "Documento cadastrado com sucesso",
+	
 	//mensagem de danger documento
-	$mdd1 = "você já cadstrou",
+	$mdd1 = "você já cadastrou",
 	$mdd2 = "você já cadstrou como achado", 
 	$mdd3 = "Este documento já possui cadastro como achado no banco",
 	$mdd4 = "Este documento foi encontrado em nosso sistema seu proprietário será notificado",
@@ -64,8 +67,3 @@ trait ServiceTraitFlashMessage
 	}
 }
 
-
-throw new \Exception('');
-
-$_SESSION['tipo_mensagem'] = "danger";
-				$_SESSION['tipo_mensagem']  

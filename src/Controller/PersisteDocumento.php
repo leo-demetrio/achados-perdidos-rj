@@ -27,11 +27,13 @@ class PersisteDocumento implements InterfaceControladoraRequisicao
 
 		try{
 
+
 			$post = $this->limpaPost($_POST);
 			$data_perda = $_POST['data_perda'];
 			$dataRegistro= $_SESSION['data'];
 			$id_registro = $_SESSION['id'];
-
+			// echo $_SESSION['id'];exit;
+			// print_r($post);exit;
 		
 			$documento = new ModelDocumento(
 
@@ -45,64 +47,61 @@ class PersisteDocumento implements InterfaceControladoraRequisicao
 
 			);
 
+			//teste se o proprio já cadastrou
 			$tabela = "documentos";
 			$docBanco = $documento->buscaPeloNumero($tabela);
 			
-
-			//o mesmo não pode perder e achar o mesmo doc
 			if($docBanco['id_reg'] == $id_registro){
-
-				$this->messageSuccess("mdd1");				
+				
+				$this->messageSuccess("dd1");				
 				header("Location: /relatorio");
 				return;					
 			}		
-
 			
+			//teste se o proprio já cadastrou como achado
 			$tabela = "doc_achado";
 			$docAchadoBanco = $documento->buscaPeloNumero($tabela);
-			if(isset($docAchadoBanco['id_reg'])){ 
-				$regAchadoBanco = $docAchadoBanco['id_reg'];
-			}else{
-				$regAchadoBanco = 0;
-			}
-
 			
-			if($regAchadoBanco['id_reg'] == $id_registro){
+			if($docAchadoBanco['id_reg'] == $id_registro){
 
-				$this->messageSuccess("mdd2");
+				$this->messageSuccess("dd2");
 				header("Location: /relatorio");
 				die();					
 			}
 
 
 			
-			if($situacao === 'achado'){	
-								
+			if($post['situacao'] === 'achado'){	
+
+				
+					//se está no banco achado		
 					if($docAchadoBanco){
 
-						$this->messageSuccess("mdd3");
+						$this->messageSuccess("dd3");
 						header('Location: /relatorio');
 						return;
 					}
 					
-					$documentoAchado->inserirAchado();
+					$tabela = "doc_achado";
+					$documento->inserir($tabela);
+					//se estiver no banco avisa o proprietário
 					if($docBanco){
 
-						$this->messageSuccess("mdd4");
+						$this->messageSuccess("dd4");
 						header('Location: /relatorio');
 						return;
 					}
 
 					header('Location: /relatorio');
-					die();
+					return;
 				}
 					
-
+				
 			//fazer união dessa mensagem acima
 			//verifica se o documento está no banco	
 			if($docBanco){
 
-				$this->messageSuccess("mdd5");
+				$this->messageSuccess("dd5");
 				header('Location: /relatorio');
 				return;
 			}
@@ -114,12 +113,13 @@ class PersisteDocumento implements InterfaceControladoraRequisicao
 
 				//enviar email
 
-				$this->messageSuccess("mdd6");
+				$this->messageSuccess("dd6");
 				header('Location: /relatorio');
 				return;
 				
 			}
 
+			$this->messageSuccess('sd1');
 			header('Location: /relatorio');
 			die();
 

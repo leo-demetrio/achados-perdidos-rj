@@ -56,9 +56,12 @@ class ModelDocumento
 		// echo $query;exit();
 		$conexao = ModelConexao::conect();
 		$stmt = $conexao->prepare($query);
-		$stmt->bindValue(':numero', $this->numero);
+		$stmt->bindValue(':numero', $this->numeroDocumento);
 		$stmt->execute();
-		return $stmt->fetch();
+		$res = $stmt->fetch(\PDO::FETCH_ASSOC);
+		// echo $this->numero;
+		// print_r($res);exit;
+		return $res;
 	}
 
 	public static function buscaPeloId($tabela, $id_reg){
