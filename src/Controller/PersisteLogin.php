@@ -17,7 +17,8 @@ class PersisteLogin implements InterfaceControladoraRequisicao
 	public function processaRequisicao(): void
 	{
 		try{
-
+			//colocar limpa post
+			$_SESSION['email'] = $_POST['email'];
 			$email = $_POST['email'];
 			$senha = $_POST['senha'];
 

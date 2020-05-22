@@ -83,6 +83,27 @@ class PersisteVeiculo implements InterfaceControladoraRequisicao
 				//verifica se possui cadastro no banco para devolver
 				if($veiculoBanco){
 
+					$email = new Email();
+						$email->addMensagem(
+
+							"Documento achado",
+							$this->messageSuccess("dd4"),
+							$_SESSION['nome'],
+							//$_SESSION['email'],
+							"leopoldocd@hotmail.com"
+						)->sendEmail();
+
+						//mesgem para o dono do documento
+						$email->addMensagem(
+
+							"Documento achado",
+							$this->messageSuccess("da"),
+							$_SESSION['nome'],
+							//$_SESSION['email'],
+							"leopoldocd@hotmail.com"
+
+						)->sendEmail();
+
 					$this->messageDanger("dv3");
 					header('Location: /relatorio');
 					return;
@@ -129,46 +150,3 @@ class PersisteVeiculo implements InterfaceControladoraRequisicao
 
 
 
-
-			// $placa = $this->filtraString($_POST['placa']);
-			// $modelo = $this->filtraString($_POST['modelo']);
-			// $cor = $this->filtraString($_POST['cor']);
-			// $nomeProprietario = $this->filtraString($_POST['nome-proprietario']);
-			// $situacao = $this->filtraString($_POST['situacao']);
-			
-
-			// $veiculoAchado->setIdReg($id_registro);
-			// 		$veiculoAchado->setPlaca($post['placa']);
-			// 		$veiculoAchado->setModelo($post['modelo']);
-			// 		$veiculoAchado->setCor($post['cor']);
-			// 		$veiculoAchado->setDataRegistro($post['data']);
-			// 		$veiculoAchado->setNomeProprietario ($post['nomeProprietario']);
-			// 		$veiculoAchado->setSituacao($post['situacao']);
-
-
-// $veiculo->setIdReg($post['id']);
-// 			$veiculo->setPlaca($post['placa']);
-// 			$veiculo->setModelo($post['modelo']);
-// 			$veiculo->setCor($post['cor']);
-// 			$veiculo->setDataRegistro($post['data']);
-// 			$veiculo->setNomeProprietario ($post['nomeProprietario']);
-// 			$veiculo->setSituacao($post['situacao']);
-
-
-// if(isset($veiculoAchadoBanco['id_reg'])){
-			// 	$veicAchadoBanco = $veiculoAchadoBanco['id_reg'];
-			// }else{
-			// 	$veicAchadoBanco = 0;
-			// }
-			// echo $veicAchadoBanco;exit;
-			//o mesmo não pode perder e achar
-
-
-// if(isset($veiculoBanco['id_reg'])){
-// 				$veicBanco = $veiculoBanco['id_reg'];
-// 			}else{
-// // 				$veicBanco = 0;
-// // 			}
-
-
-// throw new \Exception('O veículo se encontra em nossa base de dados iremos entrar em contato com que está em posse dele');

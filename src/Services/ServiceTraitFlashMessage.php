@@ -29,7 +29,10 @@ trait ServiceTraitFlashMessage
 	$mdd3 = "Este documento já possui cadastro como achado no banco",
 	$mdd4 = "Este documento foi encontrado em nosso sistema seu proprietário será notificado",
 	$mdd5 = "Esse documento já foi cadastrado no banco",
-	$mdd6 = "Documento em nossa base de dados, iremos entrar em contato com quem tem a posse do documento";
+	$mdd6 = "Documento em nossa base de dados, iremos entrar em contato com quem tem a posse do documento",
+
+	//email mensagem  documento achado
+	$mda = "O documento foi achado";
 
 
 
@@ -54,6 +57,7 @@ trait ServiceTraitFlashMessage
 
 		$_SESSION['tipo-mensagem'] = "success";
 		$_SESSION['mensagem'] = $this->$msg;
+		return $this->$msg;
 		
 	}
 	public  function messageDanger($tipo){

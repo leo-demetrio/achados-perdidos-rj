@@ -17,6 +17,7 @@ class PersisteRegistro implements InterfaceControladoraRequisicao
 	{
 		
 		try{
+			//colocar limpa post
 			//Inserção tabela Registro
 			$email = $this->filtraEmail($_POST['email']);
 			$registro = new ModelRegistro();

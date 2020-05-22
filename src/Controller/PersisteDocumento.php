@@ -9,6 +9,7 @@ use Projeto\APRJ\Services\ServiceTraitLimpaPost;
 use Projeto\APRJ\Services\ServiceTraitFlashMessage;
 use Projeto\APRJ\Model\ModelDocumento;
 use Projeto\APRJ\Model\ModelDocumentoAchado;
+use Projeto\APRJ\Suport\Email;
 
 
 
@@ -86,6 +87,28 @@ class PersisteDocumento implements InterfaceControladoraRequisicao
 					$documento->inserir($tabela);
 					//se estiver no banco avisa o proprietário
 					if($docBanco){
+
+						//mesagem p quem está com documento
+						$email = new Email();
+						$email->addMensagem(
+
+							"Documento achado",
+							$this->messageSuccess("dd4"),
+							$_SESSION['nome'],
+							//$_SESSION['email'],
+							"leopoldocd@hotmail.com"
+						)->sendEmail();
+
+						//mesgem para o dono do documento
+						$email->addMensagem(
+
+							"Documento achado",
+							$this->messageSuccess("da"),
+							$_SESSION['nome'],
+							//$_SESSION['email'],
+							"leopoldocd@hotmail.com"
+
+						)->sendEmail();
 
 						$this->messageSuccess("dd4");
 						header('Location: /relatorio');

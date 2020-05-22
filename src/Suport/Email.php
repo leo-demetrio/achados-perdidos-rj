@@ -66,6 +66,8 @@ class Email
 		}
 
 		$this->mail->send();
+		return true;
+		
 	}catch(\Exception $e){
 		$this->trataErro($e);
 	}
