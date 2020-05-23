@@ -8,6 +8,7 @@ use Projeto\APRJ\Services\ServiceTraitErro;
 use Projeto\APRJ\Services\ServiceTraitValidaInputNome;
 use Projeto\APRJ\Services\ServiceTraitValidaInputTelefone;
 use Projeto\APRJ\Services\ServiceTraitLimpaPost;
+use Projeto\APRJ\Services\ServiceTraitFlashMessage;
 
 class PersistePrincipal
 {
@@ -16,24 +17,33 @@ class PersistePrincipal
 	use ServiceTraitValidaInputTelefone;
 	use ServiceTraitFilter;
 	use ServiceTraitLimpaPost;
+	use ServiceTraitFlashMessage;
+
+
 	
 	public function processaRequisicao(): void
 	{
 		try{
 			
 			$post = $this->limpaPost($_POST);
+			$nome = $post['nome_completo'];
+			$telefone = $post['telefone'];
+			$telefone_recado = $post['telefone'];
 			$id = $_SESSION['id'];
  			$email = $_SESSION['email'];
+
+ 			$_SESSION['nome'] = $nome;
 			
 
-			$cadastroPrincipal = new ModelPrincipal();
-			$result = $cadastroPrincipal->inserir($id, $post['nome'], $post['telefone'], $post['telefoneRecado'], $email);
+			$principal = new ModelPrincipal();
+			$result = $principal->inserir($id, $nome, $telefone, $telefone_recado, $email);
 			if(!$result){
+				$this->messageDanger("dc1");
 				header('Location: /cadastro-principal');
 				return;
 			}
-			$_SESSION['nome'] = $nome;
-
+			
+			$this->messageDanger("dc2");
 			header('Location: /home-logado');
 			return;
 
@@ -48,13 +58,3 @@ class PersistePrincipal
 
 }
 
-
-// $nome = $this->filtraString($_POST['nome_completo']);
-
-// 			$telefone = $this->filtraString($_POST['telefone']);
-			
-
-// 			$telefoneRecado = $this->filtraString($_POST['telefone-recado']);
-
-// 			$id = $_SESSION['id'];
-// 			$email = $_SESSION['email'];

@@ -19,17 +19,16 @@ class Relatorio extends ControllerComHtml implements InterfaceControladoraRequis
 		try{
 
 			$id = $_SESSION['id'];
+			// $id = 2;
 			
 			$tabela = "veiculos";
 			$veiculos = ModelVeiculo::buscaPeloId($tabela, $id);
-
 			
 			$tabela = "documentos";			
 			$documentos = ModelDocumento::buscaPeloId($tabela, $id);
 			
 			$tabela = "doc_achado";			
 			$documentosAchados = ModelDocumento::buscaPeloId($tabela, $id);
-
 			
 			echo $this->renderizaHtml('relatorio/relatorio.php', [
 

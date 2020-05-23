@@ -6,42 +6,53 @@ use Projeto\APRJ\Model\ModelRegistro;
 use Projeto\APRJ\Services\ServiceTraitFilter;
 use Projeto\APRJ\Services\ServiceTraitErro;
 use Projeto\APRJ\Services\ServiceTraitEncripta;
+use Projeto\APRJ\Services\ServiceTraitLimpaPost;
+use Projeto\APRJ\Services\ServiceTraitFlashMessage;
 
 class PersisteRegistro implements InterfaceControladoraRequisicao
 {
 	use ServiceTraitErro;
 	use ServiceTraitFilter;
 	use ServiceTraitEncripta;
+	use ServiceTraitLimpaPost;
+	use ServiceTraitFlashMessage;
 
 	public function processaRequisicao(): void
 	{
 		
 		try{
-			//colocar limpa post
+			
 			//Inserção tabela Registro
-			$email = $this->filtraEmail($_POST['email']);
+			$post = $this->limpaPost($_POST);
+			$email = $post['email'];
+			$senha = $post['senha'];
+			$ip = $_SESSION['ip'];
+		    $data = $_SESSION['data'];
+
+		    $_SESSION['email'] = $email;
+
 			$registro = new ModelRegistro();
+			//testa se já existe email
 			$registroEmail = $registro->buscaIdPorEmail($email);
 
 			if($registroEmail){ 
-				throw new \Exception("O email já possui cadastro!!");
+
+				$this->messageDanger("de1");
+				header('Location: /registro');
+				return;
+				
 				}	
-
-			$senha = $this->filtraString($_POST['senha']);
-		    $senhaEncriptada = $this->encriptaSenha($senha);
-
-		    $ip = $_SESSION['ip'];
-		    $data = $_SESSION['data'];
-	
+			
+		    $senhaEncriptada = $this->encriptaSenha($senha);	
 			
 			$registro->inserir($email, $senhaEncriptada, $ip, $data);
-			
+			//já está no banco
 			$id_registro = $registro->buscaIdPorEmail($email);
-			$_SESSION['id'] = $id_registro['id_registro'];//arraya associativo
-			$_SESSION['email'] = $email;
+			$_SESSION['id'] = $id_registro['id_registro'];
+			
 
 			header("Location: /cadastro-principal");
-			die();
+			return;
 
 		}catch(\Exception $e){
 			$this->trataErro($e);

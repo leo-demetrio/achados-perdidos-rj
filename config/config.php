@@ -21,3 +21,14 @@ define("MAIL", [
 	"from_name" => "Achados e Perdidos",
 	"from_email" => "leocdemetrio@gmail.com"
 ]);
+
+
+/****** SESSÕES DISPONÍVEIS *******/
+/*Aqui estão todas as sessões utilizadas no programa e onde são iniciadas
+
+$_SESSION['?']
+-ip index.php
+-data index.php
+-id PersiteRegistro.php refere-se ao registro de usuário no banco
+-email PersiteRegistro.php
+-nome PersitePrincipal.php

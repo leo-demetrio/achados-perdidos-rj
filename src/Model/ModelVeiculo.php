@@ -54,7 +54,7 @@ class ModelVeiculo
 	}
 
 	public static function buscaPeloId(string $tabela,int $id_reg){
-			// echo $tabela;exit;
+			echo $tabela;exit;
 		$query = "SELECT id_reg, placa, modelo, cor, data_registro, nome_proprietario, situacao FROM $tabela WHERE id_reg = :id_reg";
 		// echo $query;exit;
 		$conexao = ModelConexao::conect();

@@ -16,6 +16,7 @@ class HomeLogado extends ControllerComHtml implements InterfaceControladoraRequi
 			$titulo = 'Home Logado';
 		}
 		try{
+			//usar a função compct aqui
 			echo $this->renderizaHtml('home/home-logado.php', [
 
 				'titulo' => $titulo

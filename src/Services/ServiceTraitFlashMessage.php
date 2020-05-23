@@ -32,7 +32,12 @@ trait ServiceTraitFlashMessage
 	$mdd6 = "Documento em nossa base de dados, iremos entrar em contato com quem tem a posse do documento",
 
 	//email mensagem  documento achado
-	$mda = "O documento foi achado";
+	$mda = "O documento foi achado",
+	$mde1 = "O email já possui cadastro!!",
+
+	//mensagem danger cadastro principal
+	$mdc1 = "Não foi possível cadastrar tente novamente",
+	$mdc2 = "Cadastro efetuado com sucesso";
 
 
 
@@ -63,7 +68,7 @@ trait ServiceTraitFlashMessage
 	public  function messageDanger($tipo){
 
 		$msg = "m".$tipo;
-		echo $this->$msg;exit;
+		// echo $this->$msg;exit;
 
 		$_SESSION['tipo-mensagem'] = "danger";
 		$_SESSION['mensagem'] = $this->$msg;

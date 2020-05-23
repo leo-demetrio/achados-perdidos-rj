@@ -5,7 +5,7 @@ namespace Projeto\APRJ\Model;
 
 class ModelPrincipal
 {
-	public function inserir(int $id,String $nome,String $telefone,String $telefoneRecado,String $email): bool
+	public function inserir(int $id,string $nome,string $telefone,string $telefoneRecado,string $email): bool
 	{
 		$query = "INSERT INTO registro_completo (id_reg, nome, telefone, telefone_recado, email) VALUES (:id, :nome, :telefone, :telefoneRecado, :email)";
 		$conexao = ModelConexao::conect();

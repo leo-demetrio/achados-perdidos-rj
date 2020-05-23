@@ -24,8 +24,9 @@ if(!array_key_exists($caminho, $rotas))
 	echo "Erro 404";
 	return;
 }
-
-
+ // var_dump($_SESSION);exit;
+//vou deixar && só em fase de desenvolvimento
+//verifica logado
 if(!(stripos($caminho, 'cadastro') >= 0)){
 	$rotaLogin = stripos($caminho, 'login');
 	if(!isset($_SESSION['id']) && $rotaLogin === false){

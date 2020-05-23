@@ -29,7 +29,7 @@ return  [
 	'/home' => HomeLogado::class,
 	'/login' => CadastroLogin::class,
 	'/salvar-login' => PersisteLogin::class,
-	'/cadastro-registro' => CadastroRegistro::class,
+	'/registro' => CadastroRegistro::class,
 	'/salvar-registro' => PersisteRegistro::class,
 	'/cadastro-principal' => CadastroPrincipal::class,
 	'/salvar-principal' => PersistePrincipal::class,
