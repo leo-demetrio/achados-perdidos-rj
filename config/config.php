@@ -32,3 +32,4 @@ $_SESSION['?']
 -id PersiteRegistro.php refere-se ao registro de usuário no banco
 -email PersiteRegistro.php
 -nome PersitePrincipal.php
+*/
