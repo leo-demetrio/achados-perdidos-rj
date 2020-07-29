@@ -2,7 +2,7 @@
 namespace Projeto\APRJ\Controller;
 
 use Projeto\APRJ\Controller\InterfaceControladoraRequisicao;
-use Projeto\APRJ\Services\ServiceTraitFilter;
+// use Projeto\APRJ\Services\ServiceTraitFilter;
 use Projeto\APRJ\Model\ModelPrincipal;
 use Projeto\APRJ\Services\ServiceTraitErro;
 use Projeto\APRJ\Services\ServiceTraitValidaInputNome;
@@ -15,7 +15,7 @@ class PersistePrincipal
 	use ServiceTraitErro;
 	use ServiceTraitValidaInputNome;
 	use ServiceTraitValidaInputTelefone;
-	use ServiceTraitFilter;
+	// use ServiceTraitFilter;
 	use ServiceTraitLimpaPost;
 	use ServiceTraitFlashMessage;
 

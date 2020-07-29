@@ -17,7 +17,7 @@ define("MAIL", [
 	"host" => "smtp.gmail.com",
 	"port" => "587",
 	"user" => "achadosperdidos2020@gmail.com",
-	"password" => "aprj@#2020",
+	"password" => "aprj@#\$2020",
 	"from_name" => "Achados e Perdidos",
 	"from_email" => "leocdemetrio@gmail.com"
 ]);

@@ -19,6 +19,10 @@
 			<input type="submit" value="Submit">
 		</p>
 	</fieldset>
+
+	<p>
+		<button><a href="/registro">Cadastrar</a></button>
+	</p>
 </form>
 
 

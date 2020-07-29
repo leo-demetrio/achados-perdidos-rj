@@ -2,7 +2,7 @@
 namespace Projeto\APRJ\Controller;
 
 use Projeto\APRJ\Controller\InterfaceControladoraRequisicao;
-use Projeto\APRJ\Services\ServiceTraitFilter;
+// use Projeto\APRJ\Services\ServiceTraitFilter;
 use Projeto\APRJ\Services\ServiceTraitErro;
 use Projeto\APRJ\Services\ServiceTraitValidaData;
 use Projeto\APRJ\Services\ServiceTraitLimpaPost;
@@ -17,7 +17,7 @@ use Projeto\APRJ\Suport\Email;
 class PersisteDocumento implements InterfaceControladoraRequisicao
 {
 	use ServiceTraitErro;
-	use ServiceTraitFilter;
+	// use ServiceTraitFilter;
 	use ServiceTraitValidaData;
 	use ServiceTraitFlashMessage;
 	use ServiceTraitLimpaPost;
@@ -33,7 +33,7 @@ class PersisteDocumento implements InterfaceControladoraRequisicao
 			$data_perda = $_POST['data_perda'];
 			$dataRegistro= $_SESSION['data'];
 			$id_registro = $_SESSION['id'];
-			// echo $_SESSION['id'];exit;
+			//echo $_SESSION['data'];exit;
 			// print_r($post);exit;
 		
 			$documento = new ModelDocumento(
@@ -42,7 +42,8 @@ class PersisteDocumento implements InterfaceControladoraRequisicao
 				$post['numero'],
 				$post['tipo-documento'],
 				$post['data_perda'],
-				$post['dataRegistro'],
+				// $post['dataRegistro'],				
+				$dataRegistro,				
 				$post['nome'],
 				$post['situacao']
 
@@ -51,7 +52,7 @@ class PersisteDocumento implements InterfaceControladoraRequisicao
 			//teste se o proprio já cadastrou
 			$tabela = "documentos";
 			$docBanco = $documento->buscaPeloNumero($tabela);
-			
+			// var_dump($docBanco);echo "<br>".$id_registro;exit;
 			if($docBanco['id_reg'] == $id_registro){
 				
 				$this->messageSuccess("dd1");				
@@ -107,7 +108,7 @@ class PersisteDocumento implements InterfaceControladoraRequisicao
 							$_SESSION['nome'],
 							//$_SESSION['email'],
 							"leopoldocd@hotmail.com"
-
+							
 						)->sendEmail();
 
 						$this->messageSuccess("dd4");

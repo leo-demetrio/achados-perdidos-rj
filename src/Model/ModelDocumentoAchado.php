@@ -50,7 +50,7 @@ class ModelDocumentoAchado
 		return $documentos;
 	}
 
-	public function excluir(int $numero): bool
+	public function excluir(string $numero): bool
 	{
 		$query = "DELETE FROM doc_achado WHERE numero_documento = :numero";
 		$conexao = ModelConexao::conect();

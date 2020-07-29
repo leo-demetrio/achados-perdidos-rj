@@ -3,7 +3,7 @@ namespace Projeto\APRJ\Controller;
 
 use Projeto\APRJ\Controller\InterfaceControladoraRequisicao;
 use Projeto\APRJ\Model\ModelRegistro;
-use Projeto\APRJ\Services\ServiceTraitFilter;
+// use Projeto\APRJ\Services\ServiceTraitFilter;
 use Projeto\APRJ\Services\ServiceTraitErro;
 use Projeto\APRJ\Services\ServiceTraitEncripta;
 use Projeto\APRJ\Services\ServiceTraitLimpaPost;
@@ -12,7 +12,7 @@ use Projeto\APRJ\Services\ServiceTraitFlashMessage;
 class PersisteRegistro implements InterfaceControladoraRequisicao
 {
 	use ServiceTraitErro;
-	use ServiceTraitFilter;
+	// use ServiceTraitFilter;
 	use ServiceTraitEncripta;
 	use ServiceTraitLimpaPost;
 	use ServiceTraitFlashMessage;
