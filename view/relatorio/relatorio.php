@@ -99,6 +99,7 @@
       <td><a href="/editar" class="green link">editar</a></td>
       <td><a href="/excluir-documentos-achados?numero_documento=<?php echo $docAchado['numero_documento']?>" class="red link">excluir</a></td>
       </p>
+      
 
     </p>
 
