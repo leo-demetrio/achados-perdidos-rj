@@ -130,8 +130,7 @@ class PersisteDocumento implements InterfaceControladoraRequisicao
 				return;
 			}
 
-			$tabela = "documentos";
-			$documento->inserir($tabela);
+			
 
 			if(isset($docAchadoBanco['numero_documento'])){
 
@@ -143,9 +142,12 @@ class PersisteDocumento implements InterfaceControladoraRequisicao
 				
 			}
 
+			$tabela = "documentos";
+			$documento->inserir($tabela);
+
 			$this->messageSuccess('sd1');
 			header('Location: /relatorio');
-			die();
+			return;
 
 			
 

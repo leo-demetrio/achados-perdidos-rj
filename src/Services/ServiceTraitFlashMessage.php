@@ -22,6 +22,7 @@ trait ServiceTraitFlashMessage
 
 	//mensagem sucesso documento
 	$msd1 = "Documento cadastrado com sucesso",
+	$msd2 = "Documento excluído com sucesso!!",
 	
 	//mensagem de danger documento
 	$mdd1 = "você já cadastrou",
@@ -30,6 +31,7 @@ trait ServiceTraitFlashMessage
 	$mdd4 = "Este documento foi encontrado em nosso sistema seu proprietário será notificado",
 	$mdd5 = "Esse documento já foi cadastrado no banco",
 	$mdd6 = "Documento em nossa base de dados, iremos entrar em contato com quem tem a posse do documento",
+	$mdd7 = "Não foi possível excluir, tente novamente",
 
 	//email mensagem  documento achado
 	$mda = "O documento foi achado",
@@ -60,7 +62,7 @@ trait ServiceTraitFlashMessage
 		$msg = "m".$tipo;
 		// echo $this->$msg;exit;
 
-		$_SESSION['tipo-mensagem'] = "success";
+		$_SESSION['tipo_mensagem'] = "success";
 		$_SESSION['mensagem'] = $this->$msg;
 		return $this->$msg;
 		
@@ -70,7 +72,7 @@ trait ServiceTraitFlashMessage
 		$msg = "m".$tipo;
 		// echo $this->$msg;exit;
 
-		$_SESSION['tipo-mensagem'] = "danger";
+		$_SESSION['tipo_mensagem'] = "danger";
 		$_SESSION['mensagem'] = $this->$msg;
 		
 	}

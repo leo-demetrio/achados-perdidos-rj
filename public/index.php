@@ -21,7 +21,7 @@ $rotas = require __DIR__ . '/../config/routes.php';
 
 if(!array_key_exists($caminho, $rotas))
 {
-	echo "Erro 404";
+	http_response_code(404);
 	return;
 }
  // var_dump($_SESSION);exit;
@@ -32,7 +32,7 @@ if(!(stripos($caminho, 'cadastro') >= 0)){
 	if(!isset($_SESSION['id']) && $rotaLogin === false){
 
 		header('Location: /login');
-		die();
+		return;
 
 	}
 }
