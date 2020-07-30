@@ -22,7 +22,7 @@ class ExcluirDocumento extends ControllerComHtml implements InterfaceControlador
 		if($result){
 			$this->messageSuccess('sd2');
 		}else{
-			$this->messageDanger($mdd9);
+			$this->messageDanger($dd9);
 		}
 
 		header('Location: /relatorio');

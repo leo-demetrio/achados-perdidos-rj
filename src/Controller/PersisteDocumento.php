@@ -2,7 +2,6 @@
 namespace Projeto\APRJ\Controller;
 
 use Projeto\APRJ\Controller\InterfaceControladoraRequisicao;
-// use Projeto\APRJ\Services\ServiceTraitFilter;
 use Projeto\APRJ\Services\ServiceTraitErro;
 use Projeto\APRJ\Services\ServiceTraitValidaData;
 use Projeto\APRJ\Services\ServiceTraitLimpaPost;
@@ -17,7 +16,6 @@ use Projeto\APRJ\Suport\Email;
 class PersisteDocumento implements InterfaceControladoraRequisicao
 {
 	use ServiceTraitErro;
-	// use ServiceTraitFilter;
 	use ServiceTraitValidaData;
 	use ServiceTraitFlashMessage;
 	use ServiceTraitLimpaPost;
@@ -41,8 +39,7 @@ class PersisteDocumento implements InterfaceControladoraRequisicao
 				$id_registro,
 				$post['numero'],
 				$post['tipo-documento'],
-				$post['data_perda'],
-				// $post['dataRegistro'],				
+				$post['data_perda'],				
 				$dataRegistro,				
 				$post['nome'],
 				$post['situacao']
@@ -72,11 +69,11 @@ class PersisteDocumento implements InterfaceControladoraRequisicao
 			}
 
 
-			
+			//testa situação achado
 			if($post['situacao'] === 'achado'){	
 
 				
-					//se está no banco achado		
+					//se está no banco achado p não repetir dois registros		
 					if($docAchadoBanco){
 
 						$this->messageSuccess("dd3");
@@ -86,7 +83,7 @@ class PersisteDocumento implements InterfaceControladoraRequisicao
 					
 					$tabela = "doc_achado";
 					$documento->inserir($tabela);
-					//se estiver no banco avisa o proprietário
+					//se estiver no banco como perdido avisa o proprietário
 					if($docBanco){
 
 						//mesagem p quem está com documento
@@ -100,7 +97,7 @@ class PersisteDocumento implements InterfaceControladoraRequisicao
 							"leopoldocd@hotmail.com"
 						)->sendEmail();
 
-						//mesgem para o dono do documento
+						//mensagem para o dono do documento
 						$email->addMensagem(
 
 							"Documento achado",
@@ -119,6 +116,7 @@ class PersisteDocumento implements InterfaceControladoraRequisicao
 					header('Location: /relatorio');
 					return;
 				}
+				//final situação achado
 					
 				
 			//fazer união dessa mensagem acima
@@ -131,10 +129,32 @@ class PersisteDocumento implements InterfaceControladoraRequisicao
 			}
 
 			
-
+			//documento no banco achado
 			if(isset($docAchadoBanco['numero_documento'])){
 
-				//enviar email
+				//inserir na tabela
+				$tabela = "documentos";
+				$documento->inserir($tabela);
+
+				//enviar email proprietário
+				$email = new Email();
+				$email->addMensagem(
+					"Documento achado",
+					$this->messageSuccess("dd4"),
+					$_SESSION['nome'],
+					//$_SESSION['email'],
+					"leopoldocd@hotmail.com"
+				)->sendEmail();
+
+				//enviar email próprio para notificar sobre entrega
+				$email = new Email();
+				$email->addMensagem(
+					"Documento achado",
+					$this->messageSuccess("dd4"),
+					$_SESSION['nome'],
+					//$_SESSION['email'],
+					"leopoldocd@hotmail.com"
+				)->sendEmail();
 
 				$this->messageSuccess("dd6");
 				header('Location: /relatorio');
@@ -160,42 +180,3 @@ class PersisteDocumento implements InterfaceControladoraRequisicao
 
 
 
-// $tipo = $this->filtraString($_POST['tipo-documento']);
-// 			$nome = $this->filtraString($_POST['nome']);
-// 			$id = $this->filtraInt($_SESSION['id']);
-// $numero = $this->filtraString($_POST['numero']);
-// 			$situacao = $this->filtraString($_POST['situacao']);
-
-
-// $documentoAchado->setNomeDocumento($nome);
-// 					$documentoAchado->setNumeroDocumento($numero);
-// 					$documentoAchado->setTipoDocumento($tipo);
-// 					$documentoAchado->setDataPerda($data_perda);
-// 					$documentoAchado->setIdREg($id);
-// 					$documentoAchado->setDataRegistro($dataRegistro);
-// 					$documentoAchado->setSituacao($situacao);
-
-
-
-			// die("veio");
-			// $documento->setNomeDocumento($nome);
-			// $documento->setNumeroDocumento($numero);
-			// $documento->setTipoDocumento($tipo);
-			// $documento->setDataPerda($data_perda);
-			// $documento->setIdREg($id);
-			// $documento->setDataRegistro($dataRegistro);
-			// $documento->setSituacao($situacao);
-
-
-// if(isset($docBanco['id_reg'])){ 
-// 				$regBanco = $docBanco['id_reg'];
-// 			}else{
-// 				$regBanco = 0;
-
-
-
-// 			}
-
-
-
-// throw new \Exception("Documento em nossa base de dados, iremos entrar em contato com quem tem a posse do documento");

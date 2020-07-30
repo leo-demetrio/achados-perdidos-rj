@@ -5,7 +5,6 @@ use Projeto\APRJ\Controller\InterfaceControladoraRequisicao;
 use Projeto\APRJ\Model\ModelVeiculo;
 use Projeto\APRJ\Model\ModelVeiculoAchado;
 use Projeto\APRJ\Services\ServiceTraitErro;
-//use Projeto\APRJ\Services\ServiceTraitFilter;
 use Projeto\APRJ\Services\ServiceTraitValidaData;
 use Projeto\APRJ\Services\ServiceTraitLimpaPost;
 use Projeto\APRJ\Services\ServiceTraitFlashMessage;
@@ -13,7 +12,6 @@ use Projeto\APRJ\Services\ServiceTraitFlashMessage;
 class PersisteVeiculo implements InterfaceControladoraRequisicao
 {
 	use ServiceTraitErro;
-	// use ServiceTraitFilter;
 	use ServiceTraitValidaData;
 	use ServiceTraitLimpaPost;
 	use ServiceTraitFlashMessage;

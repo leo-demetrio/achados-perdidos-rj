@@ -17,7 +17,7 @@
 
 
 		
-	<?php if(isset($_SESSION['id'])): ?>
+	<!-- <?php if(isset($_SESSION['id'])): ?> -->
 	<header>
 		<!-- nav -->
 		<nav class="navbar navbar-expand-lg navbar-light bg-light color-header">
@@ -60,7 +60,7 @@
 			</ul>
 		</nav> -->
 	</header>
-	<?php endif ?>
+	<!-- <?php endif ?> -->
 	
 
 	<div class="container">
