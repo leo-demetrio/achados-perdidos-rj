@@ -20,7 +20,7 @@ class PersisteVeiculo implements InterfaceControladoraRequisicao
 	{
 
 		try{
-			// $this->messageDanger("dv5");
+			
 			$post = $this->limpaPost($_POST);
 			$data = $_SESSION['data'];
 			$id_registro = $_SESSION['id'];
@@ -38,16 +38,18 @@ class PersisteVeiculo implements InterfaceControladoraRequisicao
 			);
 
 			//fazer um join para unir as duas consultas
+			//testa se o próprio já cadastrou
 			$tabela = "veiculos";
 			$veiculoBanco = $veiculo->buscaPelaPlaca($tabela);
 			
 			if($veiculoBanco['id_reg'] == $id_registro){
 				//falta mensagem de já tem cadastro
+				$this->messageDanger('dv6');
 				header('Location: /relatorio');
 				return;				
 			}
 
-			
+			//testa se o próprio já cadastrou como achado
 			$tabela = "veiculos_achados";
 			$veiculoAchadoBanco = $veiculo->buscaPelaPlaca($tabela);
 			
@@ -59,7 +61,7 @@ class PersisteVeiculo implements InterfaceControladoraRequisicao
 				return;	
 			
 			}
-			
+			//testa situação achado
 			if($post['situacao'] === 'achado'){
 
 				//se está no banco achado
@@ -73,7 +75,7 @@ class PersisteVeiculo implements InterfaceControladoraRequisicao
 					
 			
 
-
+					//inserir na tabela
 					$tabela = "veiculos_achados";
 					$veiculo->inserir($tabela);
 						
@@ -112,21 +114,44 @@ class PersisteVeiculo implements InterfaceControladoraRequisicao
 				die();
 
 			}
+			//final situação achado
 
+			//testa se já foi cadastrado
 			if($veicBanco){
 				$this->messageDanger("dv4");
 				return;
 			}		
 
-			
+			//insere na tabela
 			$tabela = "veiculos";
 			$veiculo->inserir($tabela);
 			$this->messageSuccess("sv1");
 
 
-		
+			//veículo no banco parar devolver
 			if($veiculoAchadoBanco){
-				$this->messageDanger("dv5");		
+
+				$email->addMensagem(
+
+							"Documento achado",
+							$this->messageSuccess("dd4"),
+							$_SESSION['nome'],
+							//$_SESSION['email'],
+							"leopoldocd@hotmail.com"
+						)->sendEmail();
+
+						//mesgem para o dono do documento
+						$email->addMensagem(
+
+							"Documento achado",
+							$this->messageSuccess("da"),
+							$_SESSION['nome'],
+							//$_SESSION['email'],
+							"leopoldocd@hotmail.com"
+
+						)->sendEmail();
+				$this->messageDanger("dv5");
+				return;		
 			}
 
 			header('Location: /relatorio');
