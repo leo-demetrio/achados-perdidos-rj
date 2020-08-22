@@ -11,17 +11,29 @@ class HomeLogado extends ControllerComHtml implements InterfaceControladoraRequi
 	
 	public function processaRequisicao(): void
 	{
-		$titulo = 'Home deslogado';
-		if(isset($_SESSION['id'])){
-			$titulo = 'Home Logado';
-		}
+
 		try{
-			//usar a função compct aqui
-			echo $this->renderizaHtml('home/home-logado.php', [
 
-				'titulo' => $titulo
+            if(isset($_SESSION['id'])) {
+                $titulo = 'Home Logado';
+                echo $this->renderizaHtml('home/home-logado.php', [
 
-			]);
+                    'titulo' => $titulo
+
+                ]);
+                return;
+            }
+
+            $titulo = 'Home deslogado';
+            echo $this->renderizaHtml('home/home-deslogado.php', [
+
+                'titulo' => $titulo
+
+            ]);
+
+
+
+
 		}catch(\Exception $e){
 			$this->trataErro($e);
 		}

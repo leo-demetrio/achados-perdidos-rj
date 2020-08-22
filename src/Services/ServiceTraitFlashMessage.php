@@ -21,6 +21,7 @@ trait ServiceTraitFlashMessage
 	$mdv5 = "O veículo se encontra em nossa base de dados iremos entrar em contato com quem está em posse dele",
 	$mdv6 = 'você já cadastrou esse veículo',
 
+
 	//mensagem sucesso documento
 	$msd1 = "Documento cadastrado com sucesso",
 	$msd2 = "Documento excluído com sucesso!!",

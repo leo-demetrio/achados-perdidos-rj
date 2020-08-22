@@ -36,9 +36,8 @@ class ModelVeiculo
 	
 	public function inserir($tabela)
 	{
-		// echo($this->id_reg);exit;
-		
-		$query = "INSERT INTO $tabela (id_reg, placa, modelo, cor, data_registro, nome_proprietario, situacao) VALUES (:id_reg, :placa, :modelo, :cor, :data_registro, :nome_proprietario, :situacao)";
+
+		$query = "INSERT INTO $tabela(id_reg, placa, modelo, cor, data_registro, nome_proprietario, situacao) VALUES (:id_reg, :placa, :modelo, :cor, :data_registro, :nome_proprietario, :situacao)";
 
 		$conexao = ModelConexao::conect();
 		$stmt = $conexao->prepare($query);
@@ -53,9 +52,10 @@ class ModelVeiculo
 		// print_r($result);exit;
 	}
 
-	public static function buscaPeloId(string $tabela,int $id_reg){
-			// echo $tabela;exit;
-		$query = "SELECT id_reg, placa, modelo, cor, data_registro, nome_proprietario, situacao FROM $tabela WHERE id_reg = :id_reg";
+	public static function buscaPeloId($tabela, $id_reg){
+			//echo $tabela;exit;
+		$query =
+            "SELECT id_reg, placa, modelo, cor, data_registro, nome_proprietario, situacao FROM $tabela WHERE id_reg = :id_reg";
 		// echo $query;exit;
 		$conexao = ModelConexao::conect();
 		$stmt = $conexao->prepare($query);

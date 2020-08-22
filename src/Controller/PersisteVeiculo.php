@@ -3,7 +3,7 @@ namespace Projeto\APRJ\Controller;
 
 use Projeto\APRJ\Controller\InterfaceControladoraRequisicao;
 use Projeto\APRJ\Model\ModelVeiculo;
-use Projeto\APRJ\Model\ModelVeiculoAchado;
+//use Projeto\APRJ\Model\ModelVeiculoAchado;
 use Projeto\APRJ\Services\ServiceTraitErro;
 use Projeto\APRJ\Services\ServiceTraitValidaData;
 use Projeto\APRJ\Services\ServiceTraitLimpaPost;
@@ -20,7 +20,7 @@ class PersisteVeiculo implements InterfaceControladoraRequisicao
 	{
 
 		try{
-			
+
 			$post = $this->limpaPost($_POST);
 			$data = $_SESSION['data'];
 			$id_registro = $_SESSION['id'];
@@ -41,9 +41,9 @@ class PersisteVeiculo implements InterfaceControladoraRequisicao
 			//testa se o próprio já cadastrou
 			$tabela = "veiculos";
 			$veiculoBanco = $veiculo->buscaPelaPlaca($tabela);
-			
+
 			if($veiculoBanco['id_reg'] == $id_registro){
-				//falta mensagem de já tem cadastro
+				echo $veiculoBanco['id_reg'];
 				$this->messageDanger('dv6');
 				header('Location: /relatorio');
 				return;				
@@ -109,7 +109,7 @@ class PersisteVeiculo implements InterfaceControladoraRequisicao
 					return;
 
 				}
-				$this->messageSuccess("sv1")
+				$this->messageSuccess("sv1");
 				header('Location: /relatorio');
 				die();
 
@@ -155,7 +155,7 @@ class PersisteVeiculo implements InterfaceControladoraRequisicao
 			}
 
 			header('Location: /relatorio');
-			die();
+			return;
 
 		}catch(\Exception $e){
 			$this->trataErro($e);

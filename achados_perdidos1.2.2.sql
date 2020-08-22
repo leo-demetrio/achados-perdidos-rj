@@ -122,6 +122,20 @@ CREATE TABLE `registro_login` (
 -- --------------------------------------------------------
 
 --
+-- Estrutura da tabela `registro_login`
+--
+
+CREATE TABLE `suspeitos` (
+  `id_sus` int(11) NOT NULL,
+  `modelo` varchar(50) DEFAULT NULL,
+  `placa` int(11) NOT NULL,
+  `data_cadastro` date DEFAULT NULL,
+  `ip` varchar(50) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
 -- Estrutura da tabela `veiculos`
 --
 
@@ -200,6 +214,12 @@ ALTER TABLE `veiculos`
 --
 ALTER TABLE `registro`
   MODIFY `id_registro` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT de tabela `suspeitos`
+--
+ALTER TABLE `suspeitos`
+  MODIFY `id_sus` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT de tabela `registro_login`

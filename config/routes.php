@@ -13,13 +13,16 @@ use Projeto\APRJ\Controller\PersisteVeiculo;
 use Projeto\APRJ\Controller\PersisteDocumento;
 use Projeto\APRJ\Controller\HomeLogado;
 use Projeto\APRJ\Controller\Relatorio;
-use Projeto\APRJ\Controller\RelatorioAchado;
+//use Projeto\APRJ\Controller\RelatorioAchado;
 use Projeto\APRJ\Controller\Sair;
 use Projeto\APRJ\Controller\ExcluirDocumento;
 use Projeto\APRJ\Controller\ExcluirDocumentoAchado;
 use Projeto\APRJ\Controller\ExcluirVeiculo;
-use Projeto\APRJ\Controller\ExcluirVeiculoAchado;
+//use Projeto\APRJ\Controller\ExcluirVeiculoAchado;
 use Projeto\APRJ\Controller\Teste;
+use Projeto\APRJ\Controller\Documento;
+use Projeto\APRJ\Controller\Veiculo;
+use Projeto\APRJ\Controller\PersisteSuspeito;
 
 
 
@@ -28,6 +31,9 @@ return  [
 	'/teste' => Teste::class,
 	'/home' => HomeLogado::class,
 	'/login' => CadastroLogin::class,
+    '/documento' => Documento::class,
+    '/veiculo' => Veiculo::class,
+    '/salvar-suspeito' => PersisteSuspeito::class,
 	'/salvar-login' => PersisteLogin::class,
 	'/registro' => CadastroRegistro::class,
 	'/salvar-registro' => PersisteRegistro::class,
