@@ -1,9 +1,30 @@
 <?php 
 require __DIR__ . '/../header.php';
  ?>
-	
 
 
+<form action="/salvar-login" method="post">
+    <div class="form-group" >
+        <label for="email">Email</label>
+        <input type="email" class="form-control" name="email" id="email" aria-describedby="emailHelp">
+
+    </div>
+    <div class="form-group">
+        <label for="senha">Password</label>
+        <input type="password" class="form-control" name="senha" id="senha">
+    </div>
+    <div class="form-group form-check">
+        <input type="checkbox" class="form-check-input" id="exampleCheck1">
+        <label class="form-check-label" for="exampleCheck1">Check me out</label>
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+    <hr>
+    <p>
+        <button  class="btn btn-warning"><a href="/registro">Cadastre-se</a></button>
+    </p>
+</form>
+
+<!--
 <form id="form" action="/salvar-login" method="post">
 	<fieldset>
 		<legend>Cadastro principal</legend>
@@ -23,8 +44,8 @@ require __DIR__ . '/../header.php';
 	</fieldset>
 
 	<p>
-		<button><a href="/registro">Cadastrar</a></button>
+		<button><a href="/registro">Cadastre-se</a></button>
 	</p>
 </form>
-
+-->
 <?php require __DIR__ . '/../footer.php'; ?>

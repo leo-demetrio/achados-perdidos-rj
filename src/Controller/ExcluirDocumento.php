@@ -14,10 +14,10 @@ class ExcluirDocumento extends ControllerComHtml implements InterfaceControlador
 
 	public function processaRequisicao(): void
 	{
+
 		try{
 		$numero = $_GET['numero_documento'];
 		$result = ModelDocumento::excluir($numero);
-
 
 		if($result){
 			$this->messageSuccess('sd2');

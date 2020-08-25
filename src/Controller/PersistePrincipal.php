@@ -24,14 +24,14 @@ class PersistePrincipal
 	public function processaRequisicao(): void
 	{
 		try{
-			
+
+
 			$post = $this->limpaPost($_POST);
-			$nome = $post['nome_completo'];
+			$nome = $post['nome'];
 			$telefone = $post['telefone'];
-			$telefone_recado = $post['telefone'];
+			$telefone_recado = $post['telefone-recado'];
 			$id = $_SESSION['id'];
  			$email = $_SESSION['email'];
-
  			$_SESSION['nome'] = $nome;
 			
 

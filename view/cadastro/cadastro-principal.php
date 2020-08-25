@@ -1,6 +1,23 @@
 <?php require __DIR__ . '/../header.php'; ?>
-	
 
+
+    <form action="/salvar-principal" method="post">
+        <div class="form-group" >
+            <label for="nome">Nome:</label>
+            <input type="text" class="form-control" name="nome" id="nome" aria-describedby="emailHelp">
+        </div>
+        <div class="form-group">
+            <label for="telefone">Telefone:</label>
+            <input type="tel" class="form-control" name="telefone" id="telefone">
+        </div>
+        <div class="form-group">
+            <label for="telefone-recado">Telefone recado:</label>
+            <input type="tel" class="form-control" name="telefone-recado" id="telefone-recado">
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+	
+<!--
 
 <form id="form" action="/salvar-principal" method="post">
 	<fieldset>
@@ -25,6 +42,6 @@
 
 	</fieldset>
 </form>
-
+-->
 
 <?php require __DIR__ . '/../footer.php'; ?>

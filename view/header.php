@@ -8,6 +8,7 @@
 	<link rel="stylesheet" type="text/css" href="css/form.css">
 	<link rel="stylesheet" type="text/css" href="css/header.css">
 	<meta name="viewport" content="width=device-width,initial-sacle=1">
+    <script type="text/javascript" src="js/jquery-3.5.1.js"></script>
 
 	<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
 </head>
@@ -39,6 +40,9 @@
 	      <li class="nav-item">
 	        <a class="nav-link " href="/login">Login</a>
 	      </li>
+            <li class="nav-item">
+                <a class="nav-link " href="/relatorio">Relatorio</a>
+            </li>
 	      <li class="nav-item">
 	        <a class="nav-link " href="/sair">Sair</a>
 	      </li>

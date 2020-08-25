@@ -23,6 +23,7 @@ use Projeto\APRJ\Controller\Teste;
 use Projeto\APRJ\Controller\Documento;
 use Projeto\APRJ\Controller\Veiculo;
 use Projeto\APRJ\Controller\PersisteSuspeito;
+use Projeto\APRJ\Controller\EditaDocumento;
 
 
 
@@ -51,5 +52,6 @@ return  [
 	'/excluir-documentos-achados' => ExcluirDocumentoAchado::class,
 	'/excluir-veiculo' => ExcluirVeiculo::class,
 	'/excluir-veiculos-achados' => ExcluirVeiculoAchado::class,
+    '/editar/documento' => EditaDocumento::class
 
 ];

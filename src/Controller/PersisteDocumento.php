@@ -25,8 +25,6 @@ class PersisteDocumento implements InterfaceControladoraRequisicao
 	{
 
 		try{
-
-
 			$post = $this->limpaPost($_POST);
 			$data_perda = $_POST['data_perda'];
 			$dataRegistro= $_SESSION['data'];

@@ -49,7 +49,6 @@ class PersisteRegistro implements InterfaceControladoraRequisicao
 			//já está no banco
 			$id_registro = $registro->buscaIdPorEmail($email);
 			$_SESSION['id'] = $id_registro['id_registro'];
-			
 
 			header("Location: /cadastro-principal");
 			return;

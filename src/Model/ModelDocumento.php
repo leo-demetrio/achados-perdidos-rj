@@ -1,9 +1,12 @@
 <?php
 namespace Projeto\APRJ\Model;
 
+use Projeto\APRJ\Services\ServiceTraitErro;
 
 class ModelDocumento
 {
+    use ServiceTraitErro;
+
 	private $id_reg;
 	private $numeroDocumento;
 	private $tipoDocumento;
@@ -52,7 +55,7 @@ class ModelDocumento
 	}
 	public function buscaPeloNumero($tabela) {
 
-		$query = "SELECT id_reg,numero_documento FROM $tabela WHERE numero_documento = :numero";
+		$query = "SELECT * FROM $tabela WHERE numero_documento = :numero";
 		// echo $query;exit();
 		$conexao = ModelConexao::conect();
 		$stmt = $conexao->prepare($query);
@@ -67,7 +70,8 @@ class ModelDocumento
 	public static function buscaPeloId($tabela, $id_reg){
 
 		
-		$query = "SELECT numero_documento, tipo_documento, data_perda, data_registro, nome_documento, situacao FROM $tabela WHERE id_reg = :id_reg";
+		//$query = "SELECT id_doc,numero_documento, tipo_documento, data_perda, data_registro, nome_documento, situacao FROM $tabela WHERE id_reg = :id_reg";
+		$query = "SELECT * FROM $tabela WHERE id_reg = :id_reg";
 		// echo $query;exit;
 		$conexao = ModelConexao::conect();
 		$stmt = $conexao->prepare($query);
@@ -76,8 +80,22 @@ class ModelDocumento
 		$documentos = $stmt->fetchAll();
 		return $documentos;
 	}
-	public static function excluir(string $numero)
+    public static function buscaPeloIdDoc($tabela, $id_doc){
+        //echo $tabela;echo $id_reg;exit;
+
+        $query = "SELECT numero_documento, tipo_documento, data_perda, data_registro, nome_documento, situacao FROM $tabela WHERE id_doc = :id_doc";
+        // echo $query;exit;
+        $conexao = ModelConexao::conect();
+        $stmt = $conexao->prepare($query);
+        $stmt->bindValue("id_doc", $id_doc);
+        $stmt->execute();
+        $documentos = $stmt->fetchAll();
+        return $documentos;
+
+    }
+	public static function excluir($numero)
 	{
+	    echo $numero;exit;
 		$query = "DELETE FROM documentos WHERE numero_documento = :numero";
 		$conexao = ModelConexao::conect();
 		$stmt = $conexao->prepare($query);

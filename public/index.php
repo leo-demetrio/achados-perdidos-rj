@@ -40,7 +40,8 @@ if(!(stripos($caminho, 'cadastro') >= 0)){
 
 
 $classeControladora = $rotas[$caminho];
-//echo  $classeControladora;exit;
+//echo $classeControladora;exit;
+//echo $classeControladora;exit;
 $controlador = new $classeControladora();
 
 $controlador->processaRequisicao();

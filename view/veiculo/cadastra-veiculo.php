@@ -1,6 +1,36 @@
 <?php require __DIR__ . '/../header.php'; ?>
-	
 
+    <form action="/salvar-veiculo" method="post">
+        <div class="form-group">
+            <label for="placa">Placa</label>
+            <input type="text" class="form-control" name="placa" id="placa" aria-describedby="emailHelp">
+        </div>
+        <div class="form-group">
+            <label for="modelo">Modelo</label>
+            <input type="modelo" class="form-control" name="modelo" id="modelo">
+        </div>
+        <div class="form-group">
+            <label for="cor">Cor</label>
+            <input type="cor" class="form-control" name="cor" id="cor">
+        </div>
+        <div class="form-group">
+            <label for="nome-proprietario">Nome proprietário</label>
+            <input type="nome-proprietario" class="form-control" name="nome-proprietario" id="nome-proprietario">
+        </div>
+        <label for="situacao">Situação</label><br>
+        <select class="custom-select my-1 mr-sm-2" name="situacao" id="situacao">
+            <option selected value="perdido">Perdido</option>
+
+            <option value="achado">Achado</option>
+            <option value="furtado">Furtado</option>
+            <option value="roubado">Roubado</option>
+        </select>
+
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+
+	
+<!--
 
 <form id="form" action="/salvar-veiculo" method="post">
 	<fieldset>
@@ -40,6 +70,6 @@
 		</p>
 	</fieldset>
 </form>
-
+-->
 
 <?php require __DIR__ . '/../footer.php'; ?>

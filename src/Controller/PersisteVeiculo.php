@@ -3,7 +3,7 @@ namespace Projeto\APRJ\Controller;
 
 use Projeto\APRJ\Controller\InterfaceControladoraRequisicao;
 use Projeto\APRJ\Model\ModelVeiculo;
-//use Projeto\APRJ\Model\ModelVeiculoAchado;
+use Projeto\APRJ\Model\ModelVeiculoAchado;
 use Projeto\APRJ\Services\ServiceTraitErro;
 use Projeto\APRJ\Services\ServiceTraitValidaData;
 use Projeto\APRJ\Services\ServiceTraitLimpaPost;
