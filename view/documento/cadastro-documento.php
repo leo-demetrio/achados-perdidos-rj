@@ -15,7 +15,11 @@
 
     <label class="my-1 mr-2" for="tipo-documento">Preference</label>
     <select class="custom-select my-1 mr-sm-2" name="tipo-documento" id="tipo-documento">
-        <option selected value="<?= isset($documento) ? $documento['tipo_documento'] : 'CARTÃO DO CIDADÃO';?>">CARTÃO DO CIDADÃO</option>
+
+        <option selected value="<?= isset($documento) ? $documento['tipo_documento'] : 'CARTÃO DO CIDADÃO';?>"><?php if(isset($documento)){ echo $documento['tipo_documento']; }else{ echo 'CARTÃO DO CIDADÃO'; } ?>
+            
+        </option>
+
         <option value="CARTÃO DO CIDADÃO">CARTÃO DO CIDADÃO</option>
         <option value="0">--  Favor escolher  --</option><option value="CARTÃO NACIONAL DE SAÚDE - SUS">CARTÃO NACIONAL DE SAÚDE - SUS</option>
         <option value="CARTÃO PASSE ESCOLAR OU PASSE LIVRE">CARTÃO PASSE ESCOLAR OU PASSE LIVRE</option>
