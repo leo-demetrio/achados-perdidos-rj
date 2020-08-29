@@ -29,6 +29,7 @@ class Relatorio extends ControllerComHtml implements InterfaceControladoraRequis
 			$tabela = "documentos";			
 			$documentos = ModelDocumento::buscaPeloId($tabela, $id);
 			
+			
 			$tabela = "doc_achado";			
 			$documentosAchados = ModelDocumento::buscaPeloId($tabela, $id);
 			

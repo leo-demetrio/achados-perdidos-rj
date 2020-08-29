@@ -47,7 +47,7 @@
          </tr>
          </thead>
          <tbody>
-
+         
          <?php foreach ($documentos as $registro): ?>
              <tr>
                  <td><?php echo  $registro['numero_documento'] ?></td>

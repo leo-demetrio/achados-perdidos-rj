@@ -41,23 +41,9 @@ trait ServiceTraitFlashMessage
 
 	//mensagem danger cadastro principal
 	$mdc1 = "Não foi possível cadastrar tente novamente",
-	$mdc2 = "Cadastro efetuado com sucesso";
+	$msc2 = "Cadastro efetuado com sucesso";
 
 
-
-	//****** Implemtar msg de sucesso ou não
-	// public function message($success = null, $danger = null){
-
-	// 	echo "message";exit;
-	// 	if($danger){
-	// 		$m = $this->messageDanger($danger);
-	// 		echo $m;exit;
-	// 		return;
-	// 	}	
-	// 	$m = $this->messageSuccess($success);
-	// 	echo $m;exit;
-
-	// }
 
 	public  function messageSuccess($tipo){
 

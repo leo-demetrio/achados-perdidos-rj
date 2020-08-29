@@ -49,8 +49,6 @@ class ModelDocumento
 		$stmt->bindValue(':nome_documento', $this->nomeDocumento);
 		$stmt->bindValue(':situacao', $this->situacao);
 		$stmt->execute();
-
-		//var_dump($stmt);exit;
 			
 	}
 	public function buscaPeloNumero($tabela) {
@@ -67,12 +65,10 @@ class ModelDocumento
 		return $res;
 	}
 
-	public static function buscaPeloId($tabela, $id_reg){
+	public static function buscaPeloId($tabela, $id_reg)
+	{
 
-		
-		//$query = "SELECT id_doc,numero_documento, tipo_documento, data_perda, data_registro, nome_documento, situacao FROM $tabela WHERE id_reg = :id_reg";
 		$query = "SELECT * FROM $tabela WHERE id_reg = :id_reg";
-		// echo $query;exit;
 		$conexao = ModelConexao::conect();
 		$stmt = $conexao->prepare($query);
 		$stmt->bindValue(':id_reg', $id_reg);
@@ -83,19 +79,19 @@ class ModelDocumento
     public static function buscaPeloIdDoc($tabela, $id_doc){
         //echo $tabela;echo $id_reg;exit;
 
-        $query = "SELECT numero_documento, tipo_documento, data_perda, data_registro, nome_documento, situacao FROM $tabela WHERE id_doc = :id_doc";
+        $query = "SELECT id_doc,numero_documento, tipo_documento, data_perda, data_registro, nome_documento, situacao FROM $tabela WHERE id_doc = :id_doc";
         // echo $query;exit;
         $conexao = ModelConexao::conect();
         $stmt = $conexao->prepare($query);
         $stmt->bindValue("id_doc", $id_doc);
         $stmt->execute();
-        $documentos = $stmt->fetchAll();
+        $documentos = $stmt->fetch();
         return $documentos;
 
     }
 	public static function excluir($numero)
 	{
-	    echo $numero;exit;
+	    
 		$query = "DELETE FROM documentos WHERE numero_documento = :numero";
 		$conexao = ModelConexao::conect();
 		$stmt = $conexao->prepare($query);
@@ -103,6 +99,33 @@ class ModelDocumento
 
 		return $stmt->execute();
 		
+	}
+
+	public function editar($id_doc,$tabela)
+	{
+		$query = "UPDATE $tabela SET 
+		id_reg = :id_reg,
+		numero_documento = :numero_documento,
+		tipo_documento = :tipo_documento,
+		data_perda = :data_perda,
+		data_registro = :data_registro,
+		nome_documento = :nome_documento,
+		situacao = :situacao 
+		WHERE id_doc = :id_doc;";
+		// echo $query;exit;
+		$conexao = ModelConexao::conect();
+		$stmt = $conexao->prepare($query);
+		$stmt->bindValue(':id_doc', $id_doc);
+		$stmt->bindValue(':id_reg', $this->id_reg);
+		$stmt->bindValue(':numero_documento', $this->numeroDocumento);
+		$stmt->bindValue(':tipo_documento', $this->tipoDocumento);
+		$stmt->bindValue(':data_perda', $this->dataPerda);
+		$stmt->bindValue(':data_registro', $this->dataRegistro);
+		$stmt->bindValue(':nome_documento', $this->nomeDocumento);
+		$stmt->bindValue(':situacao', $this->situacao);
+		$stmt->execute();
+
+
 	}
 	public function setIdReg($valor){
 		$this->id_reg = $valor;

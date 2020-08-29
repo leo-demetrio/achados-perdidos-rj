@@ -15,7 +15,7 @@ class CadastroLogin extends ControllerComHtml implements InterfaceControladoraRe
 	{
 		try{
 	
-			echo $this->renderizahtml('cadastro/cadastro-login.php', [
+			echo $this->renderizaHtml('cadastro/cadastro-login.php', [
 				
 				'titulo' => 'Login'
 

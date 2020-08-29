@@ -43,7 +43,7 @@ class PersistePrincipal
 				return;
 			}
 			
-			$this->messageDanger("dc2");
+			$this->messageSuccess("sc2");
 			header('Location: /home-logado');
 			return;
 

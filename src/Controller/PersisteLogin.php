@@ -46,12 +46,12 @@ class PersisteLogin implements InterfaceControladoraRequisicao
 			if(is_null($senhaFiltrada) || $senhaFiltrada === false){
 				
 				header('location: /login');
-				exit;
+				return;
 			}
 
 			if(password_verify($senhaFiltrada, $email->getSenha())){
 				echo 'Email ou senha inválidos';
-				exit;
+				return;
 			}
 			//pegar nome e por no cabeçalho
 			$registroNome = new ModelRegistro();
@@ -60,7 +60,7 @@ class PersisteLogin implements InterfaceControladoraRequisicao
 
 
 			header('Location: /home-logado');
-			exit;
+			return;
 
 		}catch(\Exception $e){
 

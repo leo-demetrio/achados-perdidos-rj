@@ -25,6 +25,8 @@ class PersisteDocumento implements InterfaceControladoraRequisicao
 	{
 
 		try{
+			
+			// var_dump($_POST);exit;
 			$post = $this->limpaPost($_POST);
 			$data_perda = $_POST['data_perda'];
 			$dataRegistro= $_SESSION['data'];
@@ -43,6 +45,13 @@ class PersisteDocumento implements InterfaceControladoraRequisicao
 				$post['situacao']
 
 			);
+
+			// echo $_POST['id_doc'];exit;
+			if (!empty($_POST['id_doc'])) {
+				$documento->editar($_POST['id_doc'],'documentos');
+				header('Location: /relatorio');
+				return;
+			}
 
 			//teste se o proprio já cadastrou
 			$tabela = "documentos";
