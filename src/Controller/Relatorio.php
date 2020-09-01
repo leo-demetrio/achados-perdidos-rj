@@ -18,6 +18,8 @@ class Relatorio extends ControllerComHtml implements InterfaceControladoraRequis
 	{
 		try{
 
+			//Estou fazendo consultas demais usar o padrão do livro que preenche variáveis $_SESSION A PARTIR DESSA CONSULTA DO RELATLÓRIO
+
 			$id = $_SESSION['id'];
 			// $id = 2;
 			
@@ -32,6 +34,7 @@ class Relatorio extends ControllerComHtml implements InterfaceControladoraRequis
 			
 			$tabela = "doc_achado";			
 			$documentosAchados = ModelDocumento::buscaPeloId($tabela, $id);
+			//var_dump($documentosAchados);exit;
 			
 			echo $this->renderizaHtml('relatorio/relatorio.php', [
 

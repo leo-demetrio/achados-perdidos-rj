@@ -17,14 +17,27 @@ class EditaDocumento extends ControllerComHtml implements InterfaceControladoraR
         try{
 
         $numero = $_GET['id_doc'];
+        $flag = $_GET['flag'];
+        // echo $flag;exit;
         $tabela = "documentos";
-        $documento = ModelDocumento::buscaPeloIdDoc($tabela,$numero);
+
+        if ($_GET['flag'] === 'true') {
+            $tabela = "doc_achado";
+            $documento = ModelDocumento::buscaPeloIdDoc($tabela,$numero);
+        } else {
+            $documento = ModelDocumento::buscaPeloIdDoc($tabela,$numero);
+        }
+        // echo $tabela;
+        //ALTERAR TABELA DOC ACHADO INSERIR CAMPO id_doc
+       
         // echo("<pre>");
-        // var_dump($documento);exit;
+         //var_dump($documento);exit;
 
         echo $this->renderizaHtml('documento/cadastro-documento.php',[
             'titulo' => 'Edita Documento',
-            'documento' => $documento
+            'documento' => $documento,
+            'tabela' => $tabela,
+            'flag' => $flag
         ]);
 
 

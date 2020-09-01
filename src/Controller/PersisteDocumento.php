@@ -27,6 +27,7 @@ class PersisteDocumento implements InterfaceControladoraRequisicao
 		try{
 			
 			// var_dump($_POST);exit;
+			//var_dump($_GET);exit;
 			$post = $this->limpaPost($_POST);
 			$data_perda = $_POST['data_perda'];
 			$dataRegistro= $_SESSION['data'];
@@ -46,9 +47,48 @@ class PersisteDocumento implements InterfaceControladoraRequisicao
 
 			);
 
-			// echo $_POST['id_doc'];exit;
+			//EDITANDO DOCUENTO
+			echo $_POST['situacao'];
+			echo $_POST['flag'];
 			if (!empty($_POST['id_doc'])) {
-				$documento->editar($_POST['id_doc'],'documentos');
+			
+				
+				$tabela = 'documentos';
+
+				$docAchado = new ModelDocumentoAchado();
+
+				//RECONSTRUIR
+				// if(($_POST['situacao'] == 'achado') && $_POST['flag'] == 'false'){
+					
+				// 	$docAchado->inserirAchado($post);
+
+				// 	$documento->excluirPeloIdDoc($_POST['id_doc']);
+				// 	header('Location: /relatorio');					
+				// 	return;
+
+				// }else {
+
+				// 	$documento->editar($_POST['id_doc'],$tabela);
+				// 	header('Location: /relatorio');	
+				// 	return;
+
+				// }
+
+				
+
+				if (!($post['situacao'] == 'achado') && ($_POST['flag'] == 'true')) {
+					// $tabela = 'documentos';
+					$documento->inserir($tabela);
+					$tabela = 'doc_achado';
+					
+					$docAchado->excluirPeloIdDoc($_POST['id_doc']);	
+					header('Location: /relatorio');	
+					return;		
+				} else {
+					$tabela = "doc_achado";
+					$docAchado->editar($_POST,$tabela);
+				}
+				
 				header('Location: /relatorio');
 				return;
 			}

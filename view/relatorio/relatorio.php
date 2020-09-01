@@ -53,20 +53,26 @@
                  <td><?php echo  $registro['numero_documento'] ?></td>
                  <td><?php echo $registro['tipo_documento'] ?></td>
                  <td><?php echo $registro['situacao'] ?></td>
-                 <div>
-                 <td><a  class="btn btn-primary" href="/editar/documento?id_doc=<?php echo $registro['id_doc']?>">editar</a></td>
+                 
+                 <td><a  class="btn btn-primary" href="/editar/documento?id_doc=<?php echo $registro['id_doc']?>&flag=<?php echo 'false'; ?>">editar</a></td>
                  <td><a  class="btn btn-danger" href="/excluir-documento?numero_documento=<?php echo $registro['numero_documento']?>">excluir</a></td>
-                 </div>
+              </tr>   
 
          <?php endforeach ?>
+         <?php //var_dump($documentosAchados); exit;?>
           <?php foreach($documentosAchados as $docAchado): ?>
 
-              <td><a  class="btn btn-primary" href="/editar">editar</a></td>
+            <tr>
+                 <td><?php echo  $docAchado['numero_documento'] ?></td>
+                 <td><?php echo $docAchado['tipo_documento'] ?></td>
+                 <td><?php echo $docAchado['situacao'] ?></td>
+              <td><a  class="btn btn-primary" href="/editar/documento?id_doc=<?php echo $docAchado['id_doc']?>&flag=<?php echo 'true'; ?>">editar</a></td>
               <td><a  class="btn btn-danger" href="/excluir-documentos-achados?numero_documento=<?php echo $docAchado['numero_documento']?>">excluir</a></td>
-
+            
 
           <?php endforeach ?>
-             </tr>
+            </tr>
+
          </tbody>
      </table>
  <?php endif ?>

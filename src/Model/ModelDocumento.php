@@ -77,7 +77,7 @@ class ModelDocumento
 		return $documentos;
 	}
     public static function buscaPeloIdDoc($tabela, $id_doc){
-        //echo $tabela;echo $id_reg;exit;
+        // echo $tabela;echo $id_doc;exit;
 
         $query = "SELECT id_doc,numero_documento, tipo_documento, data_perda, data_registro, nome_documento, situacao FROM $tabela WHERE id_doc = :id_doc";
         // echo $query;exit;

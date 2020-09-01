@@ -1,8 +1,11 @@
 <?php require_once __DIR__ . '/../header.php'; ?>
 
 <?php //var_dump($documento);exit;?>
+<?php //echo $tabela;exit;?>
 <form action="/salvar-documento" method="post">
-    <input type="hidden" name="id_doc" value="<?= isset($documento) ? $documento['id_doc'] : '' ?>">
+        <input type="hidden" name="id_doc" value="<?= isset($documento) ? $documento['id_doc'] : '' ?>"> 
+        <input type="hidden" name="flag" value="<?php echo $flag ?>">
+        
     <div class="form-group">
         <label for="nome">Nome completo</label>
         <input type="text" class="form-control" name="nome" id="nome" placeholder="Example input placeholder" value="<?= isset($documento) ? $documento['nome_documento'] : '';?>">
@@ -21,7 +24,7 @@
         </option>
 
         <option value="CARTÃO DO CIDADÃO">CARTÃO DO CIDADÃO</option>
-        <option value="0">--  Favor escolher  --</option><option value="CARTÃO NACIONAL DE SAÚDE - SUS">CARTÃO NACIONAL DE SAÚDE - SUS</option>
+        <option value="CARTÃO NACIONAL DE SAÚDE - SUS">CARTÃO NACIONAL DE SAÚDE - SUS</option>
         <option value="CARTÃO PASSE ESCOLAR OU PASSE LIVRE">CARTÃO PASSE ESCOLAR OU PASSE LIVRE</option>
         <option value="CARTEIRA DO IDOSO">CARTEIRA DO IDOSO</option>
         <option value="CDI CERTIFICADO DISPENSA E INCORPORACAO">CDI CERTIFICADO DISPENSA E INCORPORACAO</option>
@@ -51,7 +54,7 @@
 
     <label for="situacao">Situação</label><br>
     <select class="custom-select my-1 mr-sm-2" name="situacao" id="situacao">
-        <option selected value="<?= isset($documento) ? $documento['situacao'] : 'Perdido';?>">Perdido</option>
+        <option selected value="<?= isset($documento) ? $documento['situacao'] : 'Perdido';?>"><?= isset($documento) ? $documento['situacao'] : 'Perdido';?></option>
 
         <option value="achado">Achado</option>
         <option value="furtado">Furtado</option>
