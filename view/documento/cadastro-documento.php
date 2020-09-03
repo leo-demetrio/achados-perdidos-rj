@@ -1,9 +1,11 @@
 <?php require_once __DIR__ . '/../header.php'; ?>
 
 <?php //var_dump($documento);exit;?>
-<?php //echo $tabela;exit;?>
+<?php //echo "d".$flag;exit;?>
 <form action="/salvar-documento" method="post">
         <input type="hidden" name="id_doc" value="<?= isset($documento) ? $documento['id_doc'] : '' ?>"> 
+        <input type="hidden" name="id_reg" value="<?= isset($documento) ? $documento['id_reg'] : '' ?>">
+        <input type="hidden" name="data_registro" value="<?= isset($documento) ? $documento['data_registro'] : '' ?>">
         <input type="hidden" name="flag" value="<?php echo $flag ?>">
         
     <div class="form-group">

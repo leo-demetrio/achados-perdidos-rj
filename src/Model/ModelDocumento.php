@@ -79,7 +79,7 @@ class ModelDocumento
     public static function buscaPeloIdDoc($tabela, $id_doc){
         // echo $tabela;echo $id_doc;exit;
 
-        $query = "SELECT id_doc,numero_documento, tipo_documento, data_perda, data_registro, nome_documento, situacao FROM $tabela WHERE id_doc = :id_doc";
+        $query = "SELECT id_reg,id_doc,numero_documento, tipo_documento, data_perda, data_registro, nome_documento, situacao FROM $tabela WHERE id_doc = :id_doc";
         // echo $query;exit;
         $conexao = ModelConexao::conect();
         $stmt = $conexao->prepare($query);
@@ -93,6 +93,17 @@ class ModelDocumento
 	{
 	    
 		$query = "DELETE FROM documentos WHERE numero_documento = :numero";
+		$conexao = ModelConexao::conect();
+		$stmt = $conexao->prepare($query);
+		$stmt->bindValue(':numero', $numero);
+
+		return $stmt->execute();
+		
+	}
+	public static function excluirPeloIdDoc($numero)
+	{
+	    
+		$query = "DELETE FROM documentos WHERE id_doc = :numero";
 		$conexao = ModelConexao::conect();
 		$stmt = $conexao->prepare($query);
 		$stmt->bindValue(':numero', $numero);

@@ -26,7 +26,7 @@ class PersisteDocumento implements InterfaceControladoraRequisicao
 
 		try{
 			
-			// var_dump($_POST);exit;
+			//var_dump($_POST);echo "aqui";exit;
 			//var_dump($_GET);exit;
 			$post = $this->limpaPost($_POST);
 			$data_perda = $_POST['data_perda'];
@@ -48,8 +48,8 @@ class PersisteDocumento implements InterfaceControladoraRequisicao
 			);
 
 			//EDITANDO DOCUENTO
-			echo $_POST['situacao'];
-			echo $_POST['flag'];
+			// echo $_POST['situacao'];
+			// echo $_POST['flag'];
 			if (!empty($_POST['id_doc'])) {
 			
 				
@@ -57,40 +57,41 @@ class PersisteDocumento implements InterfaceControladoraRequisicao
 
 				$docAchado = new ModelDocumentoAchado();
 
-				//RECONSTRUIR
-				// if(($_POST['situacao'] == 'achado') && $_POST['flag'] == 'false'){
+				//Documento comum
+				if(($_POST['situacao'] == 'achado') && $_POST['flag'] == 'false'){
 					
-				// 	$docAchado->inserirAchado($post);
+					$docAchado->inserirAchado($post);
+					//echo "inserir3";exit;
+					$documento->excluirPeloIdDoc($_POST['id_doc']);
+					header('Location: /relatorio');					
+					return;
 
-				// 	$documento->excluirPeloIdDoc($_POST['id_doc']);
-				// 	header('Location: /relatorio');					
-				// 	return;
+				}else {
 
-				// }else {
+					$documento->editar($_POST['id_doc'],$tabela);
+					header('Location: /relatorio');	
+					return;
 
-				// 	$documento->editar($_POST['id_doc'],$tabela);
-				// 	header('Location: /relatorio');	
-				// 	return;
-
-				// }
+				}
 
 				
-
+				//Documento achado
 				if (!($post['situacao'] == 'achado') && ($_POST['flag'] == 'true')) {
 					// $tabela = 'documentos';
 					$documento->inserir($tabela);
-					$tabela = 'doc_achado';
-					
+
+					//$tabela = 'doc_achado';					
 					$docAchado->excluirPeloIdDoc($_POST['id_doc']);	
 					header('Location: /relatorio');	
-					return;		
+					return;	
+
 				} else {
 					$tabela = "doc_achado";
 					$docAchado->editar($_POST,$tabela);
+					header('Location: /relatorio');
+					return;
 				}
 				
-				header('Location: /relatorio');
-				return;
 			}
 
 			//teste se o proprio já cadastrou

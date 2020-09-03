@@ -47,7 +47,7 @@
          </tr>
          </thead>
          <tbody>
-         
+          <?php //echo "<pre>". print_r($documentos); exit;?>
          <?php foreach ($documentos as $registro): ?>
              <tr>
                  <td><?php echo  $registro['numero_documento'] ?></td>
@@ -59,7 +59,7 @@
               </tr>   
 
          <?php endforeach ?>
-         <?php //var_dump($documentosAchados); exit;?>
+        
           <?php foreach($documentosAchados as $docAchado): ?>
 
             <tr>

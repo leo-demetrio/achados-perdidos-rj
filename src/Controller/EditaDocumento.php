@@ -18,7 +18,7 @@ class EditaDocumento extends ControllerComHtml implements InterfaceControladoraR
 
         $numero = $_GET['id_doc'];
         $flag = $_GET['flag'];
-        // echo $flag;exit;
+         // echo $flag;exit;
         $tabela = "documentos";
 
         if ($_GET['flag'] === 'true') {
@@ -40,7 +40,7 @@ class EditaDocumento extends ControllerComHtml implements InterfaceControladoraR
             'flag' => $flag
         ]);
 
-
+        return;
 
         }catch (\Exception $e){
             $this->trataErro($e);

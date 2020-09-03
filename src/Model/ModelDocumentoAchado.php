@@ -15,7 +15,7 @@ class ModelDocumentoAchado
 
 	public function inserirAchado($post)
 	{
-		var_dump($post);exit;
+		//echo "<pre>";var_dump($post);exit;
 		$query = "INSERT INTO doc_achado (id_reg,numero_documento, tipo_documento,data_perda,data_registro,nome_documento,situacao) VALUES (:id_reg,:numero_documento,:tipo_documento,:data_perda,:data_registro,:nome_documento,:situacao)";
 		//echo $id;echo$numero;exit;
 		$conexao = ModelConexao::conect();
@@ -24,9 +24,10 @@ class ModelDocumentoAchado
 		$stmt->bindValue(':numero_documento', $post['numero']);
 		$stmt->bindValue(':tipo_documento', $post['tipo-documento']);
 		$stmt->bindValue(':data_perda', $post['data_perda']);
-		$stmt->bindValue(':data_registro', $post['dataRegistro']);
+		$stmt->bindValue(':data_registro', $post['data_registro']);
 		$stmt->bindValue(':nome_documento', $post['nome']);
 		$stmt->bindValue(':situacao', $post['situacao']);
+		//echo "inserirachado";exit;
 		$stmt->execute();
 
 		//var_dump($stmt);exit;
