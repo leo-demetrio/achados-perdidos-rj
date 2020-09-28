@@ -36,7 +36,7 @@ class PersisteLogin implements InterfaceControladoraRequisicao
 			$email->buscaPeloEmail($emailFiltrado);
 
 			$_SESSION['id'] = $email->getId_registro();
-			//$_SESSION['id'].'id';exit;
+			//echo $_SESSION['id'].'id';exit;
 
 			if(!$email->getEmail() || !$email->getSenha()){
 				echo "Email ou senha Inválidos";

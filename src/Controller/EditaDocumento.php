@@ -3,8 +3,8 @@
 
 namespace Projeto\APRJ\Controller;
 
-use Projeto\APRJ\Controller\InterfaceControladoraRequisicao;
-use Projeto\APRJ\Controller\ControllerComHtml;
+//use Projeto\APRJ\Controller\InterfaceControladoraRequisicao;
+//use Projeto\APRJ\Controller\ControllerComHtml;
 use Projeto\APRJ\Model\ModelDocumento;
 use Projeto\APRJ\Services\ServiceTraitErro;
 

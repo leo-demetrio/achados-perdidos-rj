@@ -26,14 +26,12 @@ class PersisteDocumento implements InterfaceControladoraRequisicao
 
 		try{
 			
-			//var_dump($_POST);echo "aqui";exit;
-			//var_dump($_GET);exit;
+
 			$post = $this->limpaPost($_POST);
 			$data_perda = $_POST['data_perda'];
 			$dataRegistro= $_SESSION['data'];
 			$id_registro = $_SESSION['id'];
-			//echo $_SESSION['data'];exit;
-			// print_r($post);exit;
+
 		
 			$documento = new ModelDocumento(
 
@@ -51,7 +49,6 @@ class PersisteDocumento implements InterfaceControladoraRequisicao
 			// echo $_POST['situacao'];
 			// echo $_POST['flag'];
 			if (!empty($_POST['id_doc'])) {
-			
 				
 				$tabela = 'documentos';
 

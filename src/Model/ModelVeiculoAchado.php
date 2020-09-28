@@ -37,9 +37,9 @@ class ModelVeiculoAchado
 		$veiculos = $stmt->fetchAll();
 		return $veiculos;
 	}
-	public function buscaPelaPlaca($placa){
+	public static function buscaPelaPlaca($placa){
 		
-		$query = "SELECT id_reg,placa FROM veiculos_achados WHERE placa = :placa";
+		$query = "SELECT id_reg,placa,modelo,cor,data_registro,nome_proprietario,situacao FROM veiculos_achados WHERE placa = :placa";
 		$conexao = ModelConexao::conect();
 		$stmt = $conexao->prepare($query);
 		$stmt->bindValue(':placa', $placa);
@@ -47,15 +47,14 @@ class ModelVeiculoAchado
 		return $stmt->fetch();
 
 	}
-	public function excluir(int $numero): void
-	{
-		$query = "DELETE FROM documentos_achados WHERE numero_documento = :numero";
-		$conexao = ModelConexao::conect();
-		$stmt = $conexao->prepare($query);
-		$stmt->bindValue(':numero', $numero);
-		$stmt->execute();
-		// var_dump($stmt);die('excluiu');
-	}
+    public static function excluir($placa)
+    {
+        $query = "DELETE FROM veiculos_achados WHERE placa = :placa";
+        $conexao = ModelConexao::conect();
+        $stmt = $conexao->prepare($query);
+        $stmt->bindValue(':placa', $placa);
+        $stmt->execute();
+    }
 	
 
 	public function setIdReg($valor){

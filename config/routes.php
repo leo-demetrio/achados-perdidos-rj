@@ -24,6 +24,7 @@ use Projeto\APRJ\Controller\Documento;
 use Projeto\APRJ\Controller\Veiculo;
 use Projeto\APRJ\Controller\PersisteSuspeito;
 use Projeto\APRJ\Controller\EditaDocumento;
+use Projeto\APRJ\Controller\EditaVeiculo;
 
 
 
@@ -46,12 +47,13 @@ return  [
 	'/cadastro-documento' => CadastroDocumento::class,
 	'/salvar-documento' => PersisteDocumento::class,
 	'/relatorio' => Relatorio::class,
-	'/relatorio-encontrado' => RelatorioAchado::class,
+	//'/relatorio-encontrado' => RelatorioAchado::class,
 	'/sair' => Sair::class,
 	'/excluir-documento' => ExcluirDocumento::class,
 	'/excluir-documentos-achados' => ExcluirDocumentoAchado::class,
 	'/excluir-veiculo' => ExcluirVeiculo::class,
-	'/excluir-veiculos-achados' => ExcluirVeiculoAchado::class,
-    '/editar/documento' => EditaDocumento::class
+	//'/excluir-veiculos-achados' => ExcluirVeiculoAchado::class,
+    '/editar/documento' => EditaDocumento::class,
+    '/editar/veiculo' => EditaVeiculo::class
 
 ];

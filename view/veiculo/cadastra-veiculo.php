@@ -1,25 +1,29 @@
-<?php require __DIR__ . '/../header.php'; ?>
+<?php require __DIR__ . '/../header.php';
+//echo "<pre>".$veiculo['situacao'];
+//var_dump($veiculo);
+?>
 
     <form action="/salvar-veiculo" method="post">
+        <input type="hidden" name="flag" value="<?= $flag ?>">
         <div class="form-group">
             <label for="placa">Placa</label>
-            <input type="text" class="form-control" name="placa" id="placa" aria-describedby="emailHelp">
+            <input type="text" class="form-control" name="placa" id="placa" aria-describedby="emailHelp" value="<?= isset($veiculo) ? $veiculo['placa'] : '' ?>">
         </div>
         <div class="form-group">
             <label for="modelo">Modelo</label>
-            <input type="modelo" class="form-control" name="modelo" id="modelo">
+            <input type="modelo" class="form-control" name="modelo" id="modelo" value="<?= isset($veiculo) ? $veiculo['modelo'] : '' ?>">
         </div>
         <div class="form-group">
             <label for="cor">Cor</label>
-            <input type="cor" class="form-control" name="cor" id="cor">
+            <input type="cor" class="form-control" name="cor" id="cor" value="<?= isset($veiculo) ? $veiculo['cor'] : '' ?>">
         </div>
         <div class="form-group">
             <label for="nome-proprietario">Nome proprietário</label>
-            <input type="nome-proprietario" class="form-control" name="nome-proprietario" id="nome-proprietario">
+            <input type="nome-proprietario" class="form-control" name="nome-proprietario" id="nome-proprietario" value="<?= isset($veiculo) ? $veiculo['nome_proprietario'] : '' ?>">
         </div>
         <label for="situacao">Situação</label><br>
         <select class="custom-select my-1 mr-sm-2" name="situacao" id="situacao">
-            <option selected value="perdido">Perdido</option>
+            <option selected value="<?= isset($veiculo) ? $veiculo['situacao'] : 'perdido' ?>"><?= isset($veiculo) ? $veiculo['situacao'] : 'perdido' ?></option>
 
             <option value="achado">Achado</option>
             <option value="furtado">Furtado</option>

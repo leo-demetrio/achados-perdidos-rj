@@ -64,7 +64,7 @@ class ModelVeiculo
 		$veiculos = $stmt->fetchAll();
 		return $veiculos;
 	}
-	public function buscaPelaPlaca($tabela){
+	public static function buscaPelaPlaca($tabela){
 		
 		$query = "SELECT id_reg,placa FROM $tabela WHERE placa = :placa";
 		$conexao = ModelConexao::conect();

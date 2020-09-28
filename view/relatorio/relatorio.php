@@ -23,8 +23,20 @@
                  <td class="td"><?php echo $registro['modelo'] ?></td>
                  <td class="td"><?php echo $registro['situacao'] ?></td>
                  <div class="d-flex justify-content-end">
-                 <td><a  class="btn btn-primary" href="/editar">editar</a></td>
+                 <td><a  class="btn btn-primary" href="/editar/veiculo?placa=<?php echo $registro['placa']?>">editar</a></td>
                  <td><a  class="btn btn-danger" href="/excluir-veiculo?placa=<?php echo $registro['placa']?>" class="red link">excluir</a></td>
+                 </div>
+             </tr>
+         <?php endforeach ?>
+
+         <?php foreach ($veiculosAchados as $registro): ?>
+             <tr>
+                 <td class="td"><?php echo  $registro['placa'] ?></td>
+                 <td class="td"><?php echo $registro['modelo'] ?></td>
+                 <td class="td"><?php echo $registro['situacao'] ?></td>
+                 <div class="d-flex justify-content-end">
+                     <td><a  class="btn btn-primary" href="/editar/veiculo?placa=<?php echo $registro['placa']?>&flag=true">editar</a></td>
+                     <td><a  class="btn btn-danger" href="/excluir-veiculo?placa=<?php echo $registro['placa']?>&flag='maior'" class="red link">excluir</a></td>
                  </div>
              </tr>
          <?php endforeach ?>

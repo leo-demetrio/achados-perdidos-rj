@@ -27,10 +27,12 @@ class Relatorio extends ControllerComHtml implements InterfaceControladoraRequis
             //echo is_string($tabela);exit;
 			$veiculos = ModelVeiculo::buscaPeloId($tabela, $id);
 
+            $tabela = "veiculos_achados";
+            $veiculosAchados = ModelVeiculo::buscaPeloId($tabela, $id);
+            //var_dump($veiculosAchados);exit;
 
 			$tabela = "documentos";			
 			$documentos = ModelDocumento::buscaPeloId($tabela, $id);
-			
 			
 			$tabela = "doc_achado";			
 			$documentosAchados = ModelDocumento::buscaPeloId($tabela, $id);
@@ -40,6 +42,7 @@ class Relatorio extends ControllerComHtml implements InterfaceControladoraRequis
 
 				'titulo' => 'Relatório',
 				'veiculos' => $veiculos,
+				'veiculosAchados' => $veiculosAchados,
 				'documentos' => $documentos,
 				'documentosAchados' => $documentosAchados
 
