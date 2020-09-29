@@ -1,7 +1,4 @@
-<?php require __DIR__ . '/../header.php';
-//echo "<pre>".$veiculo['situacao'];
-//var_dump($veiculo);
-?>
+<?php require __DIR__ . '/../header.php';?>
 
     <form action="/salvar-veiculo" method="post">
         <input type="hidden" name="flag" value="<?= $flag ?>">
@@ -33,7 +30,7 @@
         <button type="submit" class="btn btn-primary">Submit</button>
     </form>
 
-	
+<?php require __DIR__ . '/../footer.php'; ?>
 <!--
 
 <form id="form" action="/salvar-veiculo" method="post">
@@ -76,4 +73,3 @@
 </form>
 -->
 
-<?php require __DIR__ . '/../footer.php'; ?>

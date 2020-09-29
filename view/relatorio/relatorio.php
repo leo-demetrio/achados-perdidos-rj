@@ -23,8 +23,8 @@
                  <td class="td"><?php echo $registro['modelo'] ?></td>
                  <td class="td"><?php echo $registro['situacao'] ?></td>
                  <div class="d-flex justify-content-end">
-                 <td><a  class="btn btn-primary" href="/editar/veiculo?placa=<?php echo $registro['placa']?>">editar</a></td>
-                 <td><a  class="btn btn-danger" href="/excluir-veiculo?placa=<?php echo $registro['placa']?>" class="red link">excluir</a></td>
+                 <td><a  class="btn btn-primary" href="/editar-veiculo?placa=<?php echo $registro['placa']?>&flag=false">editar</a></td>
+                 <td><a  class="btn btn-danger" href="/excluir-veiculo?placa=<?php echo $registro['placa']?>&flag=false" class="red link">excluir</a></td>
                  </div>
              </tr>
          <?php endforeach ?>
@@ -35,8 +35,8 @@
                  <td class="td"><?php echo $registro['modelo'] ?></td>
                  <td class="td"><?php echo $registro['situacao'] ?></td>
                  <div class="d-flex justify-content-end">
-                     <td><a  class="btn btn-primary" href="/editar/veiculo?placa=<?php echo $registro['placa']?>&flag=true">editar</a></td>
-                     <td><a  class="btn btn-danger" href="/excluir-veiculo?placa=<?php echo $registro['placa']?>&flag='maior'" class="red link">excluir</a></td>
+                     <td><a  class="btn btn-primary" href="/editar-veiculo?placa=<?php echo $registro['placa']?>&flag=true">editar</a></td>
+                     <td><a  class="btn btn-danger" href="/excluir-veiculo?placa=<?php echo $registro['placa']?>&flag=true" class="red link">excluir</a></td>
                  </div>
              </tr>
          <?php endforeach ?>
@@ -66,7 +66,7 @@
                  <td><?php echo $registro['tipo_documento'] ?></td>
                  <td><?php echo $registro['situacao'] ?></td>
                  
-                 <td><a  class="btn btn-primary" href="/editar/documento?id_doc=<?php echo $registro['id_doc']?>&flag=<?php echo 'false'; ?>">editar</a></td>
+                 <td><a  class="btn btn-primary" href="/editar-documento?id_doc=<?php echo $registro['id_doc']?>&flag=<?php echo 'false'; ?>">editar</a></td>
                  <td><a  class="btn btn-danger" href="/excluir-documento?numero_documento=<?php echo $registro['numero_documento']?>">excluir</a></td>
               </tr>   
 

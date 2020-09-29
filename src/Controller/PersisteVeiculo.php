@@ -19,6 +19,7 @@ class PersisteVeiculo implements InterfaceControladoraRequisicao
 	public function processaRequisicao(): void
 	{
 
+
 		try{
 
 			$post = $this->limpaPost($_POST);
@@ -31,24 +32,27 @@ class PersisteVeiculo implements InterfaceControladoraRequisicao
 			$post['placa'],
 			$post['modelo'],
 			$post['cor'],
-			$post['dataRegistro'],
-			$post['nomeProprietario'],
-			$post['situacao']			
+			$data, $post['nome-proprietario'],
+			$post['situacao']
+
 
 			);
-
-			if($_POST['flag'] === 'true'){
-
+            //echo $_POST['flag'];exit;
+			if($_POST['flag'] == 'true'){
+                $veiculo->editar();
+                header('location: /relatorio');
+                return;
             }
-			exit;
+			//echo "passou";
+			//exit;
 
 			//fazer um join para unir as duas consultas
 			//testa se o próprio já cadastrou
 			$tabela = "veiculos";
 			$veiculoBanco = $veiculo->buscaPelaPlaca($tabela);
-            //var_dump($veiculoBanco);exit;
+
 			if($veiculoBanco['id_reg'] == $id_registro){
-				echo $veiculoBanco['id_reg']."aqui";exit;
+				$veiculoBanco['id_reg'];
 				$this->messageDanger('dv6');
 				header('Location: /relatorio');
 				return;				

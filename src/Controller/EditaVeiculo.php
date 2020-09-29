@@ -13,20 +13,20 @@ class EditaVeiculo extends ControllerComHtml implements InterfaceControladoraReq
     public function processaRequisicao(): void
     {
         $placa = $_GET['placa'];
+        $flag = $_GET['flag'];
 
-        if($_GET['flag']){
+        if($flag == 'true'){
             $veiculo = ModelVeiculoAchado::buscaPelaPlaca($placa);
-            //$tabela = "veiculos_achados";
-            $flag = 'false';
         }else{
-            $veiculo = ModelVeiculo::buscaPelaPlaca($placa);
+            $flag = 'false';
+            $veiculo = ModelVeiculo::buscaPelaPlaca2($placa);
         }
 
         echo $this->renderizaHtml('veiculo/cadastra-veiculo.php',[
-            'titulo' => 'Edita Veiculo',
-            'veiculo' => $veiculo,
-            //'tabela' => $tabela,
-            'flag' =>  $flag
-        ]);
+          'titulo' => 'Edita Veiculo',
+          'veiculo' => $veiculo,
+         'flag' =>  $flag
+       ]);
+
     }
 }

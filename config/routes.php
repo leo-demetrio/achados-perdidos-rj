@@ -53,7 +53,7 @@ return  [
 	'/excluir-documentos-achados' => ExcluirDocumentoAchado::class,
 	'/excluir-veiculo' => ExcluirVeiculo::class,
 	//'/excluir-veiculos-achados' => ExcluirVeiculoAchado::class,
-    '/editar/documento' => EditaDocumento::class,
-    '/editar/veiculo' => EditaVeiculo::class
+    '/editar-documento' => EditaDocumento::class,
+    '/editar-veiculo' => EditaVeiculo::class
 
 ];

@@ -34,10 +34,11 @@ class ModelVeiculo
 
 	}
 	
-	public function inserir($tabela)
+	public function editar()
 	{
 
-		$query = "INSERT INTO $tabela(id_reg, placa, modelo, cor, data_registro, nome_proprietario, situacao) VALUES (:id_reg, :placa, :modelo, :cor, :data_registro, :nome_proprietario, :situacao)";
+		$query = "UPDATE veiculos   SET id_reg = :id_reg, placa = :placa, modelo = :modelo, cor = :cor, 
+        data_registro = :data_registro, nome_proprietario = :nome_proprietario, situacao = :situacao";
 
 		$conexao = ModelConexao::conect();
 		$stmt = $conexao->prepare($query);
@@ -51,6 +52,23 @@ class ModelVeiculo
 		$result = $stmt->execute();
 		// print_r($result);exit;
 	}
+    public function inserir($tabela)
+    {
+
+        $query = "INSERT INTO $tabela(id_reg, placa, modelo, cor, data_registro, nome_proprietario, situacao) VALUES (:id_reg, :placa, :modelo, :cor, :data_registro, :nome_proprietario, :situacao)";
+
+        $conexao = ModelConexao::conect();
+        $stmt = $conexao->prepare($query);
+        $stmt->bindValue(':id_reg', $this->id_reg);
+        $stmt->bindValue(':placa', $this->placa);
+        $stmt->bindValue(':modelo', $this->modelo);
+        $stmt->bindValue(':cor', $this->cor);
+        $stmt->bindValue(':data_registro', $this->dataRegistro);
+        $stmt->bindValue(':nome_proprietario', $this->nomeProprietario);
+        $stmt->bindValue(':situacao', $this->situacao);
+        $result = $stmt->execute();
+        // print_r($result);exit;
+    }
 
 	public static function buscaPeloId($tabela, $id_reg){
 			//echo $tabela;exit;
@@ -64,9 +82,9 @@ class ModelVeiculo
 		$veiculos = $stmt->fetchAll();
 		return $veiculos;
 	}
-	public static function buscaPelaPlaca($tabela){
-		
-		$query = "SELECT id_reg,placa FROM $tabela WHERE placa = :placa";
+	public function buscaPelaPlaca($tabela){
+
+		$query = "SELECT id_reg, placa FROM $tabela WHERE placa = :placa";
 		$conexao = ModelConexao::conect();
 		$stmt = $conexao->prepare($query);
 		$stmt->bindValue(':placa', $this->placa);
@@ -74,6 +92,16 @@ class ModelVeiculo
 		return $stmt->fetch();
 
 	}
+    public static function buscaPelaPlaca2($placa){
+
+        $query = "SELECT * FROM veiculos  WHERE placa = :placa";
+        $conexao = ModelConexao::conect();
+        $stmt = $conexao->prepare($query);
+        $stmt->bindValue(':placa', $placa);
+        $stmt->execute();
+        return $stmt->fetch();
+
+    }
 	public static function excluir($placa)
 	{
 		$query = "DELETE FROM veiculos WHERE placa = :placa";
