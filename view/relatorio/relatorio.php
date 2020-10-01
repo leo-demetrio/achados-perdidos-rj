@@ -3,7 +3,7 @@
 
 <!-- Início Veículos -->
 
- <?php if(count($veiculos) > 0): ?>
+ <?php if(count($veiculos) > 0 || count($veiculosAchados) > 0): ?>
      <h3>Veículos</h3>
      <table class="table">
          <thead>
@@ -46,7 +46,7 @@
 
 
  <!-- Inicio Documentos -->
- <?php if(count($documentos) > 0): ?>
+ <?php if(count($documentos) > 0 || count($documentosAchados) > 0): ?>
      <h3>Documentos</h3>
      <table class="table">
          <thead>
@@ -71,15 +71,15 @@
               </tr>   
 
          <?php endforeach ?>
-        
+         
           <?php foreach($documentosAchados as $docAchado): ?>
-
+           
             <tr>
                  <td><?php echo  $docAchado['numero_documento'] ?></td>
                  <td><?php echo $docAchado['tipo_documento'] ?></td>
                  <td><?php echo $docAchado['situacao'] ?></td>
               <td><a  class="btn btn-primary" href="/editar-documento?id_doc=<?php echo $docAchado['id_doc']?>&flag=true">editar</a></td>
-              <td><a  class="btn btn-danger" href="/excluir-documentos-achados?numero_documento=<?php echo $docAchado['numero_documento']?>">excluir</a></td>
+              <td><a  class="btn btn-danger" href="/excluir-documento?numero_documento=<?php echo $docAchado['numero_documento']?>&flag=true">excluir</a></td>
             
 
           <?php endforeach ?>

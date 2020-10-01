@@ -14,15 +14,13 @@ class ExcluirVeiculo implements InterfaceControladoraRequisicao
 	{
         $placa = $_GET['placa'];
 
-	    if(GET['flag']) {
-	        echo GET['flag']."aqui";exit;
+	    if($_GET['flag'] == 'true') {
+	       
 	        ModelVeiculoAchado::excluir($placa);
-            header('Location: /relatorio');
-            return;
-        }
-		
-
-		ModelVeiculo::excluir($placa);
+           
+        }else {
+			ModelVeiculo::excluir($placa);
+		}			
 
 		header('Location: /relatorio');
 		return;

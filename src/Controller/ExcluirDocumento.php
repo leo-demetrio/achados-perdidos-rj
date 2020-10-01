@@ -3,6 +3,7 @@ namespace Projeto\APRJ\Controller;
 
 use Projeto\APRJ\Controller\InterfaceControladoraRequisicao;
 use Projeto\APRJ\Model\ModelDocumento;
+use Projeto\APRJ\Model\ModelDocumentoAchado;
 use Projeto\APRJ\Services\ServiceTraitFlashMessage;
 use Projeto\APRJ\Services\ServiceTraitErro;
 
@@ -17,8 +18,18 @@ class ExcluirDocumento extends ControllerComHtml implements InterfaceControlador
 
 		try{
 		$numero = $_GET['numero_documento'];
-		$result = ModelDocumento::excluir($numero);
 
+		
+
+		if($_GET['flag'] === 'true'){
+			
+			$result = ModelDocumentoAchado::excluir($numero);	
+
+		}else {
+
+			$result = ModelDocumento::excluir($numero);
+		
+		}
 		if($result){
 			$this->messageSuccess('sd2');
 		}else{
@@ -32,8 +43,6 @@ class ExcluirDocumento extends ControllerComHtml implements InterfaceControlador
 			$this->trataErro($e);
 
 	}
-		header('Location: /relatorio');
-		return ;
-
+		
 	}
 }
