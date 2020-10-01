@@ -80,7 +80,7 @@ class ModelDocumento
         // echo $tabela;echo $id_doc;exit;
 
         $query = "SELECT id_reg,id_doc,numero_documento, tipo_documento, data_perda, data_registro, nome_documento, situacao FROM $tabela WHERE id_doc = :id_doc";
-        // echo $query;exit;
+        //echo $id_doc;exit;
         $conexao = ModelConexao::conect();
         $stmt = $conexao->prepare($query);
         $stmt->bindValue("id_doc", $id_doc);
@@ -111,6 +111,31 @@ class ModelDocumento
 		return $stmt->execute();
 		
 	}
+    public function edita($id_doc)
+    {
+        $query = "UPDATE documentos SET 
+		id_reg = :id_reg,
+		numero_documento = :numero_documento,
+		tipo_documento = :tipo_documento,
+		data_perda = :data_perda,
+		data_registro = :data_registro,
+		nome_documento = :nome_documento,
+		situacao = :situacao 
+		WHERE id_doc = :id_doc;";
+        $conexao = ModelConexao::conect();
+        $stmt = $conexao->prepare($query);
+        $stmt->bindValue(':id_doc', $id_doc);
+        $stmt->bindValue(':id_reg', $this->id_reg);
+        $stmt->bindValue(':numero_documento', $this->numeroDocumento);
+        $stmt->bindValue(':tipo_documento', $this->tipoDocumento);
+        $stmt->bindValue(':data_perda', $this->dataPerda);
+        $stmt->bindValue(':data_registro', $this->dataRegistro);
+        $stmt->bindValue(':nome_documento', $this->nomeDocumento);
+        $stmt->bindValue(':situacao', $this->situacao);
+        $stmt->execute();
+
+
+    }
 
 	public function editar($id_doc,$tabela)
 	{

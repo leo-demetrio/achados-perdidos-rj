@@ -28,11 +28,10 @@ class PersisteDocumento implements InterfaceControladoraRequisicao
 			
 
 			$post = $this->limpaPost($_POST);
-			$data_perda = $_POST['data_perda'];
 			$dataRegistro= $_SESSION['data'];
 			$id_registro = $_SESSION['id'];
 
-		
+
 			$documento = new ModelDocumento(
 
 				$id_registro,

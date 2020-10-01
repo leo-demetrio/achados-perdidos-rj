@@ -13,6 +13,25 @@ class ModelDocumentoAchado
 	private $nomeDocumento;
 	private $situacao;
 
+	public function __construct(
+
+		$id_reg,
+		$numeroDocumento,
+		$tipoDocumento,
+		$dataPerda,
+		$dataRegistro,
+		$nomeDocumento,
+		$situacao
+	){
+		$this->id_reg = $id_reg;
+		$this->numeroDocumento = $numeroDocumento;
+		$this->tipoDocumento = $tipoDocumento;
+		$this->dataPerda = $dataPerda;
+		$this->dataRegistro = $dataRegistro;
+		$this->nomeDocumento = $nomeDocumento;
+		$this->situacao = $situacao;
+	}
+
 	public function inserirAchado($post)
 	{
 		//echo "<pre>";var_dump($post);exit;
@@ -50,6 +69,19 @@ class ModelDocumentoAchado
 		$documentos = $stmt->fetchAll();
 		return $documentos;
 	}
+    public static function buscaPeloIdDoc($id_doc){
+        // echo $tabela;echo $id_doc;exit;
+
+        $query = "SELECT id_reg,id_doc,numero_documento, tipo_documento, data_perda, data_registro, nome_documento, situacao FROM doc_achado WHERE id_doc = :id_doc";
+        //echo $id_doc;exit;
+        $conexao = ModelConexao::conect();
+        $stmt = $conexao->prepare($query);
+        $stmt->bindValue("id_doc", $id_doc);
+        $stmt->execute();
+        $documentos = $stmt->fetch();
+        return $documentos;
+
+    }
 
 	public function excluir(string $numero): bool
 	{
@@ -71,6 +103,31 @@ class ModelDocumentoAchado
 		return $result;
 		// var_dump($result);die('excluiu');
 	}
+    public function edita($id_doc)
+    {
+        $query = "UPDATE doc_achado SET 
+		id_reg = :id_reg,
+		numero_documento = :numero_documento,
+		tipo_documento = :tipo_documento,
+		data_perda = :data_perda,
+		data_registro = :data_registro,
+		nome_documento = :nome_documento,
+		situacao = :situacao 
+		WHERE id_doc = :id_doc;";
+        $conexao = ModelConexao::conect();
+        $stmt = $conexao->prepare($query);
+        $stmt->bindValue(':id_doc', $id_doc);
+        $stmt->bindValue(':id_reg', $this->id_reg);
+        $stmt->bindValue(':numero_documento', $this->numeroDocumento);
+        $stmt->bindValue(':tipo_documento', $this->tipoDocumento);
+        $stmt->bindValue(':data_perda', $this->dataPerda);
+        $stmt->bindValue(':data_registro', $this->dataRegistro);
+        $stmt->bindValue(':nome_documento', $this->nomeDocumento);
+        $stmt->bindValue(':situacao', $this->situacao);
+        $stmt->execute();
+
+
+    }
 	public function editar($post,$tabela)
 	{
 		$query = "UPDATE $tabela SET 

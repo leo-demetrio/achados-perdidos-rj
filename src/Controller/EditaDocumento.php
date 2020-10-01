@@ -6,6 +6,7 @@ namespace Projeto\APRJ\Controller;
 use Projeto\APRJ\Controller\InterfaceControladoraRequisicao;
 use Projeto\APRJ\Controller\ControllerComHtml;
 use Projeto\APRJ\Model\ModelDocumento;
+use Projeto\APRJ\Model\ModelDocumentoAchado;
 use Projeto\APRJ\Services\ServiceTraitErro;
 
 class EditaDocumento extends ControllerComHtml implements InterfaceControladoraRequisicao
@@ -16,31 +17,43 @@ class EditaDocumento extends ControllerComHtml implements InterfaceControladoraR
     {
         try{
 
-        $numero = $_GET['id_doc'];
+        $id_doc = $_GET['id_doc'];
         $flag = $_GET['flag'];
-         // echo $flag;exit;
+        // echo $flag . $id_doc;exit;
         $tabela = "documentos";
 
         if ($_GET['flag'] === 'true') {
-            $tabela = "doc_achado";
-            $documento = ModelDocumento::buscaPeloIdDoc($tabela,$numero);
+            //echo "não";exit;
+            $documento = ModelDocumentoAchado::buscaPeloIdDoc($id_doc);
+            echo $this->renderizaHtml('documento/edita-documento.php',[
+                'titulo' => 'Edita Documento Achado',
+                'documento' => $documento,
+    //            'tabela' => $tabela,
+                'flag' => $flag,
+                'id_doc' => $id_doc
+            ]);
+    
+            return;
         } else {
-            $documento = ModelDocumento::buscaPeloIdDoc($tabela,$numero);
+           
+            $documento = ModelDocumento::buscaPeloIdDoc($tabela,$id_doc);
+            echo $this->renderizaHtml('documento/edita-documento.php',[
+                'titulo' => 'Edita Documento',
+                'documento' => $documento,
+    //            'tabela' => $tabela,
+                'flag' => $flag,
+                'id_doc' => $id_doc
+            ]);
+    
+            return;
         }
-        // echo $tabela;
+         //echo $tabela;
         //ALTERAR TABELA DOC ACHADO INSERIR CAMPO id_doc
        
         // echo("<pre>");
          //var_dump($documento);exit;
 
-        echo $this->renderizaHtml('documento/cadastro-documento.php',[
-            'titulo' => 'Edita Documento',
-            'documento' => $documento,
-            'tabela' => $tabela,
-            'flag' => $flag
-        ]);
-
-        return;
+        
 
         }catch (\Exception $e){
             $this->trataErro($e);
