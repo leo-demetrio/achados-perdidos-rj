@@ -83,7 +83,7 @@ class ModelDocumentoAchado
 
     }
 
-	public function excluir(string $numero): bool
+	public static function excluir(string $numero): bool
 	{
 		$query = "DELETE FROM doc_achado WHERE numero_documento = :numero";
 		$conexao = ModelConexao::conect();
@@ -93,7 +93,7 @@ class ModelDocumentoAchado
 		return $result;
 		// var_dump($result);die('excluiu');
 	}
-	public function excluirPeloIdDoc(string $numero): bool
+	public static function excluirPeloIdDoc(string $numero): bool
 	{
 		$query = "DELETE FROM doc_achado WHERE id_doc = :numero";
 		$conexao = ModelConexao::conect();
