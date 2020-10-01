@@ -22,7 +22,7 @@ class EditaVeiculo extends ControllerComHtml implements InterfaceControladoraReq
             $veiculo = ModelVeiculo::buscaPelaPlaca2($placa);
         }
 
-        echo $this->renderizaHtml('veiculo/cadastra-veiculo.php',[
+        echo $this->renderizaHtml('veiculo/edita-veiculo.php',[
           'titulo' => 'Edita Veiculo',
           'veiculo' => $veiculo,
          'flag' =>  $flag

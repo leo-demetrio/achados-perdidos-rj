@@ -39,7 +39,7 @@ class ModelVeiculo
 
 		$query = "UPDATE veiculos   SET id_reg = :id_reg, placa = :placa, modelo = :modelo, cor = :cor, 
         data_registro = :data_registro, nome_proprietario = :nome_proprietario, situacao = :situacao";
-
+		
 		$conexao = ModelConexao::conect();
 		$stmt = $conexao->prepare($query);
 		$stmt->bindValue(':id_reg', $this->id_reg);
@@ -52,6 +52,24 @@ class ModelVeiculo
 		$result = $stmt->execute();
 		// print_r($result);exit;
 	}
+	public function inserirNovo()
+    {
+
+        $query = "INSERT INTO veiculos(id_reg, placa, modelo, cor, data_registro, nome_proprietario, situacao) VALUES (:id_reg, :placa, :modelo, :cor, :data_registro, :nome_proprietario, :situacao)";
+		//echo $this->id_reg;"inserir";exit;
+        $conexao = ModelConexao::conect();
+        $stmt = $conexao->prepare($query);
+        $stmt->bindValue(':id_reg', $this->id_reg);
+        $stmt->bindValue(':placa', $this->placa);
+        $stmt->bindValue(':modelo', $this->modelo);
+        $stmt->bindValue(':cor', $this->cor);
+        $stmt->bindValue(':data_registro', $this->dataRegistro);
+        $stmt->bindValue(':nome_proprietario', $this->nomeProprietario);
+        $stmt->bindValue(':situacao', $this->situacao);
+        $result = $stmt->execute();
+        // print_r($result);exit;
+    }
+
     public function inserir($tabela)
     {
 

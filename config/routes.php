@@ -26,6 +26,7 @@ use Projeto\APRJ\Controller\PersisteSuspeito;
 use Projeto\APRJ\Controller\EditaDocumento;
 use Projeto\APRJ\Controller\PersisteEditaDocumento;
 use Projeto\APRJ\Controller\EditaVeiculo;
+use Projeto\APRJ\Controller\PersisteEditaVeiculo;
 
 
 
@@ -56,6 +57,7 @@ return  [
 	//'/excluir-veiculos-achados' => ExcluirVeiculoAchado::class,
     '/editar-documento' => EditaDocumento::class,
     '/persiste/editar-documento' => PersisteEditaDocumento::class,
-    '/editar-veiculo' => EditaVeiculo::class
+	'/editar-veiculo' => EditaVeiculo::class,
+	'/periste/edita-veiculo' => PersisteEditaVeiculo::class
 
 ];

@@ -11,6 +11,28 @@ class ModelVeiculoAchado
 	private $nomeProprietario;
 	private $situacao;
 	private $dados = array();
+
+	public function __construct(
+		$id_reg,
+		$placa,
+		$modelo,
+		$cor,
+		$dataRegistro,
+		$nomeProprietario,
+		$situacao
+
+
+   ) {
+	   
+	   $this->id_reg = $id_reg;
+	   $this->placa = $placa;
+	   $this->modelo = $modelo;
+	   $this->cor = $cor;
+	   $this->dataRegistro = $dataRegistro;
+	   $this->nomeProprietario = $nomeProprietario;
+	   $this->situacao = $situacao;
+
+   }
 	
 	public function inserir()
 	{
@@ -26,6 +48,24 @@ class ModelVeiculoAchado
 		$stmt->bindValue(':nome_proprietario', $this->nomeProprietario);
 		$stmt->bindValue(':situacao', $this->situacao);
 		$stmt->execute();
+	}
+	public function editar()
+	{
+		//echo $this->placa;exit;
+		$query = "UPDATE veiculos_achados  SET id_reg = :id_reg, placa = :placa, modelo = :modelo, cor = :cor, 
+        data_registro = :data_registro, nome_proprietario = :nome_proprietario, situacao = :situacao WHERE id_reg = :id_reg";
+
+		$conexao = ModelConexao::conect();
+		$stmt = $conexao->prepare($query);
+		$stmt->bindValue(':id_reg', $this->id_reg);
+		$stmt->bindValue(':placa', $this->placa);
+		$stmt->bindValue(':modelo', $this->modelo);
+		$stmt->bindValue(':cor', $this->cor);
+		$stmt->bindValue(':data_registro', $this->dataRegistro);
+		$stmt->bindValue(':nome_proprietario', $this->nomeProprietario);
+		$stmt->bindValue(':situacao', $this->situacao);
+		$result = $stmt->execute();
+		 //print_r($result);exit;
 	}
 
 	public function buscaPeloId(){
