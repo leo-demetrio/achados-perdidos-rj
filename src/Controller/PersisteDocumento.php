@@ -9,6 +9,7 @@ use Projeto\APRJ\Services\ServiceTraitFlashMessage;
 use Projeto\APRJ\Model\ModelDocumento;
 use Projeto\APRJ\Model\ModelDocumentoAchado;
 use Projeto\APRJ\Suport\Email;
+use Projeto\APRJ\Model\ModelRegistro;
 
 
 
@@ -25,7 +26,7 @@ class PersisteDocumento implements InterfaceControladoraRequisicao
 	{
 
 		try{
-			
+		
 
 			$post = $this->limpaPost($_POST);
 			$dataRegistro= $_SESSION['data'];
@@ -127,8 +128,16 @@ class PersisteDocumento implements InterfaceControladoraRequisicao
 					
 					$tabela = "doc_achado";
 					$documento->inserir($tabela);
-					//se estiver no banco como perdido avisa o proprietário
+					//se estiver no banco como perdido/achado/furtado avisa o proprietário
 					if($docBanco){
+
+						//pegar o email do proprietário
+						$id_reg = $docBanco['id_reg'];
+						$registro = new ModelRegistro();
+						$result = $registro->buscaPeloId($id_reg);
+						$emailProprietario = $result['email'];
+
+
 
 						//mesagem p quem está com documento
 						$email = new Email();
@@ -137,8 +146,8 @@ class PersisteDocumento implements InterfaceControladoraRequisicao
 							"Documento achado",
 							$this->messageSuccess("dd4"),
 							$_SESSION['nome'],
-							//$_SESSION['email'],
-							"leopoldocd@hotmail.com"
+							$_SESSION['email'],
+							//"leopoldocd@hotmail.com"
 						)->sendEmail();
 
 						//mensagem para o dono do documento
@@ -147,8 +156,7 @@ class PersisteDocumento implements InterfaceControladoraRequisicao
 							"Documento achado",
 							$this->messageSuccess("da"),
 							$_SESSION['nome'],
-							//$_SESSION['email'],
-							"leopoldocd@hotmail.com"
+							$emailProprietario 
 							
 						)->sendEmail();
 
@@ -156,6 +164,23 @@ class PersisteDocumento implements InterfaceControladoraRequisicao
 						header('Location: /relatorio');
 						return;
 					}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 					header('Location: /relatorio');
 					return;

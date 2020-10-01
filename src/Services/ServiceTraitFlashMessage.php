@@ -41,7 +41,13 @@ trait ServiceTraitFlashMessage
 
 	//mensagem danger cadastro principal
 	$mdc1 = "Não foi possível cadastrar tente novamente",
-	$msc2 = "Cadastro efetuado com sucesso";
+	$msc2 = "Cadastro efetuado com sucesso",
+
+	//mensagem danger login
+	$mdl1 = 'Email ou senha inválidos',
+	$mdl2 = 'A senha deve ter mais de 3 caracteres';
+
+
 
 
 

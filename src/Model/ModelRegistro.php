@@ -29,7 +29,7 @@ class ModelRegistro
 	}
 	public function buscaPeloId(int $id): array
 	{
-		$query = "SELECT nome FROM registro_completo WHERE id_reg = :id";
+		$query = "SELECT nome, email FROM registro_completo WHERE id_reg = :id";
 		$conexao = ModelConexao::conect();
 		$stmt = $conexao->prepare($query);
 		$stmt->bindValue(':id', $id);
