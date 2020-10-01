@@ -25,6 +25,7 @@ trait ServiceTraitFlashMessage
 	//mensagem sucesso documento
 	$msd1 = "Documento cadastrado com sucesso",
 	$msd2 = "Documento excluído com sucesso!!",
+	$msd3 = "O documento foi encontrado em nosso banco quem tem a posse será notificado",
 	
 	//mensagem de danger documento
 	$mdd1 = "você já cadastrou",
