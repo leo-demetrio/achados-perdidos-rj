@@ -66,8 +66,7 @@ class ModelDocumento
 	}
 
 	public static function buscaPeloId($tabela, $id_reg)
-	{
-
+    {
 		$query = "SELECT * FROM $tabela WHERE id_reg = :id_reg";
 		$conexao = ModelConexao::conect();
 		$stmt = $conexao->prepare($query);

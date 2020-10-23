@@ -1,6 +1,6 @@
- <?php require __DIR__ . '/../header.php' ?>
+ <?php require __DIR__ . '/../header.php'; ?>
 
-
+<?php //echo "<pre>";var_dump($documentosAchados) ?>
 <!-- Início Veículos -->
 
  <?php if(count($veiculos) > 0 || count($veiculosAchados) > 0): ?>

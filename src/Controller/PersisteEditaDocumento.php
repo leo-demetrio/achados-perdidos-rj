@@ -26,7 +26,7 @@ class PersisteEditaDocumento  implements InterfaceControladoraRequisicao
     public function processaRequisicao(): void
     {
         try {
-
+//            echo "edita";exit;
             $post = $this->limpaPost($_POST);
            
             //parte dos achados
@@ -42,7 +42,7 @@ class PersisteEditaDocumento  implements InterfaceControladoraRequisicao
                     return;
 
                 }
-                echo "ac";exit;
+                //echo "ac";exit;
                 $doc = new DocumentoAchadoFactory();                
                 $doc = $doc->newDoc($post);       
                 $doc->edita($post['id_doc']);
