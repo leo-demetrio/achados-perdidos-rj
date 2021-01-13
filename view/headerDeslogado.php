@@ -66,4 +66,4 @@
     <h2 class="titulo-pagina"><?php echo $titulo ?></h2>
 
     <a class="btn btn-primary" href="/login" role="button">Cadastrar Documento</a>
-    <a class="btn btn-warning" href="#" role="button">Cadastrar veículo</a>
+    <a class="btn btn-warning" href="/veiculo" role="button">Cadastrar veículo</a>

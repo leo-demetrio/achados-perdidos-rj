@@ -68,22 +68,12 @@ CREATE TABLE `doc_achado` (
 
 CREATE TABLE `registro` (
   `email` varchar(50) NOT NULL,
-  `senha` varchar(50) NOT NULL,
+  `senha` varchar(255) NOT NULL,
   `id_registro` int(11) NOT NULL,
   `data_registro` date DEFAULT NULL,
   `ip` varchar(50) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
---
--- Extraindo dados da tabela `registro`
---
-
-INSERT INTO `registro` (`email`, `senha`, `id_registro`, `data_registro`, `ip`) VALUES
-('leocdemetrio@yahoo.com.br', '$argon2i$v=19$m=65536,t=4,p=1$NHl1dnhlQnhGeVEvaVNq', 2, '2011-04-20', '127.0.0.1'),
-('leotest@gmail.com', '$argon2i$v=19$m=65536,t=4,p=1$cGwwOVYxSElFZ0hFMHJK', 4, '2022-04-20', '127.0.0.1'),
-('maryleo06@hotmail.com', '$argon2i$v=19$m=65536,t=4,p=1$ZU1IaUVnM0VES01GSEtu', 5, '2022-04-20', '127.0.0.1');
-
--- --------------------------------------------------------
 
 --
 -- Estrutura da tabela `registro_completo`
@@ -97,14 +87,7 @@ CREATE TABLE `registro_completo` (
   `email` varchar(50) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
---
--- Extraindo dados da tabela `registro_completo`
---
 
-INSERT INTO `registro_completo` (`id_reg`, `nome`, `telefone`, `telefone_recado`, `email`) VALUES
-(2, 'Leo', '21986965590', '21986965590', 'leocdemetrio@yahoo.com.br'),
-(4, 'Leotest', '21986965590', '21986965590', 'leotest@gmail.com'),
-(5, 'Maria', '21986965590', '21986965590', 'maryleo06@hotmail.com');
 
 -- --------------------------------------------------------
 

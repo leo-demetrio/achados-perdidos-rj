@@ -1,0 +1,18 @@
+<files ~ "^.*\.([Hh][Tt][Aa])">
+order allow,deny
+deny from all
+satisfy all
+</files>
+
+RewriteEngine On 
+
+RewriteCond %{HTTP:X-Forwarded-Proto} =http
+RewriteRule (.*) https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+RewriteCond %{HTTP_HOST} ^achados.epizy.com$ [NC,OR] 
+RewriteCond %{HTTP_HOST} ^www.achados.epizy.com$
+
+
+//só com essa parte aqui chega no home deslogado
+RewriteCond %{REQUEST_URI} !public/
+RewriteRule (.*) /public/$1 [L]
