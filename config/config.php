@@ -19,7 +19,7 @@ define("MAIL", [
 	"user" => "achadosperdidos2020@gmail.com",
 	"password" => "aprj@#\$2020",
 	"from_name" => "Achados e Perdidos",
-	"from_email" => "leocdemetrio@gmail.com"
+	"from_email" => "achadosperdidos2020@gmail.com"
 ]);
 
 

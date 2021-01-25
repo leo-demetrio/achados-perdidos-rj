@@ -16,7 +16,7 @@ trait ServiceTraitFlashMessage
 	//mensgem de danger veículo
 	$mdv1 = "Você já cadastrou em nosso banco!",
 	$mdv2 = "Este veículo já possui cadastro como achado no banco",
-	$mdv3 = "Este veículo foi encontrado em nosso sistema seu proprietário será notificado",
+	$mdv3 = "Este veículo foi encontrado emleocdemetrio@yahoo.com.br nosso sistema seu proprietário será notificado",
 	$mdv4 = "Este veículo já foi cadastrado no banco",
 	$mdv5 = "O veículo se encontra em nossa base de dados iremos entrar em contato com quem está em posse dele",
 	$mdv6 = 'você já cadastrou esse veículo',

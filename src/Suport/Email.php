@@ -6,7 +6,7 @@ require_once __DIR__ . '/../../config/config.php';
 
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
-use PHPMailer\PHPMailer\Exception;
+use PHPMailer\PHPMailer\Exception;//colocar um alias PHPMailerExceptiion
 use Projeto\APRJ\Services\ServiceTraitErro;
 use stdClass;
 
@@ -19,7 +19,7 @@ class Email
 	private $data;
 	public function __construct()
 	{
-		$this->mail = new PHPMailer(true);
+		$this->mail = new PHPMailer(true);//true corresponde a pode enviar exceptions
 		$this->data = new stdClass();
 
 		$this->mail->isSMTP();
@@ -32,11 +32,12 @@ class Email
 		
 		$this->mail->Host = MAIL['host'];
 		$this->mail->Port = MAIL['port'];
-		echo $this->mail->Username = MAIL['user'];
-		echo $this->mail->Password = MAIL['password'];
+		$this->mail->Username = MAIL['user'];
+		$this->mail->Password = MAIL['password'];
 
 
 	}
+
 	public function addMensagem(String $subject,String $body,String $recipient_name, String $recipient_email): Email
 	{
 		$this->data->subject = $subject;
@@ -47,13 +48,19 @@ class Email
 		return $this;
 	}
 
+
+
 	public function attach(String $filePath, String $fileName): Email
 	{
 		$this->data->attach[$filePath] = $fileName;
 	}
+
+
+
 	public function sendEmail(String $from_name = MAIL['from_name'], String $from_email = MAIL['from_email'])
 	{
 		try{
+
 		$this->mail->subject = $this->data->subject;
 		$this->mail->msgHTML($this->data->body);
 		$this->mail->addAddress($this->data->recipient_email,$this->data->recipient_name);
@@ -68,8 +75,11 @@ class Email
 		$this->mail->send();
 		return true;
 		
-	}catch(\Exception $e){
+	 	} catch (\Exception $e) {
+
 		$this->trataErro($e);
+		//return false; //testar retorno 
+
 	}
 
 	}

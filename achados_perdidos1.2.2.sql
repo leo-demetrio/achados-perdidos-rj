@@ -25,7 +25,7 @@ SET time_zone = "+00:00";
 -- OS BANCOS NÃO PODEM TER CHAVES PRIMARIAS COM VALORES IGUAIS
 -- MESMO EM TABELAS DIVERENTES POSSÍVEL ERRO
 --  SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry '3334' for key 'PRIMARY'
-CREATE DATABASE  `achados_perdidos`;
+--CREATE DATABASE  `achados_perdidos`;
 
 -- --------------------------------------------------------
 

@@ -4,7 +4,7 @@ namespace Projeto\APRJ\Services;
 trait  ServiceTraitFilter
 {
 
-	public static function filtraInt($variavel) 
+	public static function filtraInteger($variavel) 
 	{
 		$variavel = filter_var($variavel, FILTER_VALIDATE_INT);
 		return $variavel;

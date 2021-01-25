@@ -22,7 +22,7 @@
 	<header>
 		<!-- nav -->
 		<nav class="navbar navbar-expand-lg navbar-light bg-light color-header">
-	  <a class="navbar-brand" href="#">Achados e Perdidos RJ</a>
+	  <a class="navbar-brand" href="/home">Achados e Perdidos RJ</a>
 	  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
 	    <span class="navbar-toggler-icon"></span>
 	  </button>

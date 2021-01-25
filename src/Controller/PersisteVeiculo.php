@@ -126,7 +126,7 @@ class PersisteVeiculo implements InterfaceControladoraRequisicao
 			//final situação achado
 
 			//testa se já foi cadastrado
-			if($veicBanco){
+			if($veiculoBanco){
 				$this->messageDanger("dv4");
 				return;
 			}		

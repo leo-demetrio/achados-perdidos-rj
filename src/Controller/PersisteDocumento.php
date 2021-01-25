@@ -50,24 +50,25 @@ class PersisteDocumento implements InterfaceControladoraRequisicao
 			$tabela = "documentos";
 			$docBanco = $documento->buscaPeloNumero($tabela);
 			
-			if($docBanco['id_reg'] == $id_registro){
-				
-				$this->messageSuccess("dd1");				
-				header("Location: /relatorio");
-				return;					
-			}		
+		
+				if($docBanco['id_reg'] == $id_registro){
+					
+					$this->messageSuccess("dd1");				
+					header("Location: /relatorio");
+					return;					
+				}		
 			
 			//teste se o proprio já cadastrou como achado
 			$tabela = "doc_achado";
 			$docAchadoBanco = $documento->buscaPeloNumero($tabela);
-			//var_dump($docAchadoBanco);exit;
+			
 			
 			if($docAchadoBanco['id_reg'] == $id_registro){
 				$this->messageSuccess("dd2");
 				header("Location: /relatorio");
 				die();					
 			}
-
+			
 
 			//testa situação achado
 			if($post['situacao'] === 'achado'){	
@@ -84,10 +85,13 @@ class PersisteDocumento implements InterfaceControladoraRequisicao
 					$tabela = "doc_achado";
 					$documento->inserir($tabela);
 					//se estiver no banco como perdido/achado/furtado avisa o proprietário
+					//echo $id_reg."chegou";
+					//var_dump($docBanco);exit;
 					if($docBanco){
 
 						//pegar o email do proprietário
 						$id_reg = $docBanco['id_reg'];
+						
 						$emailProprietario = $this->buscaEmail($id_reg);
 
 
@@ -102,19 +106,25 @@ class PersisteDocumento implements InterfaceControladoraRequisicao
 							//"leopoldocd@hotmail.com"
 						)->sendEmail();
 
-						//mensagem para o dono do documento
+						//mensagem para o dono/proprietário do documento
 						$email->addMensagem(
 
 							"Documento achado",
 							$this->messageSuccess("da"),
 							$_SESSION['nome'],
-							$emailProprietario 
-							
+							$emailProprietario 							
 						)->sendEmail();
 
 						$this->messageSuccess("dd4");
+
+						header('Location: /relatorio');
+						return;
 						
 					}
+
+
+					//avisa cadastro efetuado 
+					$this->avisaCadastroEfetuado($id_registro);
 
 					header('Location: /relatorio');
 					return;
@@ -144,7 +154,7 @@ class PersisteDocumento implements InterfaceControladoraRequisicao
 				
 				//enviar email proprietário
 				$email = new Email();
-				$email->addMensagem(
+				 $verify = $email->addMensagem(
 					"Documento achado",
 					$this->messageSuccess("dd4"),
 					$_SESSION['nome'],
@@ -155,14 +165,14 @@ class PersisteDocumento implements InterfaceControladoraRequisicao
 
 				//enviar email próprio cadastrante
 				$email = new Email();
-				$email->addMensagem(
+				$verify = $email->addMensagem(
 					"Documento achado",
 					$this->messageSuccess("dd4"),
 					$_SESSION['nome'],
-					$_SESSION['email'],
-					//"leopoldocd@hotmail.com"
+					$_SESSION['email']
 				)->sendEmail();
 
+				
 				$this->messageSuccess("sd3");
 				header('Location: /relatorio');
 				return;
@@ -190,52 +200,24 @@ class PersisteDocumento implements InterfaceControladoraRequisicao
 		return $emailProprietario;
 
 	}
+
+	private function avisaCadastroEfetuado($id_registro){
+
+		$modelRegistro = new ModelRegistro();
+		$emailCadastrador = $modelRegistro->buscaPeloId($id_registro);
+					
+		$email = new Email();
+		$email->addMensagem(
+
+				"Documento cadastrado",
+				$this->messageSuccess("da"),
+				$_SESSION['nome'],
+				$emailCadastrador['email'] 
+
+		)->sendEmail();
+
+	}
 }
 
 
 
-
-			// //EDITANDO DOCUENTO
-			// // echo $_POST['situacao'];
-			// // echo $_POST['flag'];
-			// if (!empty($_POST['id_doc'])) {
-				
-			// 	$tabela = 'documentos';
-
-			// 	$docAchado = new ModelDocumentoAchado();
-
-			// 	//Documento comum
-			// 	if(($_POST['situacao'] == 'achado') && $_POST['flag'] == 'false'){
-					
-			// 		$docAchado->inserirAchado($post);
-			// 		//echo "inserir3";exit;
-			// 		$documento->excluirPeloIdDoc($_POST['id_doc']);
-			// 		header('Location: /relatorio');					
-			// 		return;
-
-			// 	}else {
-
-			// 		$documento->editar($_POST['id_doc'],$tabela);
-			// 		header('Location: /relatorio');	
-			// 		return;
-
-			// 	}
-
-				//Documento achado
-			// if (!($post['situacao'] == 'achado') && ($_POST['flag'] == 'true')) {
-			// 		// $tabela = 'documentos';
-			// 		$documento->inserir($tabela);
-
-			// 		//$tabela = 'doc_achado';					
-			// 		$docAchado->excluirPeloIdDoc($_POST['id_doc']);	
-			// 		header('Location: /relatorio');	
-			// 		return;	
-
-			// 	} else {
-			// 		$tabela = "doc_achado";
-			// 		$docAchado->editar($_POST,$tabela);
-			// 		header('Location: /relatorio');
-			// 		return;
-			// 	}
-				
-			// }

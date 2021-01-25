@@ -38,8 +38,7 @@ class PersisteLogin implements InterfaceControladoraRequisicao
 			$email->buscaPeloEmail($emailFiltrado);
 
 			$_SESSION['id'] = $email->getId_registro();
-			//echo $_SESSION['id'].'id';exit;
-
+		
 			if(!$email->getEmail() || !$email->getSenha()){
 				$this->messageDanger('dl1');
 				header('location: /login');
