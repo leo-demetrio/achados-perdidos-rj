@@ -84,43 +84,11 @@ class PersisteDocumento implements InterfaceControladoraRequisicao
 					
 					$tabela = "doc_achado";
 					$documento->inserir($tabela);
-					//se estiver no banco como perdido/achado/furtado avisa o proprietário
-					//echo $id_reg."chegou";
-					//var_dump($docBanco);exit;
-					if($docBanco){
 
-						//pegar o email do proprietário
-						$id_reg = $docBanco['id_reg'];
+					//se estiver na tabela documentos como perdido/furtado avisa o proprietário
+					if($docBanco) $this->enviaEmailPropietarioECadastrante($docBanco);			
 						
-						$emailProprietario = $this->buscaEmail($id_reg);
-
-
-						//mesagem p quem está com documento
-						$email = new Email();
-						$email->addMensagem(
-
-							"Documento achado",
-							$this->messageSuccess("dd4"),
-							$_SESSION['nome'],
-							$_SESSION['email'],
-							//"leopoldocd@hotmail.com"
-						)->sendEmail();
-
-						//mensagem para o dono/proprietário do documento
-						$email->addMensagem(
-
-							"Documento achado",
-							$this->messageSuccess("da"),
-							$_SESSION['nome'],
-							$emailProprietario 							
-						)->sendEmail();
-
-						$this->messageSuccess("dd4");
-
-						header('Location: /relatorio');
-						return;
-						
-					}
+					
 
 
 					//avisa cadastro efetuado 
@@ -217,6 +185,39 @@ class PersisteDocumento implements InterfaceControladoraRequisicao
 		)->sendEmail();
 
 	}
+
+	private function enviaEmailPropietarioECadastrante($docBanco)
+	{
+		$emailProprietario = $this->buscaEmail($docBanco['id_reg']);
+
+		//mesagem p quem está com documento cadastrante
+		$email = new Email();
+		$email->addMensagem(
+
+			"Documento achado",
+			$this->messageSuccess("dd4"),
+			$_SESSION['nome'],
+			$_SESSION['email'],
+								
+			)->sendEmail();
+
+		//mensagem para o dono/proprietário do documento
+		$email->addMensagem(
+
+			"Documento achado",
+			$this->messageSuccess("da"),
+			$_SESSION['nome'],
+			$emailProprietario 							
+			)->sendEmail();
+
+			$this->messageSuccess("dd4");
+
+			header('Location: /relatorio');
+			exit();
+							
+
+	}
+
 }
 
 
