@@ -20,6 +20,7 @@ trait ServiceTraitFlashMessage
 	$mdv4 = "Este veículo já foi cadastrado no banco",
 	$mdv5 = "O veículo se encontra em nossa base de dados iremos entrar em contato com quem está em posse dele",
 	$mdv6 = 'você já cadastrou esse veículo',
+	$mdv7 = 'Placa incorreta',
 
 
 	//mensagem sucesso documento
@@ -35,6 +36,7 @@ trait ServiceTraitFlashMessage
 	$mdd5 = "Esse documento já foi cadastrado no banco",
 	$mdd6 = "Documento em nossa base de dados, iremos entrar em contato com quem tem a posse do documento",
 	$mdd7 = "Não foi possível excluir, tente novamente",
+	$mdd8 = "Seu documento foi encontrado em nosso sistema",
 
 	//email mensagem  documento achado
 	$mda = "O documento foi achado",

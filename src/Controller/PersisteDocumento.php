@@ -86,11 +86,8 @@ class PersisteDocumento implements InterfaceControladoraRequisicao
 					$documento->inserir($tabela);
 
 					//se estiver na tabela documentos como perdido/furtado avisa o proprietário
-					if($docBanco) $this->enviaEmailPropietarioECadastrante($docBanco);			
-						
+					if($docBanco) $this->enviaEmailPropietarioECadastrante($docBanco);
 					
-
-
 					//avisa cadastro efetuado 
 					$this->avisaCadastroEfetuado($id_registro);
 

@@ -78,7 +78,7 @@
     <?php
     endif;
     unset($_SESSION['tipo_mensagem']);
-    unset($_SESSION['mensagem'])
+    unset($_SESSION['mensagem']);
     ?>
 
 

@@ -23,6 +23,7 @@ class PersisteVeiculo implements InterfaceControladoraRequisicao
 		try{
 
 			$post = $this->limpaPost($_POST);
+			$this->verificaPlacaRegex($_POST['placa']);
 			$data = $_SESSION['data'];
 			$id_registro = $_SESSION['id'];
 
@@ -171,6 +172,23 @@ class PersisteVeiculo implements InterfaceControladoraRequisicao
 		}
 
 
+	}
+	private function verificaPlacaRegex($placa){
+
+		if (!(strlen($placa) === 7)) {
+			$this->messageDanger("dv7");
+			header(sprintf('location: %s', $_SERVER['HTTP_REFERER']));
+ 			exit;
+		}
+
+			$placa = strtolower($placa);
+			$regex_placa_antiga = "/^[a-z]{3}[0-9]{4}$/";
+			$regex_placa_nova = "/^[a-z]{3}[0-9]{1}[a-z]{1}[0-9]{2}$/";
+			$result1 = preg_match($regex_placa_antiga,$placa);
+			$result2 = preg_match($regex_placa_nova,$placa);
+			if($result1 || $result2) return;
+			header(sprintf('location: %s', $_SERVER['HTTP_REFERER']));
+			exit;			
 	}
 }
 
